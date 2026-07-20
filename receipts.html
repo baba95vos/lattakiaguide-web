@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وصولات الدفع — دليل اللاذقية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --blue:    #1a3f7c;
+          --blue-d:  #0e2450;
+          --blue-l:  #e8eef7;
+          --ink:     #141c1b;
+          --muted:   #5a6b69;
+          --border:  #d5e3e1;
+          --bg:      #f4f8f7;
+          --white:   #ffffff;
+          --warn-bg: #fffbeb;
+          --warn-br: #f59e0b;
+          --err:     #c0392b;
+          --green:   #16a34a;
+        }
+
+        body {
+          font-family: 'Cairo', sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        .header {
+          background: linear-gradient(160deg, var(--blue) 0%, var(--blue-d) 100%);
+          padding: 2.5rem 1.5rem 3rem;
+          text-align: center;
+          color: var(--white);
+          position: relative;
+          overflow: hidden;
+        }
+        .header::after {
+          content: '';
+          position: absolute;
+          bottom: -1px; left: 0; right: 0;
+          height: 28px;
+          background: var(--bg);
+          border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        .header-logo { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.3rem; }
+        .header-sub  { font-size: 0.95rem; opacity: 0.8; font-weight: 400; }
+
+        .container { max-width: 460px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+        .receipt-card {
+          background: var(--white);
+          border-radius: 20px;
+          padding: 1.5rem;
+          box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+          margin-bottom: 1.2rem;
+          animation: fadeUp 0.3s ease both;
+          border: 1px solid var(--border);
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .receipt-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 1rem;
+        }
+        .place-name { font-size: 1.15rem; font-weight: 800; color: var(--blue); }
+
+        .badge { font-size: 0.7rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 20px; color: white; }
+        .badge-pro  { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .badge-feat { background: linear-gradient(135deg, #1a3f7c, #4a7fd4); }
+
+        .receipt-body {
+          border-top: 1px dashed var(--border);
+          padding-top: 1rem;
+          margin-bottom: 1.2rem;
+        }
+        .info-row {
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.88rem;
+          margin-bottom: 0.5rem;
+        }
+        .info-label { color: var(--muted); }
+        .info-value { font-weight: 700; color: var(--ink); }
+
+        .status-badge {
+          display: inline-block;
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 0.3rem 0.8rem;
+          border-radius: 8px;
+        }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-approved { background: #dcfce7; color: #166534; }
+        .status-rejected { background: #fee2e2; color: #991b1b; }
+
+        .btn {
+          width: 100%;
+          padding: 0.8rem 1rem;
+          border: none;
+          border-radius: 12px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          cursor: pointer;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          transition: all 0.2s;
+        }
+        .btn-primary {
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          color: white;
+        }
+        .btn-primary:active { transform: scale(0.98); }
+
+        #loading-screen {
+          position: fixed; inset: 0;
+          background: var(--bg);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          z-index: 100;
+        }
+        .load-spin {
+          width: 44px; height: 44px;
+          border: 4px solid var(--blue-l);
+          border-top-color: var(--blue);
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .load-text { font-size: 0.88rem; color: var(--muted); }
+
+        .empty-state {
+          text-align: center;
+          padding: 4rem 2rem;
+        }
+        .empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+        .empty-text { color: var(--muted); font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+<div id="loading-screen">
+    <div class="load-spin"></div>
+    <div class="load-text">جاري تحميل الوصولات…</div>
+</div>
+
+<div class="header">
+    <div class="header-logo">🗺️ دليل اللاذقية</div>
+    <div class="header-sub">وصولات الدفع الخاصة بك</div>
+</div>
+
+<div class="container" id="receipts-list">
+    <!-- Cards will be injected here -->
+</div>
+
+<div id="empty-state" class="empty-state" style="display:none">
+    <div class="empty-icon">📄</div>
+    <div class="empty-text">لا توجد وصولات دفع متاحة حالياً.</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+<script>
+    firebase.initializeApp({
+        apiKey:            "AIzaSyAT8auOR8cfT7C-kRzm27iQRIPriCy9jQE",
+        authDomain:        "device-streaming-a7432e75.firebaseapp.com",
+        projectId:         "device-streaming-a7432e75",
+        storageBucket:     "device-streaming-a7432e75.firebasestorage.app",
+        messagingSenderId: "6321458513",
+        appId:             "1:6321458513:web:583c16a20cc6101977d770"
+    });
+
+    const db = firebase.firestore();
+    const urlParams = new URLSearchParams(window.location.search);
+    const uid = urlParams.get('uid');
+
+    async function fetchReceipts() {
+        if (!uid) {
+            document.getElementById('loading-screen').style.display = 'none';
+            document.getElementById('empty-state').style.display = 'block';
+            return;
+        }
+
+        try {
+            const [proSnap, featSnap] = await Promise.all([
+                db.collection('pro_requests').where('userId', '==', uid).get(),
+                db.collection('featured_requests').where('userId', '==', uid).get()
+            ]);
+
+            let receipts = [];
+
+            proSnap.forEach(doc => {
+                const data = doc.data();
+                if (data.receiptUrl) {
+                    receipts.push({ ...data, id: doc.id, planType: 'PRO' });
+                }
+            });
+
+            featSnap.forEach(doc => {
+                const data = doc.data();
+                if (data.receiptUrl) {
+                    receipts.push({ ...data, id: doc.id, planType: 'Featured' });
+                }
+            });
+
+            receipts.sort((a, b) => {
+                const da = (a.createdAt && a.createdAt.toMillis) ? a.createdAt.toMillis() : (a.createdAt || 0);
+                const dbTime = (b.createdAt && b.createdAt.toMillis) ? b.createdAt.toMillis() : (b.createdAt || 0);
+                return dbTime - da;
+            });
+
+            renderReceipts(receipts);
+        } catch (e) {
+            console.error("Error fetching receipts:", e);
+            document.getElementById('empty-state').style.display = 'block';
+        } finally {
+            document.getElementById('loading-screen').style.display = 'none';
+        }
+    }
+
+    function renderReceipts(receipts) {
+        const list = document.getElementById('receipts-list');
+        if (receipts.length === 0) {
+            document.getElementById('empty-state').style.display = 'block';
+            return;
+        }
+
+        receipts.forEach(r => {
+            const date = (r.createdAt && r.createdAt.toDate) ? r.createdAt.toDate() : new Date(r.createdAt || Date.now());
+            const dateStr = date.toLocaleDateString('ar-SY', {
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+
+            const planLabel = r.planType === 'PRO' ? 'PRO' : 'Featured';
+            const planBadgeClass = r.planType === 'PRO' ? 'badge-pro' : 'badge-feat';
+
+            let statusText = 'قيد الانتظار';
+            let statusClass = 'status-pending';
+            if (r.status === 'approved') { statusText = 'مقبول'; statusClass = 'status-approved'; }
+            if (r.status === 'rejected') { statusText = 'مرفوض'; statusClass = 'status-rejected'; }
+
+            const subType = r.subscriptionType === 'renewal' ? 'تجديد' : 'جديد';
+
+            const card = document.createElement('div');
+            card.className = 'receipt-card';
+            card.innerHTML = `
+                <div class="receipt-header">
+                    <span class="place-name">${r.placeName || 'مكان غير محدد'}</span>
+                    <span class="badge ${planBadgeClass}">${planLabel}</span>
+                </div>
+                <div class="receipt-body">
+                    <div class="info-row">
+                        <span class="info-label">المبلغ:</span>
+                        <span class="info-value">${r.amount || 0} ل.س</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">التاريخ:</span>
+                        <span class="info-value">${dateStr}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">نوع الاشتراك:</span>
+                        <span class="info-value">${subType}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">الحالة:</span>
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                    </div>
+                </div>
+                <a href="${r.receiptUrl}" target="_blank" class="btn btn-primary">
+                    تحميل الوصل PDF
+                </a>
+            `;
+            list.appendChild(card);
+        });
+    }
+
+    fetchReceipts();
+</script>
+</body>
+</html>

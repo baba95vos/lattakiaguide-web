@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل اللاذقية — الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --blue:   #1a3f7c;
+          --blue-d: #0e2450;
+          --blue-l: #e8eef7;
+          --ink:     #141c1b;
+          --muted:   #5a6b69;
+          --border:  #d5e3e1;
+          --bg:      #f4f8f7;
+          --white:   #ffffff;
+          --shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: 'Cairo', sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
+          overflow-x: hidden;
+        }
+
+        /* ── Header ─────────────────────────────── */
+        .header {
+          background: linear-gradient(160deg, var(--blue) 0%, var(--blue-d) 100%);
+          padding: 1.2rem 1rem;
+          color: var(--white);
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+          font-size: 1.4rem;
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .menu-btn {
+          background: rgba(255,255,255,0.15);
+          border: none;
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          transition: background 0.2s;
+        }
+
+        .menu-btn:active { background: rgba(255,255,255,0.3); }
+
+        /* ── Drawer Menu ────────────────────────── */
+        .drawer-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(2px);
+        }
+
+        .drawer-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .drawer {
+          position: fixed;
+          top: 0; bottom: 0; right: -280px;
+          width: 280px;
+          background: var(--white);
+          z-index: 1001;
+          transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          display: flex;
+          flex-direction: column;
+          box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+        }
+
+        .drawer.open { right: 0; }
+
+        .drawer-header {
+          padding: 2rem 1.5rem;
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          color: white;
+          text-align: center;
+        }
+
+        .drawer-logo {
+          font-size: 1.8rem;
+          font-weight: 900;
+          margin-bottom: 5px;
+        }
+
+        .drawer-sub {
+          font-size: 0.85rem;
+          opacity: 0.8;
+        }
+
+        .drawer-content {
+          padding: 1rem 0;
+          flex: 1;
+          overflow-y: auto;
+        }
+
+        .drawer-item {
+          padding: 1rem 1.5rem;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          color: var(--ink);
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: background 0.2s;
+          border-right: 4px solid transparent;
+        }
+
+        .drawer-item:hover, .drawer-item.active {
+          background: var(--blue-l);
+          color: var(--blue);
+          border-right-color: var(--blue);
+        }
+
+        .drawer-footer {
+          padding: 1rem;
+          border-top: 1px solid var(--border);
+          text-align: center;
+          font-size: 0.75rem;
+          color: var(--muted);
+        }
+
+        /* ── Main Content ──────────────────────── */
+        .main-container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 2rem 1.2rem;
+        }
+
+        .hero-section {
+          text-align: center;
+          margin-bottom: 2.5rem;
+          animation: fadeUp 0.6s ease both;
+        }
+
+        .main-title {
+          font-size: 1.8rem;
+          font-weight: 900;
+          color: var(--blue-d);
+          margin-bottom: 0.5rem;
+        }
+
+        .main-subtitle {
+          font-size: 1rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+
+        .card {
+          background: var(--white);
+          border-radius: 20px;
+          padding: 1.5rem;
+          margin-bottom: 1.2rem;
+          box-shadow: var(--shadow);
+          transition: transform 0.2s;
+          border: 1px solid rgba(0,0,0,0.02);
+          animation: fadeUp 0.5s ease both;
+        }
+
+        .card:hover { transform: translateY(-3px); }
+
+        .card-icon {
+          width: 45px; height: 45px;
+          background: var(--blue-l);
+          color: var(--blue);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.3rem;
+          margin-bottom: 1rem;
+        }
+
+        .card-h {
+          font-size: 1.1rem;
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+          color: var(--ink);
+        }
+
+        .card-p {
+          font-size: 0.88rem;
+          color: var(--muted);
+          line-height: 1.6;
+        }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Icons (Simple Unicode/Emoji replacements) ── */
+        .icon-menu::before { content: '☰'; }
+        .icon-close::before { content: '✕'; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <span>🗺️</span>
+            <span>دليل اللاذقية</span>
+        </div>
+        <button class="menu-btn" onclick="toggleDrawer()">
+            <span class="icon-menu"></span>
+        </button>
+    </header>
+
+    <!-- Side Drawer -->
+    <div class="drawer-overlay" id="overlay" onclick="toggleDrawer()"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">دليل اللاذقية</div>
+            <div class="drawer-sub">اكتشف مدينتك بسهولة</div>
+        </div>
+        <nav class="drawer-content">
+            <a href="#" class="drawer-item active">🏠 الرئيسية</a>
+            <a href="test.html" class="drawer-item">💎 الاشتراك المميز</a>
+            <a href="community-guide.html" class="drawer-item">🤝 دليل المجتمع</a>
+            <a href="terms_of_use.html" class="drawer-item">📝 شروط الاستخدام</a>
+            <a href="privacy_policy.html" class="drawer-item">🛡️ سياسة الخصوصية</a>
+            <a href="deletion_policy.html" class="drawer-item">🗑️ سياسة حذف البيانات</a>
+        </nav>
+        <div class="drawer-footer">
+            الإصدار 1.0.0 &copy; 2024
+        </div>
+    </div>
+
+    <!-- Main Body -->
+    <main class="main-container">
+
+        <div class="hero-section">
+            <h1 class="main-title">أهلاً بك في دليل اللاذقية</h1>
+            <p class="main-subtitle">دليلك الشامل لاستكشاف أجمل الأماكن والخدمات في عروس الساحل</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.1s;">
+            <div class="card-icon">📍</div>
+            <h2 class="card-h">اكتشف الأماكن</h2>
+            <p class="card-p">تصفح قائمة واسعة من المطاعم، الفنادق، والمعالم السياحية في محافظة اللاذقية مع تقييمات حقيقية.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.2s;">
+            <div class="card-icon">⭐</div>
+            <h2 class="card-h">خدمات مميزة</h2>
+            <p class="card-p">احصل على وصول حصري للعروض والخصومات عند تفعيلك للباقة المميزة داخل التطبيق.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.3s;">
+            <div class="card-icon">📣</div>
+            <h2 class="card-h">آخر الأخبار</h2>
+            <p class="card-p">ابقَ على اطلاع دائم بآخر الفعاليات والنشاطات المقامة في المدينة لحظة بلحظة.</p>
+        </div>
+
+    </main>
+
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+
+            if (drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scroll when open
+            }
+        }
+    </script>
+</body>
+</html>

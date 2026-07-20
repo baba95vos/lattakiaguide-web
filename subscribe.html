@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل اللاذقية — الاشتراك المميز</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --blue:    #1a3f7c;
+          --blue-d:  #0e2450;
+          --blue-l:  #e8eef7;
+          --ink:     #141c1b;
+          --muted:   #5a6b69;
+          --border:  #d5e3e1;
+          --bg:      #f4f8f7;
+          --white:   #ffffff;
+          --warn-bg: #fffbeb;
+          --warn-br: #f59e0b;
+          --err:     #c0392b;
+          --green:   #16a34a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: 'Cairo', sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Header ─────────────────────────────── */
+        .header {
+          background: linear-gradient(160deg, var(--blue) 0%, var(--blue-d) 100%);
+          padding: 2.5rem 1.5rem 3rem;
+          text-align: center;
+          color: var(--white);
+          position: relative;
+          overflow: hidden;
+        }
+        .header::after {
+          content: '';
+          position: absolute;
+          bottom: -1px; left: 0; right: 0;
+          height: 28px;
+          background: var(--bg);
+          border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        .header-logo { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 0.3rem; }
+        .header-sub  { font-size: 0.95rem; opacity: 0.8; font-weight: 400; }
+
+        /* ── Steps bar ──────────────────────────── */
+        .steps-bar {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0;
+          padding: 1.8rem 1.5rem 0.5rem;
+          max-width: 420px;
+          margin: 0 auto;
+        }
+        .step-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
+          position: relative;
+        }
+        .step-item:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 14px;
+          left: -50%;
+          width: 100%;
+          height: 2px;
+          background: var(--border);
+          z-index: 0;
+        }
+        .step-item.done:not(:last-child)::after,
+        .step-item.active:not(:last-child)::after { background: var(--blue); }
+        .step-circle {
+          width: 28px; height: 28px;
+          border-radius: 50%;
+          background: var(--border);
+          color: var(--muted);
+          font-size: 0.75rem;
+          font-weight: 700;
+          display: flex; align-items: center; justify-content: center;
+          z-index: 1;
+          transition: all 0.3s;
+        }
+        .step-item.active .step-circle { background: var(--blue); color: white; box-shadow: 0 0 0 4px var(--blue-l); }
+        .step-item.done .step-circle   { background: var(--blue); color: white; }
+        .step-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.3rem; font-weight: 600; }
+        .step-item.active .step-label  { color: var(--blue); }
+
+        /* ── Container / Card ───────────────────── */
+        .container { max-width: 460px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+        .card {
+          background: var(--white);
+          border-radius: 20px;
+          padding: 2rem;
+          box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+          animation: fadeUp 0.3s ease both;
+        }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .card-title { font-size: 1.35rem; font-weight: 800; color: var(--ink); margin-bottom: 0.3rem; }
+        .card-sub   { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.6rem; line-height: 1.6; }
+
+        /* ── Form ───────────────────────────────── */
+        .form-group { margin-bottom: 1.1rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"] {
+          width: 100%;
+          padding: 0.8rem 1rem;
+          border: 2px solid var(--border);
+          border-radius: 12px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 0.95rem;
+          color: var(--ink);
+          background: var(--white);
+          transition: border-color 0.2s, box-shadow 0.2s;
+          text-align: right;
+        }
+        input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-l); }
+        input.err   { border-color: var(--err); }
+
+        .err-msg { font-size: 0.78rem; color: var(--err); margin-top: 0.35rem; display: none; }
+        .err-msg.show { display: block; }
+
+        /* ── Buttons ────────────────────────────── */
+        .btn {
+          width: 100%;
+          padding: 0.9rem 1rem;
+          border: none;
+          border-radius: 14px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          font-weight: 700;
+          cursor: pointer;
+          transition: opacity 0.2s, transform 0.15s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 0.4rem;
+        }
+        .btn:active   { transform: scale(0.98); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-primary  { background: linear-gradient(135deg, var(--blue), var(--blue-d)); color: white; }
+        .btn-ghost    { background: transparent; color: var(--blue); border: 2px solid var(--border); }
+
+        /* ── Plan cards ─────────────────────────── */
+        .plan-card {
+          border: 2px solid var(--border);
+          border-radius: 16px;
+          padding: 1.2rem 1.3rem;
+          margin-bottom: 0.8rem;
+          cursor: pointer;
+          transition: all 0.2s;
+          position: relative;
+        }
+        .plan-card:hover  { border-color: var(--blue); background: var(--blue-l); }
+        .plan-card.selected { border-color: var(--blue); background: var(--blue-l); box-shadow: 0 0 0 1px var(--blue); }
+        .plan-card-top  { display: flex; align-items: center; justify-content: space-between; }
+        .plan-name-row  { display: flex; align-items: center; gap: 0.6rem; }
+        .badge { font-size: 0.7rem; font-weight: 800; padding: 0.2rem 0.6rem; border-radius: 20px; color: white; }
+        .badge-pro  { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .badge-feat { background: linear-gradient(135deg, #1a3f7c, #4a7fd4); }
+        .plan-title { font-size: 1.05rem; font-weight: 800; }
+        .plan-check {
+          width: 22px; height: 22px;
+          border-radius: 50%;
+          border: 2px solid var(--border);
+          background: white;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 0.65rem;
+          color: transparent;
+          transition: all 0.2s;
+        }
+        .plan-card.selected .plan-check { background: var(--blue); border-color: var(--blue); color: white; }
+        .plan-price  { font-size: 1.5rem; font-weight: 900; color: var(--blue); margin-top: 0.5rem; }
+        .plan-period { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+
+        /* ── Payment box ────────────────────────── */
+        .payment-box {
+          background: var(--blue-l);
+          border: 2px solid var(--blue);
+          border-radius: 16px;
+          padding: 1.5rem;
+          text-align: center;
+          margin-bottom: 1.2rem;
+        }
+        .pay-label  { font-size: 0.85rem; color: var(--muted); }
+        .pay-amount { font-size: 2rem; font-weight: 900; color: var(--blue); margin: 0.2rem 0 0.8rem; }
+        .pay-to     { font-size: 0.88rem; color: var(--ink); font-weight: 600; margin-bottom: 0.5rem; }
+        .account-num {
+          font-family: 'Courier New', monospace;
+          font-size: 0.78rem;
+          background: var(--ink);
+          color: #4ecca3;
+          padding: 0.6rem 0.8rem;
+          border-radius: 10px;
+          word-break: break-all;
+          letter-spacing: 1.5px;
+          margin: 0.5rem 0 1rem;
+          direction: ltr;
+          text-align: center;
+        }
+        .qr-wrap {
+          display: inline-block;
+          background: white;
+          border-radius: 12px;
+          padding: 10px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .qr-wrap img { display: block; border-radius: 6px; }
+        .qr-hint { font-size: 0.75rem; color: var(--muted); margin-top: 0.6rem; }
+
+        /* ── Warning ────────────────────────────── */
+        .warn-box {
+          background: var(--warn-bg);
+          border-right: 4px solid var(--warn-br);
+          border-radius: 10px;
+          padding: 0.9rem 1rem;
+          font-size: 0.83rem;
+          color: #92400e;
+          line-height: 1.6;
+          margin-bottom: 1.2rem;
+        }
+
+        /* ── Hawala input ───────────────────────── */
+        #hawala-input {
+          text-align: center;
+          letter-spacing: 2px;
+          font-size: 1.05rem;
+          font-weight: 700;
+          direction: ltr;
+        }
+
+        /* ── UID badge (info) ───────────────────── */
+        .uid-info {
+          background: #f0fdf4;
+          border: 1.5px solid #86efac;
+          border-radius: 12px;
+          padding: 0.75rem 1rem;
+          margin-bottom: 1.4rem;
+          font-size: 0.82rem;
+          color: #15803d;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .uid-info-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+        /* ── Dead / Error screen ────────────────── */
+        .dead-wrap { text-align: center; padding: 2rem 0.5rem; }
+        .dead-icon  { font-size: 4rem; margin-bottom: 1rem; }
+        .dead-title { font-size: 1.25rem; font-weight: 900; color: var(--err); margin-bottom: 0.5rem; }
+        .dead-sub   { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+        /* ── Success ────────────────────────────── */
+        .success-wrap { text-align: center; padding: 1rem 0; }
+        .success-icon { font-size: 4.5rem; margin-bottom: 1rem; animation: pop 0.4s ease; }
+        @keyframes pop {
+          0%   { transform: scale(0.5); opacity: 0; }
+          70%  { transform: scale(1.15); }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .success-title { font-size: 1.5rem; font-weight: 900; color: var(--blue); }
+        .success-sub   { font-size: 0.9rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.7; }
+        .ref-badge {
+          display: inline-block;
+          background: var(--blue-l);
+          border: 1px solid var(--blue);
+          color: var(--blue);
+          font-family: monospace;
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 2px;
+          padding: 0.4rem 1rem;
+          border-radius: 8px;
+          margin-top: 1rem;
+        }
+
+        /* ── Spinner ────────────────────────────── */
+        .spinner {
+          width: 18px; height: 18px;
+          border: 2.5px solid rgba(255,255,255,0.4);
+          border-top-color: white;
+          border-radius: 50%;
+          animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Loading overlay ────────────────────── */
+        #loading-screen {
+          position: fixed; inset: 0;
+          background: var(--bg);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          z-index: 100;
+        }
+        .load-spin {
+          width: 44px; height: 44px;
+          border: 4px solid var(--blue-l);
+          border-top-color: var(--blue);
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+        .load-text { font-size: 0.88rem; color: var(--muted); }
+    </style>
+</head>
+<body>
+<div id="vpn-notice" style="display:none;background:#fff3cd;border:1px solid #ffc107;color:#856404;padding:10px 16px;font-size:13px;text-align:center;direction:rtl;">
+  ⚠️ يبدو أنك تستخدم VPN — قد يؤثر ذلك على معالجة طلبك. يُنصح بإيقافه قبل الإرسال.
+</div>
+
+<!-- Loading overlay -->
+<div id="loading-screen">
+    <div class="load-spin"></div>
+    <div class="load-text">جاري التحقق…</div>
+</div>
+
+<div class="header">
+    <div class="header-logo">🗺️ دليل اللاذقية</div>
+    <div class="header-sub">الاشتراك في الخطط المميزة</div>
+</div>
+
+<!-- Steps bar: 3 steps only (plan / kyc / payment) -->
+<div class="steps-bar" id="steps-bar" style="display:none">
+    <div class="step-item active" id="s1">
+        <div class="step-circle">١</div>
+        <div class="step-label">الخطة</div>
+    </div>
+    <div class="step-item" id="s2">
+        <div class="step-circle">٢</div>
+        <div class="step-label">بياناتك</div>
+    </div>
+    <div class="step-item" id="s3">
+        <div class="step-circle">٣</div>
+        <div class="step-label">الدفع</div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ❌ Dead screen (refresh / invalid) -->
+    <div class="card" id="view-dead" style="display:none">
+        <div class="dead-wrap">
+            <div class="dead-icon">🔒</div>
+            <div class="dead-title">انتهت صلاحية هذه الصفحة</div>
+            <div class="dead-sub">
+                هذه الصفحة تُفتح مرة واحدة فقط من داخل التطبيق.<br>
+                يُرجى العودة إلى التطبيق والضغط على "طلب اشتراك" مجدداً.
+            </div>
+        </div>
+    </div>
+
+    <!-- ① Plan ───────────────────────────── -->
+    <div class="card" id="view-plan" style="display:none">
+        <div class="card-title">اختر اشتراكك</div>
+        <div class="card-sub">تُفعَّل الخطة فور مراجعة وتأكيد الدفع من قِبل الإدارة</div>
+
+        <div class="uid-info" id="uid-info-box" style="display:none">
+            <span class="uid-info-icon">✅</span>
+            <span id="uid-info-text"></span>
+        </div>
+
+        <div class="plan-card" id="pc-pro" onclick="selectPlan('pro')">
+            <div class="plan-card-top">
+                <div class="plan-name-row">
+                    <span class="badge badge-pro">PRO</span>
+                    <span class="plan-title">مميز</span>
+                </div>
+                <div class="plan-check" id="chk-pro">✓</div>
+            </div>
+            <div class="plan-price" id="pro-price">٩٩٩ ل.س <span class="plan-period">/ شهر</span></div>
+        </div>
+
+        <div class="plan-card" id="pc-featured" onclick="selectPlan('featured')">
+            <div class="plan-card-top">
+                <div class="plan-name-row">
+                    <span class="badge badge-feat">موصى به</span>
+                    <span class="plan-title">مُروَّج</span>
+                </div>
+                <div class="plan-check" id="chk-feat">✓</div>
+            </div>
+            <div class="plan-price" id="feat-price">٦٩٩ ل.س <span class="plan-period">/ أسبوع</span></div>
+        </div>
+
+        <!-- Bundle offer — shown after plan selection -->
+        <div id="bundle-offer" style="display:none;margin-top:0.8rem;padding:1rem 1.2rem;background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;">
+          <div style="font-size:1rem;font-weight:800;color:#15803d;margin-bottom:0.4rem;">🎉 عرض خاص</div>
+          <div id="bundle-offer-text" style="font-size:0.88rem;color:#166534;margin-bottom:0.7rem;line-height:1.6;"></div>
+          <label style="display:flex;align-items:flex-start;gap:10px;font-size:0.88rem;color:#166534;cursor:pointer;direction:rtl;">
+            <input type="checkbox" id="add-second-plan" style="margin-top:3px;flex-shrink:0;" onchange="onBundleToggle(); updatePaymentDisplay();">
+            <span id="bundle-checkbox-label"></span>
+          </label>
+          <div id="bundle-discounted-price" style="margin-top:0.5rem;font-size:0.85rem;font-weight:700;color:#15803d;display:none;"></div>
+        </div>
+
+        <div class="err-msg" id="err-plan"></div>
+        <button class="btn btn-primary" onclick="goPlan()" style="margin-top:0.8rem">متابعة</button>
+    </div>
+
+    <!-- ② KYC ───────────────────────────── -->
+    <div class="card" id="view-kyc" style="display:none">
+        <div class="card-title">بياناتك الشخصية</div>
+        <div class="card-sub">مطلوبة للتحقق من هويتك وحماية حسابك</div>
+
+        <div class="form-group">
+            <label>الاسم الأول</label>
+            <input type="text" id="k-first" placeholder="الاسم الأول">
+            <div class="err-msg" id="err-kf">هذا الحقل مطلوب</div>
+            <div class="err-msg" id="err-kf-ar">يجب أن يكون الاسم بالعربية فقط</div>
+        </div>
+        <div class="form-group">
+            <label>الاسم الثاني</label>
+            <input type="text" id="k-last" placeholder="الاسم الثاني">
+            <div class="err-msg" id="err-kl">هذا الحقل مطلوب</div>
+            <div class="err-msg" id="err-kl-ar">يجب أن يكون الاسم بالعربية فقط</div>
+        </div>
+        <div class="form-group">
+            <label>رقم هاتف للتواصل</label>
+            <input type="tel" id="k-phone" placeholder="+963XXXXXXXXX" dir="ltr">
+            <div class="err-msg" id="err-kp">هذا الحقل مطلوب</div>
+        </div>
+        <div class="form-group">
+            <label>تاريخ الميلاد</label>
+            <input type="date" id="k-dob">
+            <div class="err-msg" id="err-kdob">يجب أن يكون عمرك 18 سنة أو أكثر</div>
+        </div>
+
+        <button class="btn btn-primary" onclick="submitKyc()">متابعة للدفع</button>
+        <button class="btn btn-ghost" style="margin-top:0.5rem" onclick="goTo('view-plan')">رجوع</button>
+    </div>
+
+    <!-- ③ Payment ───────────────────────── -->
+    <div class="card" id="view-pay" style="display:none">
+        <div class="card-title">إتمام الدفع</div>
+        <div class="card-sub">حوّل المبلغ عبر شام كاش، ثم أدخل رقم الحوالة</div>
+
+        <div class="payment-box">
+            <div class="pay-label">المبلغ المطلوب</div>
+            <div class="pay-amount" id="pay-amount"></div>
+            <div class="pay-to">حوّل إلى رقم شام كاش التالي:</div>
+            <div class="account-num" id="shamcash-num">e7777b9bee1b418ab564189b8d360a04</div>
+            <div class="qr-wrap">
+                <img id="qr-img" src="" width="150" height="150" alt="QR شام كاش">
+            </div>
+            <div class="qr-hint">امسح الكود بتطبيق شام كاش</div>
+        </div>
+
+        <div class="warn-box">
+            ⚠️ أكمل التحويل أولاً عبر تطبيق شام كاش، ثم أدخل رقم الحوالة الظاهر لك بعد إتمام العملية. سيُراجَع طلبك خلال 24 ساعة.
+        </div>
+
+        <div class="form-group">
+          <label>البريد الإلكتروني <span style="color:var(--err)">*</span></label>
+          <input type="email" id="email-input" placeholder="example@gmail.com" autocomplete="email" dir="ltr">
+          <div style="font-size:0.78rem;color:#15803d;margin-top:0.35rem;">📧 سيصلك وصل الدفع على هذا البريد بعد إرسال الطلب</div>
+          <div class="err-msg" id="err-email"></div>
+        </div>
+
+        <div class="form-group">
+          <label>رقم الحوالة</label>
+          <input type="text" id="hawala-input" placeholder="أدخل رقم الحوالة هنا">
+          <div class="err-msg" id="err-hawala"></div>
+        </div>
+
+        <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:1rem;font-size:13px;color:#555;direction:rtl;cursor:pointer;">
+            <input type="checkbox" id="amount-confirm" style="margin-top:3px;flex-shrink:0;">
+            <span>أقرّ بأن المبلغ المحوّل مطابق تماماً للمبلغ المطلوب. في حال وجود فرق سيتم رفض الطلب واسترجاع المبلغ مخصوماً منه رسوم الاسترجاع.</span>
+        </label>
+        <div class="err-msg" id="err-confirm"></div>
+        <button class="btn btn-primary" id="btn-submit" onclick="submitRequest()">إرسال الطلب</button>
+        <button class="btn btn-ghost" style="margin-top:0.5rem" onclick="goTo('view-kyc')">رجوع</button>
+    </div>
+
+    <!-- ✅ Success ───────────────────────── -->
+    <div class="card" id="view-success" style="display:none">
+        <div class="success-wrap">
+            <div class="success-icon">✅</div>
+            <div class="success-title">تم استلام طلبك!</div>
+            <div class="success-sub">
+                ستتلقى إشعاراً في التطبيق فور مراجعة طلبك وتفعيل اشتراكك من قِبل الإدارة.<br>
+                عادةً خلال 24 ساعة.
+            </div>
+            <div class="ref-badge" id="ref-num"></div>
+            <button class="btn btn-primary" style="margin-top:1.5rem"
+                    onclick="returnToApp()">العودة إلى التطبيق</button>
+            <a id="receipt-link" href="#" target="_blank"
+               style="display:none;margin-top:0.8rem;padding:0.75rem 1.5rem;
+                      background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;
+                      color:#15803d;font-weight:700;font-size:0.9rem;text-decoration:none;
+                      text-align:center;width:100%;box-sizing:border-box;">
+              📄 تحميل وصل الدفع PDF
+            </a>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+
+<script>
+    // ═══════════════════════════════════════════════════════════════
+    //  SECURITY MODEL
+    //
+    //  1. uid   comes from URL param — مُوقَّع من التطبيق (لا يمكن اختراعه)
+    //  2. token comes from URL param — HMAC-SHA256(uid + placeId + ts, SECRET)
+    //     يُولَّد في وقت الضغط، صالح لـ 15 دقيقة فقط
+    //  3. الصفحة تموت عند الـ refresh لأن sessionStorage تُمسح
+    //  4. Firestore Rules تتحقق أن UID في الرابط مطابق لـ requestUid في الوثيقة
+    //     وأن الطلب جاء عبر web_payment_requests وليس مباشرة
+    //
+    //  ملاحظة: التوقيع HMAC يحمي من تعديل الـ uid يدوياً في الرابط
+    //  حتى لو عرف شخص uid شخص آخر، لا يستطيع بناء token صحيح
+    // ═══════════════════════════════════════════════════════════════
+
+      firebase.initializeApp({
+        apiKey:            "AIzaSyAT8auOR8cfT7C-kRzm27iQRIPriCy9jQE",
+        authDomain:        "device-streaming-a7432e75.firebaseapp.com",
+        projectId:         "device-streaming-a7432e75",
+        storageBucket:     "device-streaming-a7432e75.firebasestorage.app",
+        messagingSenderId: "6321458513",
+        appId:             "1:6321458513:web:583c16a20cc6101977d770"
+      });
+
+      const db = firebase.firestore();
+
+      // ── Read URL params ──────────────────────────────────────────
+      const urlParams   = new URLSearchParams(window.location.search);
+      const urlUid      = (urlParams.get('uid')      || '').trim();
+      const urlToken    = (urlParams.get('token')    || '').trim();  // HMAC token من التطبيق
+      const urlTs       = parseInt(urlParams.get('ts') || '0', 10); // timestamp إنشاء الرابط
+      const urlType     = (urlParams.get('type')     || '').trim(); // 'pro' | 'featured'
+      const urlPlaceId  = (urlParams.get('placeId')  || '').trim();
+      const urlPlaceName= (urlParams.get('placeName')|| '').trim();
+
+      // ── Session guard: تموت عند الـ refresh ─────────────────────
+      // نحفظ session_key عند أول تحميل ←
+      // عند الـ refresh: الـ URL ما زال موجود لكن session_key غير موجود في sessionStorage
+      const SESSION_KEY  = 'dlg_sub_session';
+      const SESSION_DATA = 'dlg_sub_data';
+
+      // ── State ────────────────────────────────────────────────────
+      let selectedPlan = null;
+      let existingKyc  = null;
+      let existingSubscriptions = { pro: false, featured: false };
+      let pricing = {
+        pro_amount: 999, pro_period: 'شهر',
+        featured_amount: 699, featured_period: 'أسبوع',
+        shamcash_account: 'e7777b9bee1b418ab564189b8d360a04',
+        bundle_discount_percent: 30
+      };
+
+      // ── Helpers ──────────────────────────────────────────────────
+      function showErr(id, msg) {
+        const el = document.getElementById(id);
+        if (msg) el.textContent = msg;
+        el.classList.add('show');
+      }
+      function clearErr(id) { document.getElementById(id).classList.remove('show'); }
+      function isArabicOnly(str) {
+        return /^[\u0600-\u06FF\s]+$/.test(str.trim());
+      }
+
+      function isSyrianPhone(val) {
+        const cleaned = val.trim();
+        // 09XXXXXXXX — must be exactly 10 digits, second digit must be 9
+        // +9639XXXXXXXX — must be exactly 13 chars
+        // 009639XXXXXXXX — must be exactly 14 chars
+        // Third digit (after 09) must be 1,2,3,4,5,6 (valid Syrian operators)
+        const local    = /^09[1-6]\d{7}$/.test(cleaned);
+        const intlPlus = /^\+9639[1-6]\d{7}$/.test(cleaned);
+        const intlZero = /^009639[1-6]\d{7}$/.test(cleaned);
+        return local || intlPlus || intlZero;
+      }
+
+  async function ensureAuth() {
+    if (firebase.auth().currentUser) return;
+    try {
+      await firebase.auth().signInAnonymously();
+    } catch (e) {
+      console.error('[subscribe] auth error:', e);
+    }
+  }
+
+      function show(id) { const el = document.getElementById(id); if (el) el.style.display = 'block'; }
+      function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+
+      const VIEWS = ['view-dead','view-plan','view-kyc','view-pay','view-success'];
+      const STEP_MAP = { 'view-plan': 1, 'view-kyc': 2, 'view-pay': 3 };
+
+      function hideAll() { VIEWS.forEach(hide); }
+
+      function goTo(viewId) {
+        hideAll();
+        show(viewId);
+        const n = STEP_MAP[viewId];
+        const stepsBar = document.getElementById('steps-bar');
+        if (n) {
+          stepsBar.style.display = 'flex';
+          [1,2,3].forEach(i => {
+            const el = document.getElementById('s' + i);
+            el.className = 'step-item' + (i < n ? ' done' : i === n ? ' active' : '');
+          });
+        } else {
+          stepsBar.style.display = 'none';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function setBtn(id, loading, text) {
+        const b = document.getElementById(id);
+        b.disabled = loading;
+        b.innerHTML = loading ? `${text} <div class="spinner"></div>` : text;
+      }
+
+      function killPage(reason) {
+        console.warn('[subscribe] killed:', reason);
+        hide('loading-screen');
+        goTo('view-dead');
+      }
+
+      // ── Token validation (client-side age check) ─────────────────
+      // التحقق الحقيقي من HMAC يجري على Firestore Rules / Cloud Function
+      // هنا نتحقق فقط من أن الرابط لم يتجاوز 15 دقيقة
+      function isTokenExpired() {
+        if (!urlTs) return true; // لا يوجد timestamp
+        const AGE_LIMIT_MS = 15 * 60 * 1000; // 15 دقيقة
+        return (Date.now() - urlTs) > AGE_LIMIT_MS;
+      }
+
+      // ── Main boot ────────────────────────────────────────────────
+      async function boot() {
+        // 1. تحقق: هل uid موجود في الرابط؟
+        if (!urlUid) {
+          killPage('no uid in URL');
+          return;
+        }
+
+        // 2. تحقق: هل هذه جلسة جديدة أم refresh؟
+        const existingSession = sessionStorage.getItem(SESSION_KEY);
+        if (existingSession) {
+          // sessionStorage موجودة — إذاً هذا refresh أو tab مكرر
+          killPage('refresh detected');
+          return;
+        }
+
+        // 3. تحقق: هل token موجود؟ (قد يكون اختياري في مرحلة التطوير)
+        if (!urlToken) {
+          killPage('no token in URL');
+          return;
+        }
+
+        // 4. تحقق: هل الرابط انتهت صلاحيته؟
+        if (isTokenExpired()) {
+          killPage('token expired');
+          return;
+        }
+
+        // 5. تحقق من صحة الـ token عبر Firestore
+        // التطبيق يحفظ token مؤقت في pending_tokens/{uid}
+        // عند الدخول نتحقق أنه مطابق ونحذفه (single-use)
+        await ensureAuth();
+        const tokenValid = await verifyAndConsumeToken();
+        if (!tokenValid) {
+          killPage('token invalid or already used');
+          return;
+        }
+
+        // 6. كل شيء صحيح — سجّل الجلسة في sessionStorage
+        sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+          uid: urlUid,
+          ts: Date.now()
+        }));
+
+        // 7. حمّل الأسعار وبيانات KYC
+        await Promise.all([loadPricing(), loadKyc()]);
+        existingSubscriptions = await checkExistingSubscriptions();
+        applySubscriptionLabels();
+
+        // 8. أظهر الصفحة
+        hide('loading-screen');
+        goTo('view-plan');
+
+        // إذا الـ URL فيه نوع محدد، اختره تلقائياً
+        if (urlType === 'pro' || urlType === 'featured') {
+          selectPlan(urlType);
+        }
+      }
+
+      // ── Token verification (single-use) ─────────────────────────
+      // التطبيق يكتب pending_tokens/{uid} = { token, placeId, type, expiresAt }
+      // نتحقق ونحذف — لا يمكن استخدام نفس الرابط مرتين
+      async function verifyAndConsumeToken() {
+        try {
+          const tokenRef = db.collection('pending_subscription_tokens').doc(urlUid);
+          let valid = false;
+
+          await db.runTransaction(async (tx) => {
+            const snap = await tx.get(tokenRef);
+            if (!snap.exists) return; // لا يوجد token
+
+            const data = snap.data();
+
+            // تحقق من Token
+            if (data.token !== urlToken) return;
+
+            // تحقق من انتهاء الصلاحية (server-side)
+            const now = firebase.firestore.Timestamp.now();
+            if (data.expiresAt && data.expiresAt.toMillis() < now.toMillis()) return;
+
+            // تحقق من PlaceId إذا موجود
+            if (data.placeId && data.placeId !== urlPlaceId) return;
+
+            // كل شيء صحيح — احذف التوكن (single-use)
+            tx.delete(tokenRef);
+            valid = true;
+          });
+
+          return valid;
+        } catch (e) {
+          console.error('[subscribe] token verify error:', e);
+          return false;
+        }
+      }
+
+      // ── Load pricing ─────────────────────────────────────────────
+      async function loadPricing() {
+        try {
+          const doc = await db.collection('app_config').doc('pricing').get();
+          if (doc.exists) pricing = { ...pricing, ...doc.data() };
+        } catch (_) {}
+
+        document.getElementById('pro-price').innerHTML =
+          `${pricing.pro_amount} ل.س <span class="plan-period">/ ${pricing.pro_period}</span>`;
+        document.getElementById('feat-price').innerHTML =
+          `${pricing.featured_amount} ل.س <span class="plan-period">/ ${pricing.featured_period}</span>`;
+
+        // حدّث رقم شام كاش والـ QR
+        const acc = pricing.shamcash_account || 'e7777b9bee1b418ab564189b8d360a04';
+        document.getElementById('shamcash-num').textContent = acc;
+        document.getElementById('qr-img').src =
+          `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(acc)}&bgcolor=ffffff&color=141c1b`;
+      }
+
+      // ── Load KYC prefill ─────────────────────────────────────────
+      async function loadKyc() {
+        if (!urlUid) return;
+        try {
+          const snap = await db.collection('kyc_profiles').doc(urlUid).get();
+          if (snap.exists) {
+            existingKyc = snap.data();
+            document.getElementById('k-first').value = existingKyc.firstLegalName  || '';
+            document.getElementById('k-last').value  = existingKyc.secondLegalName || '';
+            document.getElementById('k-phone').value = existingKyc.phoneNumber     || '';
+            document.getElementById('k-dob').value   = existingKyc.dateOfBirth     || '';
+          }
+        } catch (_) {}
+
+        let userName = '';
+        try {
+          const userDoc = await db.collection('users').doc(urlUid).get();
+          if (userDoc.exists) {
+            const u = userDoc.data();
+            userName = (u.firstName || u.name || '').trim();
+          }
+        } catch(_) {}
+
+        // أظهر uid info box للمستخدم
+        const infoBox  = document.getElementById('uid-info-box');
+        const infoText = document.getElementById('uid-info-text');
+
+        const greeting = userName ? `أهلاً بك ${userName}` : 'أهلاً بك';
+        const placeMsg = urlPlaceName ? `هذا الترويج يستهدف "${urlPlaceName}"` : '';
+        infoText.innerHTML = `<strong>${greeting}</strong>${placeMsg ? '<br>' + placeMsg : ''}`;
+
+        infoBox.style.display = 'flex';
+      }
+
+      async function checkExistingSubscriptions() {
+        if (!urlPlaceId) return { pro: false, featured: false };
+        const results = { pro: false, featured: false };
+        try {
+          const [proSnap, featSnap] = await Promise.all([
+            db.collection('pro_requests')
+              .where('placeId', '==', urlPlaceId)
+              .where('status', '==', 'approved')
+              .limit(1).get(),
+            db.collection('featured_requests')
+              .where('placeId', '==', urlPlaceId)
+              .where('status', '==', 'approved')
+              .limit(1).get()
+          ]);
+          results.pro      = !proSnap.empty;
+          results.featured = !featSnap.empty;
+        } catch (e) {
+          console.error('[subscribe] subscription check error:', e);
+        }
+        return results;
+      }
+
+      function applySubscriptionLabels() {
+        const plans = ['pro', 'featured'];
+        plans.forEach(plan => {
+          const isActive = existingSubscriptions[plan];
+          const card     = document.getElementById('pc-' + plan);
+          const existing = card.querySelector('.plan-renewal-badge');
+          if (existing) existing.remove();
+
+          if (isActive) {
+            const badge = document.createElement('div');
+            badge.className = 'plan-renewal-badge';
+            badge.style.cssText =
+              'margin-top:0.5rem;font-size:0.78rem;font-weight:700;' +
+              'color:#15803d;background:#f0fdf4;border:1px solid #86efac;' +
+              'border-radius:8px;padding:0.25rem 0.6rem;display:inline-block;';
+            badge.textContent = '🔄 مشترك حالياً — سيُمدَّد الاشتراك';
+            card.appendChild(badge);
+          }
+        });
+      }
+
+      // ── Plan selection ───────────────────────────────────────────
+  function selectPlan(p) {
+    selectedPlan = p;
+    ['pro','featured'].forEach(x => document.getElementById('pc-' + x).classList.remove('selected'));
+    document.getElementById('pc-' + p).classList.add('selected');
+    clearErr('err-plan');
+
+    // Show bundle offer
+    const primaryAmount = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+    const otherPlan     = selectedPlan === 'pro' ? 'featured' : 'pro';
+    const otherName     = otherPlan === 'pro' ? 'PRO مميز' : 'المُروَّج (موصى به)';
+    const otherAmount   = otherPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+
+    const fullTotal       = primaryAmount + otherAmount;
+    const discountedTotal = Math.round(fullTotal * (1 - pricing.bundle_discount_percent / 100));
+    const savedAmount     = fullTotal - discountedTotal;
+
+    document.getElementById('bundle-offer-text').textContent =
+      `بما أنك اخترت باقة، يمكنك إضافة باقة ${otherName} بخصم ${pricing.bundle_discount_percent}% على المجموع الكلي.`;
+    document.getElementById('bundle-checkbox-label').textContent =
+      `نعم، أريد إضافة ${otherName} (خصم ${pricing.bundle_discount_percent}% على المجموع)`;
+
+    document.getElementById('bundle-discounted-price').innerHTML =
+      `السعر الكامل: ${fullTotal} ل.س<br>` +
+      `خصم ${pricing.bundle_discount_percent}%: -${savedAmount} ل.س<br>` +
+      `المجموع بعد الخصم: ${discountedTotal} ل.س`;
+
+    // Reset checkbox
+    document.getElementById('add-second-plan').checked = false;
+    document.getElementById('bundle-discounted-price').style.display = 'none';
+    document.getElementById('bundle-offer').style.display = 'block';
+  }
+
+  function onBundleToggle() {
+    const checked = document.getElementById('add-second-plan').checked;
+    document.getElementById('bundle-discounted-price').style.display = checked ? 'block' : 'none';
+  }
+
+      function goPlan() {
+        if (!selectedPlan) { showErr('err-plan', 'يرجى اختيار نوع الاشتراك'); return; }
+        goTo('view-kyc');
+      }
+
+      // ── KYC submit ───────────────────────────────────────────────
+      function submitKyc() {
+        const first = document.getElementById('k-first').value.trim();
+        const last  = document.getElementById('k-last').value.trim();
+        const phone = document.getElementById('k-phone').value.trim();
+        const dob   = document.getElementById('k-dob').value;
+
+        let ok = true;
+
+        // First name: required + Arabic only
+        if (!first) {
+          showErr('err-kf', 'هذا الحقل مطلوب');
+          clearErr('err-kf-ar');
+          ok = false;
+        } else if (!isArabicOnly(first)) {
+          clearErr('err-kf');
+          showErr('err-kf-ar');
+          ok = false;
+        } else {
+          clearErr('err-kf');
+          clearErr('err-kf-ar');
+        }
+
+        // Last name: required + Arabic only
+        if (!last) {
+          showErr('err-kl', 'هذا الحقل مطلوب');
+          clearErr('err-kl-ar');
+          ok = false;
+        } else if (!isArabicOnly(last)) {
+          clearErr('err-kl');
+          showErr('err-kl-ar');
+          ok = false;
+        } else {
+          clearErr('err-kl');
+          clearErr('err-kl-ar');
+        }
+
+        // Phone: Syrian phone validation
+        if (!phone) {
+          showErr('err-kp', 'هذا الحقل مطلوب'); ok = false;
+        } else if (!isSyrianPhone(phone)) {
+          showErr('err-kp', 'أدخل رقم سوري صحيح (مثال: 09XXXXXXXX أو +9639XXXXXXXX)'); ok = false;
+        } else {
+          clearErr('err-kp');
+        }
+
+        // Date of birth: required + age >= 18
+        if (!dob) {
+          showErr('err-kdob', 'تاريخ الميلاد مطلوب');
+          ok = false;
+        } else {
+          const age = Math.floor((Date.now() - new Date(dob).getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+          if (age < 18) {
+            showErr('err-kdob', 'يجب أن يكون عمرك 18 سنة أو أكثر');
+            ok = false;
+          } else {
+            clearErr('err-kdob');
+          }
+        }
+
+        if (!ok) return;
+
+        // Save KYC to Firestore
+        const now = Date.now();
+        db.collection('kyc_profiles').doc(urlUid).set({
+          userId:          urlUid,
+          firstLegalName:  first,
+          secondLegalName: last,
+          phoneNumber:     phone,
+          dateOfBirth:     dob,
+          paymentField:    existingKyc?.paymentField || '',
+          createdAt:       existingKyc?.createdAt    || now,
+          updatedAt:       now,
+          source:          'web'
+        }).catch(() => {});
+
+        updatePaymentDisplay();
+        goTo('view-pay');
+      }
+
+      function updatePaymentDisplay() {
+        const addSecond = document.getElementById('add-second-plan')?.checked === true;
+        const primaryAmount = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+        const primaryPeriod = selectedPlan === 'pro' ? pricing.pro_period : pricing.featured_period;
+        const otherPlan     = selectedPlan === 'pro' ? 'featured' : 'pro';
+        const otherAmount   = otherPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+
+        const fullTotal       = primaryAmount + otherAmount;
+        const discountedTotal = Math.round(fullTotal * (1 - pricing.bundle_discount_percent / 100));
+
+        if (addSecond) {
+          document.getElementById('pay-amount').innerHTML =
+            `المجموع بعد خصم ${pricing.bundle_discount_percent}%: ${discountedTotal} ل.س`;
+        } else {
+          document.getElementById('pay-amount').innerHTML =
+            `${primaryAmount} ل.س / ${primaryPeriod}`;
+        }
+      }
+
+      // ── Payment submit ───────────────────────────────────────────
+  async function submitRequest() {
+    if (!document.getElementById('amount-confirm').checked) {
+      document.getElementById('err-confirm').textContent = 'يجب الموافقة على الإقرار أولاً';
+      document.getElementById('err-confirm').classList.add('show');
+      return;
+    }
+    document.getElementById('err-confirm').textContent = '';
+    document.getElementById('err-confirm').classList.remove('show');
+
+    await loadPricing();
+
+    const hawala = document.getElementById('hawala-input').value.trim();
+    if (!hawala)          { showErr('err-hawala', 'أدخل رقم الحوالة'); return; }
+    if (hawala.length < 4){ showErr('err-hawala', 'رقم الحوالة يبدو قصيراً، تحقق منه'); return; }
+    clearErr('err-hawala');
+
+  const email = document.getElementById('email-input').value.trim();
+  if (!email)                          { showErr('err-email', 'أدخل بريدك الإلكتروني'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('err-email', 'البريد الإلكتروني غير صحيح'); return; }
+  clearErr('err-email');
+    setBtn('btn-submit', true, 'جاري الإرسال');
+
+    try {
+      const session = JSON.parse(sessionStorage.getItem(SESSION_KEY) || '{}');
+      if (session.uid !== urlUid) { killPage('uid mismatch at submit'); return; }
+
+      const kyc = {
+        الاسم_الأول:   document.getElementById('k-first').value.trim(),
+        اسم_العائلة:   document.getElementById('k-last').value.trim(),
+        رقم_الهاتف:    document.getElementById('k-phone').value.trim(),
+        تاريخ_الميلاد: document.getElementById('k-dob').value
+      };
+
+      const addSecond = document.getElementById('add-second-plan')?.checked === true;
+      const otherPlan = selectedPlan === 'pro' ? 'featured' : 'pro';
+
+      const primaryAmount = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+      const primaryPeriod = selectedPlan === 'pro' ? pricing.pro_period : pricing.featured_period;
+      const otherAmount   = otherPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+
+      const fullTotal       = primaryAmount + otherAmount;
+      const discountedTotal = Math.round(fullTotal * (1 - pricing.bundle_discount_percent / 100));
+      const savedAmount     = fullTotal - discountedTotal;
+
+      const baseFields = {
+        requestUid:   urlUid,
+        placeId:      urlPlaceId,
+        placeName:    urlPlaceName,
+        kyc,
+        hawalaNumber: hawala,
+        userId:       urlUid,
+        status:       'pending',
+        ملاحظة:      'في حال إرسال مبلغ مغاير سيتم رفض الطلب واسترجاع المبلغ مخصوماً منه رسوم الاسترجاع.',
+        createdAt:    firebase.firestore.FieldValue.serverTimestamp(),
+        source:       'web',
+        email:        email,
+        urlToken:     urlToken,
+        subscriptionType: existingSubscriptions[selectedPlan] ? 'renewal' : 'new'
+      };
+
+      if (addSecond) {
+        baseFields.fullPriceBeforeDiscount = fullTotal;
+        baseFields.savedAmount = savedAmount;
+        baseFields.bundleDiscount = true;
+      }
+
+      const primaryRequest = {
+        ...baseFields,
+        plan:        selectedPlan,
+        amount:      primaryAmount,
+        period:      primaryPeriod,
+        ...(addSecond && { totalBundleAmount: discountedTotal })
+      };
+
+      const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
+      const ref = await db.collection(primaryCollection).add(primaryRequest);
+
+      if (addSecond) {
+        const secondaryRequest = {
+          ...baseFields,
+          plan:             otherPlan,
+          amount:           0,
+          period:           otherPlan === 'pro' ? pricing.pro_period : pricing.featured_period,
+          bundleLinkedTo:   ref.id,
+          subscriptionType: existingSubscriptions[otherPlan] ? 'renewal' : 'new'
+        };
+        const secondaryCollection = otherPlan === 'pro' ? 'pro_requests' : 'featured_requests';
+        await db.collection(secondaryCollection).add(secondaryRequest);
+      }
+
+      sessionStorage.removeItem(SESSION_KEY);
+      document.getElementById('ref-num').textContent = 'رقم الطلب: ' + ref.id;
+      goTo('view-success');
+
+      db.collection(primaryCollection).doc(ref.id).update({
+        requestId: ref.id
+      }).catch(e => console.warn('[subscribe] requestId update skipped:', e));
+
+      generateAndUploadReceipt(
+        ref.id,
+        primaryRequest,
+        addSecond,
+        otherPlan,
+        discountedTotal
+      );
+
+    } catch (e) {
+      console.error('[subscribe] submit error:', e);
+      showErr('err-hawala', 'فشل الإرسال، تحقق من اتصالك وحاول مجدداً');
+      setBtn('btn-submit', false, 'إرسال الطلب');
+    }
+  }
+
+      function returnToApp() {
+        // Try deep link first (app is open)
+        const deepLink = 'lattakia://subscribe_success';
+        const fallback = 'https://play.google.com/store/apps/details?id=com.example.lattakia_guide';
+
+        const start = Date.now();
+        window.location.href = deepLink;
+
+        setTimeout(() => {
+          // If app didn't open (took more than 1.5s), go to Play Store
+          if (Date.now() - start < 2000) {
+            window.location.href = fallback;
+          }
+        }, 1500);
+      }
+
+  async function generateAndUploadReceipt(requestId, requestData, addSecond, otherPlan, discountedTotal) {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ar-SY', {
+      year: 'numeric', month: 'long', day: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+
+    const primaryAmount  = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+    const primaryPeriod  = selectedPlan === 'pro' ? pricing.pro_period : pricing.featured_period;
+    const planName       = selectedPlan === 'pro' ? 'PRO مميز' : 'مُروَّج موصى به';
+    const otherPlanName  = otherPlan    === 'pro' ? 'PRO مميز' : 'مُروَّج موصى به';
+    const finalAmount    = addSecond ? discountedTotal : primaryAmount;
+    const fullTotal      = pricing.pro_amount + pricing.featured_amount;
+    const savedAmount    = fullTotal - discountedTotal;
+
+    const kyc = requestData.kyc || {};
+
+    const bundleRow = addSecond ? `
+      <tr><td>الباقة المضافة</td><td>${otherPlanName} (خصم ${pricing.bundle_discount_percent}%)</td></tr>
+      <tr><td>السعر الكامل قبل الخصم</td><td>${fullTotal} ل.س</td></tr>
+      <tr><td>التوفير</td><td>${savedAmount} ل.س</td></tr>
+    ` : '';
+
+    const html = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>وصل دفع — دليل اللاذقية</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Cairo', sans-serif; background: #fff; color: #141c1b; padding: 2rem; direction: rtl; }
+  .logo { text-align:center; font-size:2rem; font-weight:900; color:#1a3f7c; margin-bottom:0.3rem; }
+  .subtitle { text-align:center; color:#5a6b69; font-size:0.9rem; margin-bottom:1.5rem; }
+  .divider { border:none; border-top: 2px dashed #d5e3e1; margin: 1rem 0; }
+  h2 { font-size:1rem; color:#1a3f7c; margin-bottom:0.8rem; font-weight:700; }
+  table { width:100%; border-collapse:collapse; font-size:0.9rem; margin-bottom:1.2rem; }
+  td { padding:0.5rem 0.3rem; border-bottom:1px solid #f0f0f0; }
+  td:first-child { color:#5a6b69; width:45%; }
+  td:last-child { font-weight:700; text-align:left; }
+  .amount-row td { font-size:1.1rem; color:#1a3f7c; }
+  .warn { background:#fffbeb; border:1px solid #f59e0b; border-radius:10px; padding:1rem; font-size:0.82rem; color:#92400e; line-height:1.7; margin-top:1rem; }
+  .ref { text-align:center; background:#e8eef7; border-radius:8px; padding:0.6rem; font-family:monospace; font-size:0.8rem; color:#1a3f7c; margin-bottom:1rem; word-break:break-all; }
+  @media print { body { padding:1rem; } }
+</style>
+</head>
+<body>
+<div class="logo">🗺️ دليل اللاذقية</div>
+<div class="subtitle">وصل دفع رسمي</div>
+<div class="ref">رقم الطلب: ${requestId}</div>
+<hr class="divider">
+
+<h2>بيانات المكان</h2>
+<table>
+  <tr><td>اسم المكان</td><td>${requestData.placeName || '-'}</td></tr>
+  <tr><td>معرف المكان</td><td>${requestData.placeId || '-'}</td></tr>
+</table>
+
+<h2>تفاصيل الباقة</h2>
+<table>
+  <tr><td>الباقة الأساسية</td><td>${planName} / ${primaryPeriod}</td></tr>
+  <tr><td>نوع الطلب</td><td>${requestData.subscriptionType === 'renewal' ? 'تمديد' : 'اشتراك جديد'}</td></tr>
+  ${bundleRow}
+  <tr class="amount-row"><td>المبلغ الإجمالي المدفوع</td><td>${finalAmount} ل.س</td></tr>
+</table>
+
+<h2>بيانات الدافع</h2>
+<table>
+  <tr><td>الاسم الكامل</td><td>${kyc['الاسم_الأول'] || ''} ${kyc['اسم_العائلة'] || ''}</td></tr>
+  <tr><td>رقم الهاتف</td><td>${kyc['رقم_الهاتف'] || '-'}</td></tr>
+  <tr><td>تاريخ الميلاد</td><td>${kyc['تاريخ_الميلاد'] || '-'}</td></tr>
+</table>
+
+<h2>بيانات الدفع</h2>
+<table>
+  <tr><td>رقم الحوالة</td><td>${requestData.hawalaNumber || '-'}</td></tr>
+  <tr><td>طريقة الدفع</td><td>شام كاش</td></tr>
+  <tr><td>تاريخ الطلب</td><td>${dateStr}</td></tr>
+</table>
+
+<div class="warn">
+  ⚠️ تنبيه هام: هذا الوصل وثيقة طلب أولية فقط. لا يُعدّ دليلاً على تفعيل الخدمة ولا ملزماً قانونياً إلا بعد مراجعته والموافقة عليه من قِبَل إدارة دليل اللاذقية.
+</div>
+</body>
+</html>`;
+
+    // Store HTML in sessionStorage and open print window
+    const key = 'dlg_receipt_' + requestId;
+    sessionStorage.setItem(key, html);
+
+    // Show download button that opens print dialog
+    const receiptBtn = document.getElementById('receipt-link');
+    if (receiptBtn) {
+      receiptBtn.href = '#';
+      receiptBtn.style.display = 'flex';
+      receiptBtn.onclick = function(e) {
+        e.preventDefault();
+        const win = window.open('', '_blank', 'width=800,height=900');
+        win.document.write(html);
+        win.document.close();
+        win.onload = function() { win.print(); };
+      };
+    }
+
+    // Upload HTML as receipt to Firebase Storage (for admin access)
+    try {
+      const storage = firebase.storage();
+      const blob = new Blob([html], { type: 'text/html' });
+      const path = `payment_receipts/${urlUid}/${requestId}.html`;
+      const ref = storage.ref(path);
+      await ref.put(blob, { contentType: 'text/html' });
+      const downloadUrl = await ref.getDownloadURL();
+
+      db.collection(selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests')
+        .doc(requestId)
+        .update({ receiptUrl: downloadUrl, receiptPath: path })
+        .catch(() => {});
+    } catch(e) {
+      console.error('[subscribe] receipt upload error:', e);
+    }
+  }
+
+      // ── DOB max = today ──────────────────────────────────────────
+      document.getElementById('k-dob').max = new Date().toISOString().split('T')[0];
+
+      // ── منع فتح صفحة البيانات مباشرة في history ─────────────────
+      // pushState فارغ حتى Back button لا يرجع لنيف الحالة
+      history.replaceState({ page: 'subscribe' }, '');
+      window.addEventListener('popstate', () => {
+        // إذا حاول المستخدم الرجوع بعد النجاح أو من خارج التطبيق
+        // لا نفعل شيئاً — الصفحة ستموت إذا حاول إعادة التحميل
+      });
+
+      // ── Boot ─────────────────────────────────────────────────────
+      boot();
+</script>
+<script>
+fetch('https://ipapi.co/json/')
+  .then(r => r.json())
+  .then(d => { if (d.threat && (d.threat.is_vpn || d.threat.is_proxy)) document.getElementById('vpn-notice').style.display = 'block'; })
+  .catch(() => {});
+</script>
+</body>
+</html>
