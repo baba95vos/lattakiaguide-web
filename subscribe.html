@@ -587,13 +587,12 @@
 
       function isSyrianPhone(val) {
         const cleaned = val.trim();
-        // 09XXXXXXXX — must be exactly 10 digits, second digit must be 9
-        // +9639XXXXXXXX — must be exactly 13 chars
-        // 009639XXXXXXXX — must be exactly 14 chars
-        // Third digit (after 09) must be 1,2,3,4,5,6 (valid Syrian operators)
-        const local    = /^09[1-6]\d{7}$/.test(cleaned);
-        const intlPlus = /^\+9639[1-6]\d{7}$/.test(cleaned);
-        const intlZero = /^009639[1-6]\d{7}$/.test(cleaned);
+        // 09XXXXXXXX — exactly 10 digits
+        // +9639XXXXXXXX — exactly 13 chars
+        // 009639XXXXXXXX — exactly 14 chars
+        const local    = /^09\d{8}$/.test(cleaned);
+        const intlPlus = /^\+9639\d{8}$/.test(cleaned);
+        const intlZero = /^009639\d{8}$/.test(cleaned);
         return local || intlPlus || intlZero;
       }
 
