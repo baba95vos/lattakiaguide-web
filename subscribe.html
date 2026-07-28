@@ -551,6 +551,11 @@
       // ── Read URL params ──────────────────────────────────────────
       const urlParams   = new URLSearchParams(window.location.search);
       const urlUid      = (urlParams.get('uid')      || '').trim();
+      if (!urlUid || urlUid.length < 10) {
+        alert('رابط غير صالح. يرجى فتح الصفحة من داخل التطبيق.');
+        document.body.innerHTML = '';
+        throw new Error('Invalid UID in URL');
+      }
       const urlToken    = (urlParams.get('token')    || '').trim();  // HMAC token من التطبيق
       const urlTs       = parseInt(urlParams.get('ts') || '0', 10); // timestamp إنشاء الرابط
       const urlType     = (urlParams.get('type')     || '').trim(); // 'pro' | 'featured'
@@ -1060,6 +1065,20 @@
       };
 
       const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
+
+      const existingQuery = await db.collection(primaryCollection)
+        .where('userId', '==', urlUid)
+        .where('placeId', '==', urlPlaceId)
+        .where('status', '==', 'pending')
+        .limit(1)
+        .get();
+
+      if (!existingQuery.empty) {
+        showErr('err-hawala', 'يوجد طلب قيد المراجعة لهذا المكان. يرجى الانتظار حتى تتم المعالجة.');
+        setBtn('btn-submit', false, 'إرسال الطلب');
+        return;
+      }
+
       const ref = await db.collection(primaryCollection).add(primaryRequest);
 
       if (addSecond) {
