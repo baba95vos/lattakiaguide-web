@@ -33,7 +33,7 @@
           -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Header ─────────────────────────────── */
+        /* ── Header ────────────────────────────── */
         .header {
           background: linear-gradient(160deg, var(--blue) 0%, var(--blue-d) 100%);
           padding: 2.5rem 1.5rem 3rem;
@@ -578,6 +578,7 @@
         shamcash_account: 'e7777b9bee1b418ab564189b8d360a04',
         bundle_discount_percent: 30
       };
+      let verifiedUid = null;
 
       // ── Helpers ──────────────────────────────────────────────────
       function showErr(id, msg) {
@@ -741,6 +742,7 @@
 
             // كل شيء صحيح — احذف التوكن (single-use)
             tx.delete(tokenRef);
+            verifiedUid = data.uid || urlUid;
             valid = true;
           });
 
@@ -955,7 +957,7 @@
         // Save KYC to Firestore
         const now = Date.now();
         db.collection('kyc_profiles').doc(urlUid).set({
-          userId:          urlUid,
+          userId:          verifiedUid,
           firstLegalName:  first,
           secondLegalName: last,
           phoneNumber:     phone,
@@ -1035,12 +1037,12 @@
       const savedAmount     = fullTotal - discountedTotal;
 
       const baseFields = {
-        requestUid:   urlUid,
+        requestUid:   verifiedUid,
         placeId:      urlPlaceId,
         placeName:    urlPlaceName,
         kyc,
         hawalaNumber: hawala,
-        userId:       urlUid,
+        userId:       verifiedUid,
         status:       'pending',
         ملاحظة:      'في حال إرسال مبلغ مغاير سيتم رفض الطلب واسترجاع المبلغ مخصوماً منه رسوم الاسترجاع.',
         createdAt:    firebase.firestore.FieldValue.serverTimestamp(),
@@ -1067,7 +1069,7 @@
       const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
 
       const existingQuery = await db.collection(primaryCollection)
-        .where('userId', '==', urlUid)
+        .where('userId', '==', verifiedUid)
         .where('placeId', '==', urlPlaceId)
         .where('status', '==', 'pending')
         .limit(1)
