@@ -721,7 +721,7 @@
       // التحقق يتم عبر Cloud Function — لا قراءة مباشرة من Firestore
       async function verifyAndConsumeToken() {
         try {
-          const verifyFn = firebase.functions().httpsCallable('verify_subscription_token');
+          const verifyFn = firebase.functions('europe-west1').httpsCallable('verify_subscription_token');
           const result = await verifyFn({
             uid: urlUid,
             token: urlToken,
