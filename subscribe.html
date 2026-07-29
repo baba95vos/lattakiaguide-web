@@ -521,6 +521,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-functions-compat.js"></script>
 
 <script>
     // ═══════════════════════════════════════════════════════════════
@@ -717,36 +718,17 @@
       }
 
       // ── Token verification (single-use) ─────────────────────────
-      // التطبيق يكتب pending_tokens/{uid} = { token, placeId, type, expiresAt }
-      // نتحقق ونحذف — لا يمكن استخدام نفس الرابط مرتين
+      // التحقق يتم عبر Cloud Function — لا قراءة مباشرة من Firestore
       async function verifyAndConsumeToken() {
         try {
-          const tokenRef = db.collection('pending_subscription_tokens').doc(urlUid);
-          let valid = false;
-
-          await db.runTransaction(async (tx) => {
-            const snap = await tx.get(tokenRef);
-            if (!snap.exists) return; // لا يوجد token
-
-            const data = snap.data();
-
-            // تحقق من Token
-            if (data.token !== urlToken) return;
-
-            // تحقق من انتهاء الصلاحية (server-side)
-            const now = firebase.firestore.Timestamp.now();
-            if (data.expiresAt && data.expiresAt.toMillis() < now.toMillis()) return;
-
-            // تحقق من PlaceId إذا موجود
-            if (data.placeId && data.placeId !== urlPlaceId) return;
-
-            // كل شيء صحيح — احذف التوكن (single-use)
-            tx.delete(tokenRef);
-            verifiedUid = data.uid || urlUid;
-            valid = true;
+          const verifyFn = firebase.functions().httpsCallable('verify_subscription_token');
+          const result = await verifyFn({
+            uid: urlUid,
+            token: urlToken,
+            placeId: urlPlaceId
           });
-
-          return valid;
+          verifiedUid = result.data.uid;
+          return true;
         } catch (e) {
           console.error('[subscribe] token verify error:', e);
           return false;
