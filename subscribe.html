@@ -719,15 +719,23 @@
 
       // ── Token verification (single-use) ─────────────────────────
       // التحقق يتم عبر Cloud Function — لا قراءة مباشرة من Firestore
-      async function verifyAndConsumeToken() {
+           async function verifyAndConsumeToken() {
         try {
-          const verifyFn = firebase.functions('europe-west1').httpsCallable('verify_subscription_token');
-          const result = await verifyFn({
-            uid: urlUid,
-            token: urlToken,
-            placeId: urlPlaceId
+          const url = 'https://europe-west1-device-streaming-a7432e75.cloudfunctions.net/verify_subscription_token';
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              data: {
+                uid: urlUid,
+                token: urlToken,
+                placeId: urlPlaceId
+              }
+            })
           });
-          verifiedUid = result.data.uid;
+          const json = await res.json();
+          if (!res.ok || !json.result || !json.result.uid) return false;
+          verifiedUid = json.result.uid;
           return true;
         } catch (e) {
           console.error('[subscribe] token verify error:', e);
