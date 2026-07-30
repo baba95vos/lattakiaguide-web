@@ -1058,7 +1058,7 @@
 
       const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
 
-      const submitFn = firebase.functions('europe-west1').httpsCallable('submit_subscription');
+      const submitFn = firebase.app().functions('europe-west1').httpsCallable('submit_subscription');
       const payload = {
         uid:          urlUid,
         token:        urlToken,
