@@ -1058,31 +1058,42 @@
 
       const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
 
-      const submitFn = firebase.app().functions('europe-west1').httpsCallable('submit_subscription');
-      const payload = {
-        uid:          urlUid,
-        token:        urlToken,
-        placeId:      urlPlaceId,
-        placeName:    urlPlaceName,
-        plan:         selectedPlan,
-        amount:       primaryAmount,
-        period:       primaryPeriod,
-        kyc,
-        hawalaNumber: hawala,
-        email:        email,
-        subscriptionType: existingSubscriptions[selectedPlan] ? 'renewal' : 'new',
-        ...(addSecond && {
-          secondPlan:              otherPlan,
-          secondSubscriptionType:  existingSubscriptions[otherPlan] ? 'renewal' : 'new',
-          fullPriceBeforeDiscount: fullTotal,
-          savedAmount:             savedAmount,
-          bundleDiscount:          true,
-          totalBundleAmount:       discountedTotal,
-        })
-      };
+    const payload = {
+      uid:          urlUid,
+      token:        urlToken,
+      placeId:      urlPlaceId,
+      placeName:    urlPlaceName,
+      plan:         selectedPlan,
+      amount:       primaryAmount,
+      period:       primaryPeriod,
+      kyc,
+      hawalaNumber: hawala,
+      email:        email,
+      subscriptionType: existingSubscriptions[selectedPlan] ? 'renewal' : 'new',
+      ...(addSecond && {
+        secondPlan:              otherPlan,
+        secondSubscriptionType:  existingSubscriptions[otherPlan] ? 'renewal' : 'new',
+        fullPriceBeforeDiscount: fullTotal,
+        savedAmount:             savedAmount,
+        bundleDiscount:          true,
+        totalBundleAmount:       discountedTotal,
+      })
+    };
 
-      const result = await submitFn(payload);
-      const requestId = result.data.requestId;
+    const submitRes = await fetch(
+      'https://europe-west1-device-streaming-a7432e75.cloudfunctions.net/submit_subscription',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: payload })
+      }
+    );
+    const submitJson = await submitRes.json();
+    if (!submitRes.ok || !submitJson.result || !submitJson.result.requestId) {
+      const errMsg = submitJson.error?.message || 'فشل الإرسال';
+      throw new Error(errMsg);
+    }
+    const requestId = submitJson.result.requestId;
 
       sessionStorage.removeItem(SESSION_KEY);
       document.getElementById('ref-num').textContent = 'رقم الطلب: ' + requestId;
