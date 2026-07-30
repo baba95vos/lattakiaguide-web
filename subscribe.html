@@ -1058,44 +1058,38 @@
 
       const primaryCollection = selectedPlan === 'pro' ? 'pro_requests' : 'featured_requests';
 
-      const existingQuery = await db.collection(primaryCollection)
-        .where('userId', '==', verifiedUid)
-        .where('placeId', '==', urlPlaceId)
-        .where('status', '==', 'pending')
-        .limit(1)
-        .get();
+      const submitFn = firebase.functions('europe-west1').httpsCallable('submit_subscription');
+      const payload = {
+        uid:          urlUid,
+        token:        urlToken,
+        placeId:      urlPlaceId,
+        placeName:    urlPlaceName,
+        plan:         selectedPlan,
+        amount:       primaryAmount,
+        period:       primaryPeriod,
+        kyc,
+        hawalaNumber: hawala,
+        email:        email,
+        subscriptionType: existingSubscriptions[selectedPlan] ? 'renewal' : 'new',
+        ...(addSecond && {
+          secondPlan:              otherPlan,
+          secondSubscriptionType:  existingSubscriptions[otherPlan] ? 'renewal' : 'new',
+          fullPriceBeforeDiscount: fullTotal,
+          savedAmount:             savedAmount,
+          bundleDiscount:          true,
+          totalBundleAmount:       discountedTotal,
+        })
+      };
 
-      if (!existingQuery.empty) {
-        showErr('err-hawala', 'يوجد طلب قيد المراجعة لهذا المكان. يرجى الانتظار حتى تتم المعالجة.');
-        setBtn('btn-submit', false, 'إرسال الطلب');
-        return;
-      }
-
-      const ref = await db.collection(primaryCollection).add(primaryRequest);
-
-      if (addSecond) {
-        const secondaryRequest = {
-          ...baseFields,
-          plan:             otherPlan,
-          amount:           0,
-          period:           otherPlan === 'pro' ? pricing.pro_period : pricing.featured_period,
-          bundleLinkedTo:   ref.id,
-          subscriptionType: existingSubscriptions[otherPlan] ? 'renewal' : 'new'
-        };
-        const secondaryCollection = otherPlan === 'pro' ? 'pro_requests' : 'featured_requests';
-        await db.collection(secondaryCollection).add(secondaryRequest);
-      }
+      const result = await submitFn(payload);
+      const requestId = result.data.requestId;
 
       sessionStorage.removeItem(SESSION_KEY);
-      document.getElementById('ref-num').textContent = 'رقم الطلب: ' + ref.id;
+      document.getElementById('ref-num').textContent = 'رقم الطلب: ' + requestId;
       goTo('view-success');
 
-      db.collection(primaryCollection).doc(ref.id).update({
-        requestId: ref.id
-      }).catch(e => console.warn('[subscribe] requestId update skipped:', e));
-
       generateAndUploadReceipt(
-        ref.id,
+        requestId,
         primaryRequest,
         addSecond,
         otherPlan,
