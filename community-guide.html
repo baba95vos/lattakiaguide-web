@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إرشادات المجتمع – Lattakia Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --clr-bg:#F7F8FA;--clr-surface:#FFFFFF;--clr-brand:#1A5C8A;--clr-brand-mid:#2478B5;
+      --clr-accent:#E8A020;--clr-accent-lt:#FEF3DC;--clr-text:#1C1E26;--clr-muted:#5A6070;
+      --clr-border:#DDE1EA;--clr-divider:#EEF0F5;
+      --clr-warn:#FDF3E7;--clr-warn-border:#F0C070;
+      --ff-display:'Cairo',sans-serif;--ff-body:'Tajawal',sans-serif;
+      --radius-sm:6px;--radius-md:12px;--radius-lg:20px;
+      --shadow-card:0 2px 16px rgba(26,92,138,0.07),0 1px 4px rgba(0,0,0,0.04);
+      --max-w:860px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--ff-body);font-size:clamp(15px,1.6vw,17px);line-height:1.85;color:var(--clr-text);background:var(--clr-bg);-webkit-font-smoothing:antialiased}
+    .skip-link{position:absolute;top:-999px;left:50%;transform:translateX(-50%);background:var(--clr-brand);color:#fff;padding:8px 20px;border-radius:0 0 var(--radius-sm) var(--radius-sm);font-family:var(--ff-display);z-index:999}
+    .skip-link:focus{top:0}
+
+    /* Hero */
+    .site-header{background:linear-gradient(135deg,var(--clr-brand) 0%,var(--clr-brand-mid) 60%,#30A5E8 100%);color:#fff;padding:clamp(40px,7vw,80px) 24px clamp(32px,5vw,60px);text-align:center;position:relative;overflow:hidden}
+    .site-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 200'%3E%3Cpath fill='rgba(255,255,255,0.05)' d='M0,80 C150,160 350,0 600,100 C750,160 850,60 900,80 L900,200 L0,200Z'/%3E%3C/svg%3E") bottom/cover no-repeat;pointer-events:none}
+    .header-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:5px 18px;font-family:var(--ff-display);font-size:clamp(11px,1.3vw,13px);font-weight:600;letter-spacing:.06em;margin-bottom:18px}
+    .site-header h1{font-family:var(--ff-display);font-size:clamp(22px,4vw,40px);font-weight:800;line-height:1.3;margin-bottom:14px;text-shadow:0 2px 8px rgba(0,0,0,0.15)}
+    .header-meta{font-size:clamp(12px,1.4vw,14px);opacity:.8;font-weight:300}
+    .header-divider{display:block;width:48px;height:3px;background:var(--clr-accent);border-radius:2px;margin:16px auto 0}
+
+    /* Layout */
+    .page-body{max-width:var(--max-w);margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,3vw,24px) 80px}
+
+    /* TOC */
+    .toc-card{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-lg);padding:clamp(20px,3vw,32px) clamp(20px,3vw,36px);margin-bottom:40px;box-shadow:var(--shadow-card)}
+    .toc-title{font-family:var(--ff-display);font-size:clamp(14px,1.6vw,16px);font-weight:700;color:var(--clr-brand);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .toc-title::before{content:'';display:inline-block;width:4px;height:18px;background:var(--clr-accent);border-radius:2px;flex-shrink:0}
+    .toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px 20px;list-style:none}
+    .toc-grid li a{color:var(--clr-muted);text-decoration:none;font-size:clamp(12px,1.4vw,14px);line-height:1.6;display:flex;align-items:baseline;gap:6px;transition:color .2s}
+    .toc-grid li a:hover{color:var(--clr-brand)}
+    .toc-num{font-family:var(--ff-display);font-size:11px;font-weight:700;color:var(--clr-accent);flex-shrink:0;min-width:22px}
+
+    /* Sections */
+    .policy-section{background:var(--clr-surface);border-radius:var(--radius-lg);padding:clamp(24px,3.5vw,40px) clamp(20px,3.5vw,40px);margin-bottom:24px;box-shadow:var(--shadow-card);border:1px solid var(--clr-border);scroll-margin-top:24px}
+    .section-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+    .section-num{flex-shrink:0;width:40px;height:40px;min-width:40px;background:linear-gradient(135deg,var(--clr-brand),var(--clr-brand-mid));color:#fff;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-size:14px;font-weight:800;box-shadow:0 3px 10px rgba(26,92,138,0.25)}
+    .section-header h2{font-family:var(--ff-display);font-size:clamp(16px,2vw,20px);font-weight:700;color:var(--clr-brand);line-height:1.4;padding-top:8px}
+
+    /* Sub-headings */
+    .policy-section h3{font-family:var(--ff-display);font-size:clamp(14px,1.7vw,16px);font-weight:700;color:var(--clr-text);margin:24px 0 10px;padding-right:12px;border-right:3px solid var(--clr-accent)}
+
+    /* Paragraphs */
+    .policy-section p{color:var(--clr-muted);font-size:clamp(14px,1.6vw,16px);margin-bottom:14px;line-height:1.9}
+    .policy-section p:last-child{margin-bottom:0}
+
+    /* Lists */
+    .policy-section ul{list-style:none;padding:0;margin:10px 0 16px}
+    .policy-section ul li{position:relative;padding-right:22px;color:var(--clr-muted);font-size:clamp(14px,1.6vw,16px);line-height:1.85;margin-bottom:8px}
+    .policy-section ul li::before{content:'';position:absolute;right:0;top:10px;width:7px;height:7px;background:var(--clr-accent);border-radius:50%}
+
+    /* Forbidden list (red dot) */
+    .list-forbidden{list-style:none;padding:0;margin:10px 0 16px}
+    .list-forbidden li{position:relative;padding-right:22px;color:var(--clr-muted);font-size:clamp(14px,1.6vw,16px);line-height:1.85;margin-bottom:8px}
+    .list-forbidden li::before{content:'';position:absolute;right:0;top:10px;width:7px;height:7px;background:#D94F3D;border-radius:50%}
+
+    /* Forbidden block header */
+    .forbidden-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-display);font-size:clamp(13px,1.5vw,15px);font-weight:700;color:#C0392B;margin:20px 0 10px;padding:6px 14px;background:#FDF0EE;border:1px solid #F0B8B2;border-radius:var(--radius-sm)}
+    .forbidden-label::before{content:'✕';font-size:12px}
+
+    /* Highlight box */
+    .highlight-box{background:var(--clr-accent-lt);border:1px solid rgba(232,160,32,0.3);border-radius:var(--radius-md);padding:16px 20px;margin:14px 0;font-family:var(--ff-display);font-size:clamp(14px,1.6vw,15px);font-weight:600;color:var(--clr-brand)}
+    .highlight-box a{color:var(--clr-brand);text-decoration:underline;text-underline-offset:3px}
+
+    /* Divider */
+    .section-divider{height:1px;background:var(--clr-divider);margin:6px 0 20px}
+
+    /* Footer */
+    .site-footer{background:var(--clr-brand);color:rgba(255,255,255,0.75);text-align:center;padding:clamp(28px,4vw,44px) 24px;font-size:clamp(12px,1.4vw,14px);font-family:var(--ff-body)}
+    .site-footer .footer-brand{font-family:var(--ff-display);font-size:clamp(15px,1.8vw,18px);font-weight:800;color:#fff;margin-bottom:8px}
+    .site-footer a{color:var(--clr-accent);text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+    .footer-copy{margin-top:12px;font-size:12px;opacity:.6}
+
+    @media(max-width:600px){.section-num{width:34px;height:34px;min-width:34px;font-size:12px}.toc-grid{grid-template-columns:1fr}.policy-section{border-radius:var(--radius-md)}}
+    @media print{body{background:#fff}.site-header{background:var(--clr-brand)!important;print-color-adjust:exact}.toc-card,.policy-section{box-shadow:none;border:1px solid #ddd}.page-body{padding:16px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
+<header class="site-header" role="banner">
+  <div class="header-badge">Lattakia Guide</div>
+  <h1>إرشادات المجتمع</h1>
+  <p class="header-meta">آخر تحديث: 15 يوليو 2026</p>
+  <span class="header-divider" aria-hidden="true"></span>
+</header>
+
+<main id="main-content" class="page-body">
+
+  <nav class="toc-card" aria-label="فهرس إرشادات المجتمع">
+    <p class="toc-title">فهرس المحتويات</p>
+    <ol class="toc-grid">
+      <li><a href="#sec-1"><span class="toc-num">1.</span> مقدمة</a></li>
+      <li><a href="#sec-2"><span class="toc-num">2.</span> المبادئ الأساسية للمجتمع</a></li>
+      <li><a href="#sec-3"><span class="toc-num">3.</span> إضافة الأماكن</a></li>
+      <li><a href="#sec-4"><span class="toc-num">4.</span> الصور والمحتوى المرئي</a></li>
+      <li><a href="#sec-5"><span class="toc-num">5.</span> وصف الأماكن والخدمات</a></li>
+      <li><a href="#sec-6"><span class="toc-num">6.</span> التقييمات والتفاعل</a></li>
+      <li><a href="#sec-7"><span class="toc-num">7.</span> فرص العمل</a></li>
+      <li><a href="#sec-8"><span class="toc-num">8.</span> المحتوى التجاري</a></li>
+      <li><a href="#sec-9"><span class="toc-num">9.</span> المحتوى المحظور</a></li>
+      <li><a href="#sec-10"><span class="toc-num">10.</span> الخصوصية والمعلومات الشخصية</a></li>
+      <li><a href="#sec-11"><span class="toc-num">11.</span> الملكية الفكرية</a></li>
+      <li><a href="#sec-12"><span class="toc-num">12.</span> مراجعة المحتوى</a></li>
+      <li><a href="#sec-13"><span class="toc-num">13.</span> الإبلاغ عن المخالفات</a></li>
+      <li><a href="#sec-14"><span class="toc-num">14.</span> مراجعة البلاغات</a></li>
+      <li><a href="#sec-15"><span class="toc-num">15.</span> الإجراءات عند المخالفات</a></li>
+      <li><a href="#sec-16"><span class="toc-num">16.</span> نظام التحذيرات</a></li>
+      <li><a href="#sec-17"><span class="toc-num">17.</span> الحسابات المخترقة</a></li>
+      <li><a href="#sec-18"><span class="toc-num">18.</span> حماية أصحاب الأماكن</a></li>
+      <li><a href="#sec-19"><span class="toc-num">19.</span> المحتوى التجاري والميزات المدفوعة</a></li>
+      <li><a href="#sec-20"><span class="toc-num">20.</span> سلامة المستخدمين</a></li>
+      <li><a href="#sec-21"><span class="toc-num">21.</span> مسؤولية المستخدم عن المحتوى</a></li>
+      <li><a href="#sec-22"><span class="toc-num">22.</span> التغييرات على الإرشادات</a></li>
+      <li><a href="#sec-23"><span class="toc-num">23.</span> التواصل</a></li>
+      <li><a href="#sec-24"><span class="toc-num">24.</span> الموافقة على الإرشادات</a></li>
+    </ol>
+  </nav>
+
+  <!-- ── Section 1 ── -->
+  <section class="policy-section" id="sec-1">
+    <div class="section-header"><div class="section-num" aria-hidden="true">1</div><h2>مقدمة</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>تهدف <strong>Lattakia Guide Team</strong> إلى بناء دليل رقمي موثوق يساعد المستخدمين على اكتشاف الأماكن والخدمات والمعلومات بطريقة سهلة وآمنة.</p>
+    <p>تعتمد جودة Lattakia Guide بشكل كبير على مساهمة المستخدمين، ولذلك نطلب من جميع المستخدمين الالتزام بهذه الإرشادات عند إضافة المحتوى أو استخدام ميزات التطبيق.</p>
+    <p>تهدف هذه الإرشادات إلى:</p>
+    <ul>
+      <li>الحفاظ على دقة المعلومات.</li>
+      <li>حماية المستخدمين وأصحاب الأماكن.</li>
+      <li>منع المحتوى المضلل أو الضار.</li>
+      <li>توفير تجربة موثوقة للجميع.</li>
+    </ul>
+    <p>باستخدام التطبيق، يوافق المستخدم على الالتزام بهذه الإرشادات بالإضافة إلى شروط الاستخدام وسياسة الخصوصية.</p>
+  </section>
+
+  <!-- ── Section 2 ── -->
+  <section class="policy-section" id="sec-2">
+    <div class="section-header"><div class="section-num" aria-hidden="true">2</div><h2>المبادئ الأساسية للمجتمع</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>نتوقع من جميع المستخدمين:</p>
+
+    <h3>الصدق والدقة</h3>
+    <p>يجب أن تكون المعلومات المقدمة:</p>
+    <ul>
+      <li>صحيحة حسب علم المستخدم.</li>
+      <li>غير مضللة.</li>
+      <li>مرتبطة بالمكان أو الخدمة الفعلية.</li>
+    </ul>
+    <p>لا يسمح بإضافة معلومات وهمية بهدف خداع المستخدمين.</p>
+
+    <h3>الاحترام</h3>
+    <p>يجب التعامل مع المستخدمين وأصحاب الأماكن باحترام.</p>
+    <p>لا يسمح بالمحتوى الذي يحتوي على:</p>
+    <ul>
+      <li>الإهانات.</li>
+      <li>التهديدات.</li>
+      <li>خطاب الكراهية.</li>
+      <li>التشهير المتعمد.</li>
+      <li>الإساءة الشخصية.</li>
+    </ul>
+
+    <h3>المسؤولية</h3>
+    <p>المستخدم مسؤول عن كل محتوى يرسله أو ينشره من خلال حسابه.</p>
+  </section>
+
+  <!-- ── Section 3 ── -->
+  <section class="policy-section" id="sec-3">
+    <div class="section-header"><div class="section-num" aria-hidden="true">3</div><h2>إضافة الأماكن</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>عند إرسال طلب إضافة مكان، يجب أن:</p>
+    <ul>
+      <li>يكون المكان موجودًا فعليًا.</li>
+      <li>تكون المعلومات مرتبطة بالمكان الصحيح.</li>
+      <li>يكون الوصف واضحًا ودقيقًا.</li>
+      <li>يتم اختيار التصنيف المناسب.</li>
+      <li>تكون الصور مرتبطة بالمكان.</li>
+    </ul>
+    <p class="forbidden-label">يمنع إضافة:</p>
+    <ul class="list-forbidden">
+      <li>أماكن وهمية.</li>
+      <li>معلومات غير صحيحة بهدف التضليل.</li>
+      <li>أماكن لا علاقة للمستخدم بها بهدف الإضرار.</li>
+      <li>بيانات شخصية لأشخاص دون إذن.</li>
+      <li>محتوى لا علاقة له بخدمة التطبيق.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 4 ── -->
+  <section class="policy-section" id="sec-4">
+    <div class="section-header"><div class="section-num" aria-hidden="true">4</div><h2>الصور والمحتوى المرئي</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يجب أن تكون الصور المرفوعة:</p>
+    <ul>
+      <li>مرتبطة بالمكان أو الخدمة.</li>
+      <li>مملوكة للمستخدم أو لديه إذن باستخدامها.</li>
+      <li>واضحة وغير مضللة.</li>
+    </ul>
+    <p class="forbidden-label">يمنع رفع الصور التي تحتوي على:</p>
+    <ul class="list-forbidden">
+      <li>محتوى جنسي أو عري.</li>
+      <li>عنف أو مشاهد صادمة.</li>
+      <li>مواد غير قانونية.</li>
+      <li>صور مسروقة أو منسوخة دون إذن.</li>
+      <li>معلومات شخصية حساسة لأشخاص آخرين.</li>
+      <li>شعارات أو علامات تجارية بطريقة توحي بوجود علاقة غير حقيقية.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 5 ── -->
+  <section class="policy-section" id="sec-5">
+    <div class="section-header"><div class="section-num" aria-hidden="true">5</div><h2>وصف الأماكن والخدمات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يجب أن تكون أوصاف الأماكن:</p>
+    <ul>
+      <li>مفيدة للمستخدمين.</li>
+      <li>واقعية.</li>
+      <li>خالية من المبالغات المضللة.</li>
+    </ul>
+    <p class="forbidden-label">لا يسمح باستخدام أوصاف مثل:</p>
+    <ul class="list-forbidden">
+      <li>ادعاءات غير مثبتة.</li>
+      <li>معلومات طبية أو صحية مضللة.</li>
+      <li>وعود غير حقيقية.</li>
+      <li>تقييمات مزيفة.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 6 ── -->
+  <section class="policy-section" id="sec-6">
+    <div class="section-header"><div class="section-num" aria-hidden="true">6</div><h2>التقييمات والتفاعل</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يوفر التطبيق بعض وسائل التفاعل مثل الإعجاب.</p>
+    <p>يجب استخدام هذه الميزات بشكل حقيقي.</p>
+    <p class="forbidden-label">يمنع:</p>
+    <ul class="list-forbidden">
+      <li>إنشاء حسابات وهمية لزيادة التفاعل.</li>
+      <li>استخدام وسائل آلية.</li>
+      <li>محاولة التلاعب بترتيب الأماكن.</li>
+      <li>تقديم تفاعلات مقابل مكافآت أو مصالح غير معلنة.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 7 ── -->
+  <section class="policy-section" id="sec-7">
+    <div class="section-header"><div class="section-num" aria-hidden="true">7</div><h2>فرص العمل</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>عند إضافة فرصة عمل، يجب أن تكون المعلومات:</p>
+    <ul>
+      <li>حقيقية.</li>
+      <li>واضحة.</li>
+      <li>مرتبطة بجهة أو فرصة فعلية.</li>
+    </ul>
+    <p class="forbidden-label">يمنع نشر:</p>
+    <ul class="list-forbidden">
+      <li>وظائف وهمية.</li>
+      <li>عروض تهدف إلى الاحتيال.</li>
+      <li>طلبات تتطلب معلومات حساسة غير ضرورية.</li>
+      <li>عروض مخالفة للقوانين.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 8 ── -->
+  <section class="policy-section" id="sec-8">
+    <div class="section-header"><div class="section-num" aria-hidden="true">8</div><h2>المحتوى التجاري</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يمكن لأصحاب الأماكن تقديم معلومات عن خدماتهم، ولكن يجب:</p>
+    <ul>
+      <li>أن تكون المعلومات دقيقة.</li>
+      <li>عدم تضليل المستخدمين.</li>
+      <li>عدم انتحال هوية نشاط تجاري آخر.</li>
+    </ul>
+    <p class="forbidden-label">يمنع:</p>
+    <ul class="list-forbidden">
+      <li>الإعلان عن خدمات غير موجودة.</li>
+      <li>نشر عروض مزيفة.</li>
+      <li>استخدام التطبيق لإزعاج المستخدمين.</li>
+      <li>نشر محتوى لا علاقة له بخدمات المكان.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 9 ── -->
+  <section class="policy-section" id="sec-9">
+    <div class="section-header"><div class="section-num" aria-hidden="true">9</div><h2>المحتوى المحظور</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يحظر استخدام Lattakia Guide لنشر أو الترويج لأي محتوى يتضمن:</p>
+    <ul class="list-forbidden">
+      <li>نشاطات غير قانونية.</li>
+      <li>الاحتيال أو الخداع.</li>
+      <li>البرمجيات الضارة.</li>
+      <li>محاولات اختراق.</li>
+      <li>بيع أو ترويج منتجات ممنوعة.</li>
+      <li>تهديدات أو تحريض على العنف.</li>
+      <li>انتهاك حقوق الآخرين.</li>
+      <li>معلومات شخصية لأشخاص دون موافقة.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 10 ── -->
+  <section class="policy-section" id="sec-10">
+    <div class="section-header"><div class="section-num" aria-hidden="true">10</div><h2>الخصوصية والمعلومات الشخصية</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يجب احترام خصوصية الآخرين.</p>
+    <p class="forbidden-label">لا يجوز نشر:</p>
+    <ul class="list-forbidden">
+      <li>أرقام هواتف شخصية دون إذن.</li>
+      <li>عناوين خاصة.</li>
+      <li>وثائق شخصية.</li>
+      <li>صور أشخاص دون حق استخدامها.</li>
+      <li>أي معلومات حساسة عن أفراد.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 11 ── -->
+  <section class="policy-section" id="sec-11">
+    <div class="section-header"><div class="section-num" aria-hidden="true">11</div><h2>الملكية الفكرية</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يجب على المستخدم التأكد من أن المحتوى الذي يرفعه:</p>
+    <ul>
+      <li>لا ينتهك حقوق النشر.</li>
+      <li>لا يستخدم صورًا أو نصوصًا مسروقة.</li>
+      <li>لا ينتحل هوية علامات أو جهات أخرى.</li>
+    </ul>
+    <p>يمكن إزالة المحتوى الذي يثبت انتهاكه لحقوق الملكية الفكرية.</p>
+  </section>
+
+  <!-- ── Section 12 ── -->
+  <section class="policy-section" id="sec-12">
+    <div class="section-header"><div class="section-num" aria-hidden="true">12</div><h2>مراجعة المحتوى</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>قد تقوم Lattakia Guide Team بمراجعة المحتوى بهدف:</p>
+    <ul>
+      <li>التأكد من جودة المعلومات.</li>
+      <li>حماية المستخدمين.</li>
+      <li>منع إساءة الاستخدام.</li>
+    </ul>
+    <p>قد يتم:</p>
+    <ul>
+      <li>قبول الطلب.</li>
+      <li>رفض الطلب.</li>
+      <li>طلب تعديل المعلومات.</li>
+      <li>إزالة المحتوى بعد نشره إذا ظهرت مشكلة.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 13 ── -->
+  <section class="policy-section" id="sec-13">
+    <div class="section-header"><div class="section-num" aria-hidden="true">13</div><h2>الإبلاغ عن المحتوى والمخالفات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>تسعى Lattakia Guide Team إلى الحفاظ على بيئة موثوقة وآمنة لجميع المستخدمين.</p>
+    <p>إذا واجه المستخدم محتوى يعتقد أنه:</p>
+    <ul>
+      <li>مخالف لهذه الإرشادات.</li>
+      <li>غير دقيق بشكل متعمد.</li>
+      <li>ينتهك حقوق الآخرين.</li>
+      <li>يحتوي على إساءة أو احتيال.</li>
+    </ul>
+    <p>يمكنه التواصل مع فريق الدعم للإبلاغ عن المشكلة.</p>
+    <p>يجب أن يحتوي البلاغ، قدر الإمكان، على:</p>
+    <ul>
+      <li>وصف واضح للمشكلة.</li>
+      <li>رابط أو معلومات تساعد على تحديد المحتوى.</li>
+      <li>سبب الاعتقاد بأن المحتوى مخالف.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 14 ── -->
+  <section class="policy-section" id="sec-14">
+    <div class="section-header"><div class="section-num" aria-hidden="true">14</div><h2>مراجعة البلاغات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>تقوم Lattakia Guide Team بمراجعة البلاغات وفق الإمكانيات المتاحة وطبيعة المخالفة.</p>
+    <p>قد تشمل إجراءات المراجعة:</p>
+    <ul>
+      <li>التحقق من المعلومات.</li>
+      <li>طلب توضيحات إضافية.</li>
+      <li>التواصل مع الأطراف المعنية.</li>
+      <li>اتخاذ إجراء مناسب.</li>
+    </ul>
+    <p>لا يعني تقديم بلاغ أن المحتوى سيتم حذفه تلقائيًا، حيث تتم مراجعة كل حالة حسب ظروفها.</p>
+  </section>
+
+  <!-- ── Section 15 ── -->
+  <section class="policy-section" id="sec-15">
+    <div class="section-header"><div class="section-num" aria-hidden="true">15</div><h2>الإجراءات المتخذة عند المخالفات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>عند اكتشاف مخالفة، قد تتخذ Lattakia Guide Team أحد الإجراءات التالية:</p>
+    <ul>
+      <li>طلب تعديل المحتوى.</li>
+      <li>إزالة المحتوى المخالف.</li>
+      <li>رفض نشر الطلب.</li>
+      <li>تقييد بعض ميزات الحساب.</li>
+      <li>إرسال تحذير للمستخدم.</li>
+      <li>تعليق الحساب مؤقتًا.</li>
+      <li>إيقاف الحساب في الحالات الخطيرة أو المتكررة.</li>
+    </ul>
+    <p>يتم اختيار الإجراء المناسب حسب:</p>
+    <ul>
+      <li>نوع المخالفة.</li>
+      <li>خطورتها.</li>
+      <li>تكرارها.</li>
+      <li>تأثيرها على المستخدمين أو الخدمة.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 16 ── -->
+  <section class="policy-section" id="sec-16">
+    <div class="section-header"><div class="section-num" aria-hidden="true">16</div><h2>نظام التحذيرات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>قد يتم إصدار تحذيرات للمستخدمين عند مخالفة قواعد المجتمع.</p>
+    <p>قد تشمل المخالفات التي تؤدي إلى تحذير:</p>
+    <ul>
+      <li>إرسال معلومات غير صحيحة.</li>
+      <li>رفع محتوى مخالف.</li>
+      <li>إساءة استخدام الميزات.</li>
+      <li>محاولة التلاعب بالنظام.</li>
+    </ul>
+    <p>تكرار المخالفات قد يؤدي إلى إجراءات أكثر صرامة.</p>
+  </section>
+
+  <!-- ── Section 17 ── -->
+  <section class="policy-section" id="sec-17">
+    <div class="section-header"><div class="section-num" aria-hidden="true">17</div><h2>الحسابات المخترقة أو الاستخدام غير المصرح به</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>إذا تم الاشتباه بأن حسابًا تم اختراقه أو استخدامه بطريقة غير مصرح بها، قد تقوم Lattakia Guide Team باتخاذ إجراءات حماية مثل:</p>
+    <ul>
+      <li>تقييد بعض العمليات.</li>
+      <li>طلب التحقق من المستخدم.</li>
+      <li>تعليق الحساب مؤقتًا لحماية صاحبه.</li>
+    </ul>
+    <p>تهدف هذه الإجراءات إلى حماية المستخدم وليس معاقبته.</p>
+  </section>
+
+  <!-- ── Section 18 ── -->
+  <section class="policy-section" id="sec-18">
+    <div class="section-header"><div class="section-num" aria-hidden="true">18</div><h2>حماية أصحاب الأماكن</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>نظرًا لأن التطبيق يحتوي على معلومات مرتبطة بأماكن وخدمات، نولي اهتمامًا خاصًا بحماية أصحاب الأماكن من:</p>
+    <ul>
+      <li>الحذف غير المصرح به.</li>
+      <li>التعديلات الضارة.</li>
+      <li>انتحال الملكية.</li>
+      <li>نشر معلومات كاذبة عن النشاط.</li>
+    </ul>
+    <p>قد تتطلب بعض الإجراءات مثل حذف مكان منشور أو تغيير معلومات حساسة مراجعة إدارية أو التحقق من العلاقة بالمكان.</p>
+  </section>
+
+  <!-- ── Section 19 ── -->
+  <section class="policy-section" id="sec-19">
+    <div class="section-header"><div class="section-num" aria-hidden="true">19</div><h2>المحتوى التجاري والميزات المدفوعة</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>قد يستخدم أصحاب الأماكن ميزات إضافية لتحسين ظهور أماكنهم داخل التطبيق.</p>
+    <p class="forbidden-label">يجب ألا تستخدم هذه الميزات من أجل:</p>
+    <ul class="list-forbidden">
+      <li>نشر معلومات مضللة.</li>
+      <li>خداع المستخدمين.</li>
+      <li>إعطاء انطباعات غير حقيقية عن جودة الخدمة.</li>
+    </ul>
+    <p>لا تعني أي ميزة ترويجية أن Lattakia Guide Team تضمن جودة المكان أو الخدمات المقدمة فيه.</p>
+  </section>
+
+  <!-- ── Section 20 ── -->
+  <section class="policy-section" id="sec-20">
+    <div class="section-header"><div class="section-num" aria-hidden="true">20</div><h2>سلامة المستخدمين</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>يجب عدم استخدام التطبيق لطلب أو مشاركة معلومات قد تعرض المستخدمين للخطر.</p>
+    <p class="forbidden-label">يمنع:</p>
+    <ul class="list-forbidden">
+      <li>طلب بيانات شخصية حساسة دون سبب مشروع.</li>
+      <li>محاولة نقل المستخدمين إلى عمليات احتيالية.</li>
+      <li>نشر روابط ضارة.</li>
+      <li>استغلال فرص العمل أو الخدمات لخداع الآخرين.</li>
+    </ul>
+  </section>
+
+  <!-- ── Section 21 ── -->
+  <section class="policy-section" id="sec-21">
+    <div class="section-header"><div class="section-num" aria-hidden="true">21</div><h2>مسؤولية المستخدم عن المحتوى</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>كل مستخدم مسؤول عن:</p>
+    <ul>
+      <li>صحة المعلومات التي يقدمها.</li>
+      <li>قانونية المحتوى الذي يرفعه.</li>
+      <li>امتلاكه الحق في استخدام الصور أو النصوص.</li>
+    </ul>
+    <p>لا تتحمل Lattakia Guide Team مسؤولية المحتوى الذي يقدمه المستخدمون، لكنها تعمل على مراجعة وإزالة المحتوى المخالف عند معرفتها به.</p>
+  </section>
+
+  <!-- ── Section 22 ── -->
+  <section class="policy-section" id="sec-22">
+    <div class="section-header"><div class="section-num" aria-hidden="true">22</div><h2>التغييرات على إرشادات المجتمع</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>قد تقوم Lattakia Guide Team بتحديث هذه الإرشادات عند الحاجة بسبب:</p>
+    <ul>
+      <li>إضافة ميزات جديدة.</li>
+      <li>تغير طبيعة الخدمة.</li>
+      <li>تحسين حماية المستخدمين.</li>
+      <li>متطلبات قانونية أو تشغيلية.</li>
+    </ul>
+    <p>سيتم تحديث تاريخ الوثيقة عند إجراء تغييرات مهمة.</p>
+  </section>
+
+  <!-- ── Section 23 ── -->
+  <section class="policy-section" id="sec-23">
+    <div class="section-header"><div class="section-num" aria-hidden="true">23</div><h2>التواصل</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>للاستفسارات أو الإبلاغ عن مشكلة تتعلق بالمحتوى أو السلوك داخل التطبيق:</p>
+    <p><strong>Lattakia Guide Team</strong></p>
+    <p>البريد الإلكتروني:</p>
+    <div class="highlight-box"><a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a></div>
+    <p>الموقع:</p>
+    <div class="highlight-box"><a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></div>
+  </section>
+
+  <!-- ── Section 24 ── -->
+  <section class="policy-section" id="sec-24">
+    <div class="section-header"><div class="section-num" aria-hidden="true">24</div><h2>الموافقة على الإرشادات</h2></div>
+    <div class="section-divider" aria-hidden="true"></div>
+    <p>باستخدام Lattakia Guide، يوافق المستخدم على الالتزام بهذه الإرشادات وعلى استخدام الخدمة بطريقة مسؤولة تحافظ على جودة المنصة وحقوق المستخدمين الآخرين.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <p class="footer-brand">Lattakia Guide Team</p>
+  <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
+  <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية إرشادات المجتمع</p>
+</footer>
+
+</body>
+</html>

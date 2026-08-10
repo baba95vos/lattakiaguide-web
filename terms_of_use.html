@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>شروط الاستخدام – Lattakia Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ───────── Design Tokens ───────── */
+        :root {
+          --clr-bg:        #F7F8FA;
+          --clr-surface:   #FFFFFF;
+          --clr-brand:     #1A5C8A;
+          --clr-brand-mid: #2478B5;
+          --clr-accent:    #E8A020;
+          --clr-accent-lt: #FEF3DC;
+          --clr-text:      #1C1E26;
+          --clr-muted:     #5A6070;
+          --clr-border:    #DDE1EA;
+          --clr-divider:   #EEF0F5;
+
+          --ff-display: 'Cairo', sans-serif;
+          --ff-body:    'Tajawal', sans-serif;
+
+          --radius-sm: 6px;
+          --radius-md: 12px;
+          --radius-lg: 20px;
+
+          --shadow-card: 0 2px 16px rgba(26, 92, 138, 0.07), 0 1px 4px rgba(0,0,0,0.04);
+
+          --max-w: 860px;
+        }
+
+        /* ───────── Reset & Base ───────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: var(--ff-body);
+          font-size: clamp(15px, 1.6vw, 17px);
+          line-height: 1.85;
+          color: var(--clr-text);
+          background: var(--clr-bg);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ───────── Skip Link ───────── */
+        .skip-link {
+          position: absolute;
+          top: -999px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--clr-brand);
+          color: #fff;
+          padding: 8px 20px;
+          border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+          font-family: var(--ff-display);
+          z-index: 999;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ───────── Header / Hero ───────── */
+        .site-header {
+          background: linear-gradient(135deg, var(--clr-brand) 0%, var(--clr-brand-mid) 60%, #30A5E8 100%);
+          color: #fff;
+          padding: clamp(40px, 7vw, 80px) 24px clamp(32px, 5vw, 60px);
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .site-header::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 200'%3E%3Cpath fill='rgba(255,255,255,0.05)' d='M0,80 C150,160 350,0 600,100 C750,160 850,60 900,80 L900,200 L0,200Z'/%3E%3C/svg%3E") bottom / cover no-repeat;
+          pointer-events: none;
+        }
+
+        .header-badge {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 999px;
+          padding: 5px 18px;
+          font-family: var(--ff-display);
+          font-size: clamp(11px, 1.3vw, 13px);
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          margin-bottom: 18px;
+        }
+
+        .site-header h1 {
+          font-family: var(--ff-display);
+          font-size: clamp(22px, 4vw, 40px);
+          font-weight: 800;
+          line-height: 1.3;
+          margin-bottom: 14px;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-meta {
+          font-size: clamp(12px, 1.4vw, 14px);
+          opacity: 0.8;
+          font-weight: 300;
+        }
+
+        .header-divider {
+          display: block;
+          width: 48px;
+          height: 3px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          margin: 16px auto 0;
+        }
+
+        /* ───────── Layout ───────── */
+        .page-body {
+          max-width: var(--max-w);
+          margin: 0 auto;
+          padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px) 80px;
+        }
+
+        /* ───────── TOC ───────── */
+        .toc-card {
+          background: var(--clr-surface);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--radius-lg);
+          padding: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 36px);
+          margin-bottom: 40px;
+          box-shadow: var(--shadow-card);
+        }
+
+        .toc-title {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 16px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .toc-title::before {
+          content: '';
+          display: inline-block;
+          width: 4px;
+          height: 18px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
+
+        .toc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 6px 20px;
+          list-style: none;
+        }
+        .toc-grid li a {
+          color: var(--clr-muted);
+          text-decoration: none;
+          font-size: clamp(12px, 1.4vw, 14px);
+          line-height: 1.6;
+          display: flex;
+          align-items: baseline;
+          gap: 6px;
+          transition: color 0.2s;
+        }
+        .toc-grid li a:hover { color: var(--clr-brand); }
+
+        .toc-num {
+          font-family: var(--ff-display);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--clr-accent);
+          flex-shrink: 0;
+          min-width: 22px;
+        }
+
+        /* ───────── Sections ───────── */
+        .policy-section {
+          background: var(--clr-surface);
+          border-radius: var(--radius-lg);
+          padding: clamp(24px, 3.5vw, 40px) clamp(20px, 3.5vw, 40px);
+          margin-bottom: 24px;
+          box-shadow: var(--shadow-card);
+          border: 1px solid var(--clr-border);
+          scroll-margin-top: 24px;
+        }
+
+        .section-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .section-num {
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          background: linear-gradient(135deg, var(--clr-brand), var(--clr-brand-mid));
+          color: #fff;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--ff-display);
+          font-size: 14px;
+          font-weight: 800;
+          box-shadow: 0 3px 10px rgba(26,92,138,0.25);
+        }
+
+        .section-header h2 {
+          font-family: var(--ff-display);
+          font-size: clamp(16px, 2vw, 20px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          line-height: 1.4;
+          padding-top: 8px;
+        }
+
+        /* Sub-headings h3 */
+        .policy-section h3 {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.7vw, 16px);
+          font-weight: 700;
+          color: var(--clr-text);
+          margin: 24px 0 10px;
+          padding-right: 12px;
+          border-right: 3px solid var(--clr-accent);
+        }
+
+        /* Paragraphs */
+        .policy-section p {
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          margin-bottom: 14px;
+          line-height: 1.9;
+        }
+        .policy-section p:last-child { margin-bottom: 0; }
+
+        /* Lists */
+        .policy-section ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0 16px;
+        }
+        .policy-section ul li {
+          position: relative;
+          padding-right: 22px;
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          line-height: 1.85;
+          margin-bottom: 8px;
+        }
+        .policy-section ul li::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 10px;
+          width: 7px;
+          height: 7px;
+          background: var(--clr-accent);
+          border-radius: 50%;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+          background: var(--clr-accent-lt);
+          border: 1px solid rgba(232,160,32,0.3);
+          border-radius: var(--radius-md);
+          padding: 16px 20px;
+          margin: 14px 0;
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 15px);
+          font-weight: 600;
+          color: var(--clr-brand);
+        }
+        .highlight-box a {
+          color: var(--clr-brand);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        /* Section divider line */
+        .section-divider {
+          height: 1px;
+          background: var(--clr-divider);
+          margin: 6px 0 20px;
+        }
+
+        /* ───────── Footer ───────── */
+        .site-footer {
+          background: var(--clr-brand);
+          color: rgba(255,255,255,0.75);
+          text-align: center;
+          padding: clamp(28px, 4vw, 44px) 24px;
+          font-size: clamp(12px, 1.4vw, 14px);
+          font-family: var(--ff-body);
+        }
+        .site-footer .footer-brand {
+          font-family: var(--ff-display);
+          font-size: clamp(15px, 1.8vw, 18px);
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+        .site-footer a { color: var(--clr-accent); text-decoration: none; }
+        .site-footer a:hover { text-decoration: underline; }
+        .footer-copy { margin-top: 12px; font-size: 12px; opacity: 0.6; }
+
+        /* ───────── Responsive ───────── */
+        @media (max-width: 600px) {
+          .section-num { width: 34px; height: 34px; min-width: 34px; font-size: 12px; }
+          .toc-grid { grid-template-columns: 1fr; }
+          .policy-section { border-radius: var(--radius-md); }
+        }
+
+        /* ───────── Print ───────── */
+        @media print {
+          body { background: #fff; }
+          .site-header { background: var(--clr-brand) !important; print-color-adjust: exact; }
+          .toc-card, .policy-section { box-shadow: none; border: 1px solid #ddd; }
+          .page-body { padding: 16px; }
+        }
+
+        /* ───────── Reduced motion ───────── */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="site-header" role="banner">
+    <div class="header-badge">Lattakia Guide</div>
+    <h1>شروط الاستخدام</h1>
+    <p class="header-meta">آخر تحديث: 15 يوليو 2026</p>
+    <span class="header-divider" aria-hidden="true"></span>
+</header>
+
+<!-- ═══════════ PAGE BODY ═══════════ -->
+<main id="main-content" class="page-body">
+
+    <!-- Table of Contents -->
+    <nav class="toc-card" aria-label="فهرس شروط الاستخدام">
+        <p class="toc-title">فهرس المحتويات</p>
+        <ol class="toc-grid">
+            <li><a href="#sec-1"><span class="toc-num">1.</span> مقدمة</a></li>
+            <li><a href="#sec-2"><span class="toc-num">2.</span> تعريف الخدمة</a></li>
+            <li><a href="#sec-3"><span class="toc-num">3.</span> أهلية استخدام الخدمة</a></li>
+            <li><a href="#sec-4"><span class="toc-num">4.</span> إنشاء الحساب</a></li>
+            <li><a href="#sec-5"><span class="toc-num">5.</span> استخدام وضع الضيف</a></li>
+            <li><a href="#sec-6"><span class="toc-num">6.</span> قواعد الاستخدام المقبول</a></li>
+            <li><a href="#sec-7"><span class="toc-num">7.</span> إضافة الأماكن والمحتوى</a></li>
+            <li><a href="#sec-8"><span class="toc-num">8.</span> مراجعة المحتوى والموافقة عليه</a></li>
+            <li><a href="#sec-9"><span class="toc-num">9.</span> مسؤولية أصحاب الأماكن</a></li>
+            <li><a href="#sec-10"><span class="toc-num">10.</span> تعديل أو حذف الأماكن</a></li>
+            <li><a href="#sec-11"><span class="toc-num">11.</span> المحتوى الذي ينشئه المستخدم</a></li>
+            <li><a href="#sec-12"><span class="toc-num">12.</span> الصور والمحتوى المرئي</a></li>
+            <li><a href="#sec-13"><span class="toc-num">13.</span> فرص العمل والخدمات المهنية</a></li>
+            <li><a href="#sec-14"><span class="toc-num">14.</span> الإعجاب والتفاعل</a></li>
+            <li><a href="#sec-15"><span class="toc-num">15.</span> الميزات الخاصة لأصحاب الأماكن</a></li>
+            <li><a href="#sec-16"><span class="toc-num">16.</span> قرارات الإدارة والمراجعة</a></li>
+            <li><a href="#sec-17"><span class="toc-num">17.</span> الحسابات المخالفة</a></li>
+            <li><a href="#sec-18"><span class="toc-num">18.</span> الحظر ومنع إساءة الاستخدام</a></li>
+            <li><a href="#sec-19"><span class="toc-num">19.</span> الخدمات الخارجية</a></li>
+            <li><a href="#sec-20"><span class="toc-num">20.</span> الروابط والخدمات الخارجية</a></li>
+            <li><a href="#sec-21"><span class="toc-num">21.</span> الملكية الفكرية</a></li>
+            <li><a href="#sec-22"><span class="toc-num">22.</span> حقوق المحتوى الذي يقدمه المستخدم</a></li>
+            <li><a href="#sec-23"><span class="toc-num">23.</span> دقة المعلومات</a></li>
+            <li><a href="#sec-24"><span class="toc-num">24.</span> عدم تقديم ضمانات</a></li>
+            <li><a href="#sec-25"><span class="toc-num">25.</span> حدود المسؤولية</a></li>
+            <li><a href="#sec-26"><span class="toc-num">26.</span> توفر الخدمة والتحديثات</a></li>
+            <li><a href="#sec-27"><span class="toc-num">27.</span> إنهاء أو تقييد الوصول</a></li>
+            <li><a href="#sec-28"><span class="toc-num">28.</span> تعديل شروط الاستخدام</a></li>
+            <li><a href="#sec-29"><span class="toc-num">29.</span> القانون والالتزام</a></li>
+            <li><a href="#sec-30"><span class="toc-num">30.</span> التواصل معنا</a></li>
+            <li><a href="#sec-31"><span class="toc-num">31.</span> الموافقة على شروط الاستخدام</a></li>
+        </ol>
+    </nav>
+
+    <!-- ── Section 1 ── -->
+    <section class="policy-section" id="sec-1">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">1</div>
+            <h2>مقدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>مرحبًا بك في <strong>Lattakia Guide</strong>.</p>
+        <p>توضح شروط الاستخدام هذه القواعد والأحكام التي تنظم استخدام تطبيق Lattakia Guide والموقع الإلكتروني والخدمات المرتبطة به.</p>
+        <p>يتم تشغيل الخدمة وإدارتها بواسطة:</p>
+        <p><strong>Lattakia Guide Team</strong></p>
+        <p>باستخدام التطبيق أو الموقع، فإنك توافق على الالتزام بهذه الشروط وجميع السياسات المرتبطة بها، بما في ذلك:</p>
+        <ul>
+            <li>سياسة الخصوصية.</li>
+            <li>إرشادات المجتمع.</li>
+            <li>سياسة حذف الحساب.</li>
+        </ul>
+        <p>إذا لم توافق على هذه الشروط، يرجى عدم استخدام الخدمة.</p>
+    </section>
+
+    <!-- ── Section 2 ── -->
+    <section class="policy-section" id="sec-2">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">2</div>
+            <h2>تعريف الخدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>Lattakia Guide هو تطبيق دليل وخدمات يهدف إلى مساعدة المستخدمين في اكتشاف الأماكن والخدمات والمعلومات المتعلقة بالمناطق والمدن، مع التركيز على توفير دليل رقمي شامل للأماكن والأنشطة والخدمات.</p>
+        <p>تتضمن الخدمة، حسب توفر الميزات:</p>
+        <ul>
+            <li>تصفح الأماكن.</li>
+            <li>البحث عن الخدمات.</li>
+            <li>الاطلاع على معلومات الأماكن.</li>
+            <li>إضافة أماكن جديدة.</li>
+            <li>إرسال طلبات تعديل أو حذف.</li>
+            <li>التفاعل مع المحتوى عبر الإعجاب.</li>
+            <li>الاطلاع على فرص العمل والخدمات المرتبطة بالأماكن.</li>
+            <li>ميزات خاصة لأصحاب الأماكن.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 3 ── -->
+    <section class="policy-section" id="sec-3">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">3</div>
+            <h2>أهلية استخدام الخدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن استخدام التطبيق من قبل المستخدمين من مختلف الأعمار وفقًا للميزات المتاحة.</p>
+        <p>يجب على المستخدم:</p>
+        <ul>
+            <li>تقديم معلومات صحيحة عند إنشاء الحساب.</li>
+            <li>استخدام الخدمة بطريقة قانونية.</li>
+            <li>الالتزام بهذه الشروط.</li>
+        </ul>
+        <p>يحق لـ Lattakia Guide Team تقييد أو تعليق الحسابات التي تستخدم الخدمة بطريقة مخالفة.</p>
+    </section>
+
+    <!-- ── Section 4 ── -->
+    <section class="policy-section" id="sec-4">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">4</div>
+            <h2>إنشاء الحساب</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تتطلب بعض ميزات التطبيق إنشاء حساب.</p>
+        <p>يمكن إنشاء الحساب باستخدام:</p>
+        <ul>
+            <li>البريد الإلكتروني وكلمة المرور.</li>
+            <li>تسجيل الدخول بواسطة Google.</li>
+        </ul>
+        <p>عند إنشاء الحساب، يوافق المستخدم على:</p>
+        <ul>
+            <li>المحافظة على سرية بيانات تسجيل الدخول.</li>
+            <li>عدم مشاركة الحساب مع الآخرين.</li>
+            <li>تحمل مسؤولية النشاطات التي تتم من خلال حسابه.</li>
+        </ul>
+        <p>إذا اشتبه المستخدم بوجود استخدام غير مصرح به لحسابه، يجب عليه التواصل معنا فورًا.</p>
+    </section>
+
+    <!-- ── Section 5 ── -->
+    <section class="policy-section" id="sec-5">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">5</div>
+            <h2>استخدام وضع الضيف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يسمح التطبيق باستخدام بعض الميزات بدون إنشاء حساب من خلال وضع الضيف.</p>
+        <p>في وضع الضيف:</p>
+        <ul>
+            <li>يمكن للمستخدم تصفح بعض محتويات التطبيق.</li>
+            <li>قد تكون بعض الميزات غير متاحة.</li>
+            <li>قد يتم إنشاء بيانات جلسة تقنية ضرورية لتشغيل الخدمة وتحسين الأداء ومنع إساءة الاستخدام.</li>
+        </ul>
+        <p>لا يوفر وضع الضيف نفس صلاحيات الحساب المسجل.</p>
+    </section>
+
+    <!-- ── Section 6 ── -->
+    <section class="policy-section" id="sec-6">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">6</div>
+            <h2>قواعد الاستخدام المقبول</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>عند استخدام Lattakia Guide، يوافق المستخدم على عدم:</p>
+        <ul>
+            <li>استخدام التطبيق لأي نشاط غير قانوني.</li>
+            <li>محاولة اختراق أو تعطيل الخدمة.</li>
+            <li>إرسال معلومات مزيفة أو مضللة.</li>
+            <li>انتحال شخصية أشخاص أو جهات أخرى.</li>
+            <li>استخدام التطبيق لنشر محتوى ضار.</li>
+            <li>محاولة الوصول إلى بيانات مستخدمين آخرين.</li>
+            <li>تجاوز أنظمة الحماية أو القيود التقنية.</li>
+            <li>استخدام أدوات آلية بطريقة تؤثر على الخدمة.</li>
+            <li>استغلال التطبيق لأغراض احتيالية.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 7 ── -->
+    <section class="policy-section" id="sec-7">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">7</div>
+            <h2>إضافة الأماكن والمحتوى</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يسمح التطبيق للمستخدمين بإرسال طلبات إضافة أماكن أو معلومات مرتبطة بها.</p>
+        <p>عند إرسال طلب إضافة مكان، يقر المستخدم بأن:</p>
+        <ul>
+            <li>المعلومات المقدمة صحيحة حسب علمه.</li>
+            <li>لديه الحق في تقديم هذه المعلومات.</li>
+            <li>الصور المرفوعة لا تنتهك حقوق الآخرين.</li>
+            <li>لا يحتوي المحتوى على معلومات مضللة.</li>
+        </ul>
+        <p>لا يتم نشر جميع الطلبات مباشرة.</p>
+        <p>تخضع طلبات إضافة الأماكن للمراجعة من قبل فريق الإدارة قبل ظهورها للمستخدمين.</p>
+    </section>
+
+    <!-- ── Section 8 ── -->
+    <section class="policy-section" id="sec-8">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">8</div>
+            <h2>مراجعة المحتوى والموافقة عليه</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تحتفظ Lattakia Guide Team بحق:</p>
+        <ul>
+            <li>مراجعة الطلبات قبل النشر.</li>
+            <li>رفض أي طلب لا يحقق معايير الجودة.</li>
+            <li>طلب معلومات إضافية.</li>
+            <li>تعديل أو إزالة المحتوى المخالف.</li>
+            <li>إيقاف الحسابات التي تستخدم الخدمة بشكل مخالف.</li>
+        </ul>
+        <p>لا يعني إرسال طلب إضافة مكان ضمان نشره.</p>
+    </section>
+
+    <!-- ── Section 9 ── -->
+    <section class="policy-section" id="sec-9">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">9</div>
+            <h2>مسؤولية أصحاب الأماكن</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يوفر Lattakia Guide إمكانية إضافة وإدارة معلومات الأماكن والخدمات المرتبطة بها.</p>
+        <p>عند استخدام ميزات أصحاب الأماكن، يقر المستخدم بأنه:</p>
+        <ul>
+            <li>يملك الصلاحية لإضافة أو إدارة معلومات المكان.</li>
+            <li>يقدم معلومات صحيحة ودقيقة.</li>
+            <li>يتحمل مسؤولية أي معلومات تجارية أو وصفية يقدمها.</li>
+            <li>لا يستخدم الخدمة لتمثيل نشاط أو جهة دون إذن.</li>
+        </ul>
+        <p>قد تطلب Lattakia Guide Team معلومات إضافية للتحقق من ملكية أو ارتباط المستخدم بالمكان قبل تنفيذ بعض الإجراءات.</p>
+    </section>
+
+    <!-- ── Section 10 ── -->
+    <section class="policy-section" id="sec-10">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">10</div>
+            <h2>تعديل أو حذف الأماكن</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن للمستخدم طلب تعديل أو حذف الأماكن أو المحتوى المرتبط بها.</p>
+        <p>تختلف آلية التنفيذ حسب نوع الطلب:</p>
+
+        <h3>التعديل</h3>
+        <p>قد يتم إرسال طلب تعديل لمراجعة الإدارة قبل تطبيقه.</p>
+
+        <h3>الحذف</h3>
+        <p>قد يخضع حذف الأماكن المنشورة لمراجعة إضافية.</p>
+        <p>يهدف ذلك إلى:</p>
+        <ul>
+            <li>حماية أصحاب الأماكن.</li>
+            <li>منع حذف المحتوى نتيجة اختراق الحسابات.</li>
+            <li>التأكد من أن الطلب صادر من جهة مخولة.</li>
+        </ul>
+        <p>قد يتم التواصل مع صاحب المكان أو الجهة المرتبطة به قبل تنفيذ عملية الحذف.</p>
+        <p>لا تضمن Lattakia Guide Team قبول جميع طلبات الحذف إذا كانت هناك أسباب تشغيلية أو قانونية للاحتفاظ بالمحتوى.</p>
+    </section>
+
+    <!-- ── Section 11 ── -->
+    <section class="policy-section" id="sec-11">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">11</div>
+            <h2>المحتوى الذي ينشئه المستخدم</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يسمح التطبيق للمستخدمين بإرسال محتوى يشمل:</p>
+        <ul>
+            <li>أسماء الأماكن.</li>
+            <li>الوصف.</li>
+            <li>الصور.</li>
+            <li>المنتجات أو الخدمات المرتبطة بالأماكن.</li>
+            <li>معلومات فرص العمل.</li>
+        </ul>
+        <p>يبقى المستخدم مسؤولًا عن المحتوى الذي يرسله.</p>
+        <p>عند إرسال المحتوى، يمنح المستخدم Lattakia Guide Team إذنًا غير حصري لاستخدامه وعرضه وتشغيله ضمن الخدمة بهدف تقديم وظائف التطبيق.</p>
+        <p>لا تنتقل ملكية المحتوى إلى Lattakia Guide Team.</p>
+    </section>
+
+    <!-- ── Section 12 ── -->
+    <section class="policy-section" id="sec-12">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">12</div>
+            <h2>الصور والمحتوى المرئي</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>عند رفع صورة داخل التطبيق، يقر المستخدم بأن:</p>
+        <ul>
+            <li>لديه الحق في استخدامها.</li>
+            <li>لا تنتهك حقوق النشر أو العلامات التجارية أو الخصوصية.</li>
+            <li>لا تحتوي على محتوى مخالف للقوانين أو الآداب العامة.</li>
+        </ul>
+        <p>يحق لـ Lattakia Guide Team إزالة الصور أو المحتوى المرئي الذي يخالف هذه الشروط.</p>
+    </section>
+
+    <!-- ── Section 13 ── -->
+    <section class="policy-section" id="sec-13">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">13</div>
+            <h2>فرص العمل والخدمات المهنية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يوفر التطبيق ميزات مرتبطة بعرض أو طلب فرص العمل.</p>
+        <p>المستخدم الذي ينشر فرصة عمل مسؤول عن:</p>
+        <ul>
+            <li>صحة المعلومات المقدمة.</li>
+            <li>وضوح طبيعة العمل.</li>
+            <li>عدم نشر عروض وهمية أو مضللة.</li>
+        </ul>
+        <p>Lattakia Guide Team توفر منصة لعرض المعلومات فقط، ولا تعتبر طرفًا في أي علاقة عمل أو اتفاق يتم خارج التطبيق.</p>
+        <p>يجب على المستخدمين اتخاذ الإجراءات المناسبة للتحقق من أي فرصة أو عرض قبل التعامل معه.</p>
+    </section>
+
+    <!-- ── Section 14 ── -->
+    <section class="policy-section" id="sec-14">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">14</div>
+            <h2>الإعجاب والتفاعل</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يسمح التطبيق للمستخدمين بالتفاعل مع الأماكن من خلال ميزة الإعجاب.</p>
+        <p>يوافق المستخدم على:</p>
+        <ul>
+            <li>عدم استخدام وسائل آلية أو مزيفة لزيادة التفاعل.</li>
+            <li>عدم محاولة التلاعب بترتيب أو شعبية الأماكن.</li>
+            <li>عدم استخدام الحسابات الوهمية بهدف التأثير على المحتوى.</li>
+        </ul>
+        <p>قد يتم إزالة التفاعلات غير الحقيقية أو المخالفة.</p>
+    </section>
+
+    <!-- ── Section 15 ── -->
+    <section class="policy-section" id="sec-15">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">15</div>
+            <h2>الميزات الخاصة لأصحاب الأماكن</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يوفر التطبيق ميزات إضافية لأصحاب الأماكن، مثل:</p>
+        <ul>
+            <li>تحسين ظهور المكان.</li>
+            <li>إبراز المكان.</li>
+            <li>ميزات عرض إضافية.</li>
+        </ul>
+        <p>قد يتم طلب تفعيل هذه الميزات من خلال التطبيق.</p>
+        <p>يتم التواصل مع صاحب المكان لاستكمال الإجراءات اللازمة.</p>
+        <p>لا يتم تنفيذ عمليات الدفع داخل التطبيق باستخدام Google Play Billing.</p>
+        <p>قد يتم التواصل عبر:</p>
+        <ul>
+            <li>البريد الإلكتروني.</li>
+            <li>واتساب.</li>
+            <li>وسائل التواصل المتفق عليها.</li>
+        </ul>
+        <p>ولا يقوم التطبيق بتخزين معلومات الدفع أو البيانات البنكية للمستخدمين.</p>
+    </section>
+
+    <!-- ── Section 16 ── -->
+    <section class="policy-section" id="sec-16">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">16</div>
+            <h2>قرارات الإدارة والمراجعة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تحتفظ Lattakia Guide Team بحق اتخاذ القرارات المتعلقة بإدارة المنصة، بما في ذلك:</p>
+        <ul>
+            <li>قبول أو رفض طلبات إضافة الأماكن.</li>
+            <li>إزالة المحتوى المخالف.</li>
+            <li>تعليق أو تقييد الحسابات.</li>
+            <li>مراجعة النشاطات التي قد تشكل إساءة استخدام.</li>
+        </ul>
+        <p>تهدف هذه الإجراءات إلى:</p>
+        <ul>
+            <li>الحفاظ على جودة المحتوى.</li>
+            <li>حماية المستخدمين.</li>
+            <li>منع الاحتيال.</li>
+            <li>الحفاظ على موثوقية الدليل.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 17 ── -->
+    <section class="policy-section" id="sec-17">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">17</div>
+            <h2>الحسابات المخالفة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم تقييد أو تعليق الحساب في حال:</p>
+        <ul>
+            <li>تقديم معلومات مزيفة بشكل متكرر.</li>
+            <li>محاولة اختراق الخدمة.</li>
+            <li>إساءة استخدام الميزات.</li>
+            <li>نشر محتوى مخالف.</li>
+            <li>محاولة تجاوز أنظمة الحماية.</li>
+            <li>استخدام التطبيق للإضرار بالمستخدمين الآخرين.</li>
+        </ul>
+        <p>قد يتم إرسال إشعارات للمستخدم عند اتخاذ إجراءات إدارية بحقه.</p>
+    </section>
+
+    <!-- ── Section 18 ── -->
+    <section class="policy-section" id="sec-18">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">18</div>
+            <h2>الحظر ومنع إساءة الاستخدام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تستخدم Lattakia Guide Team إجراءات تقنية وإدارية لمنع إساءة الاستخدام، مثل:</p>
+        <ul>
+            <li>تقييد بعض الوظائف.</li>
+            <li>منع الأجهزة أو الحسابات المخالفة.</li>
+            <li>مراجعة النشاطات غير الطبيعية.</li>
+        </ul>
+        <p>تهدف هذه الإجراءات إلى حماية الخدمة وليس جمع معلومات إضافية غير ضرورية عن المستخدم.</p>
+    </section>
+
+    <!-- ── Section 19 ── -->
+    <section class="policy-section" id="sec-19">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">19</div>
+            <h2>الخدمات الخارجية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يعتمد التطبيق على خدمات مقدمة من أطراف خارجية من أجل تشغيل بعض الوظائف، مثل:</p>
+        <ul>
+            <li>خدمات تسجيل الدخول.</li>
+            <li>قواعد البيانات السحابية.</li>
+            <li>خدمات الخرائط.</li>
+            <li>خدمات الإشعارات.</li>
+            <li>خدمات الحماية.</li>
+            <li>خدمات استضافة الصور.</li>
+        </ul>
+        <p>قد تخضع هذه الخدمات لشروط وسياسات الخصوصية الخاصة بمقدميها.</p>
+        <p>لا تتحكم Lattakia Guide Team بشكل كامل في أنظمة هذه الجهات الخارجية، ولكنها تختار الخدمات اللازمة لتشغيل التطبيق وفق معايير مناسبة.</p>
+    </section>
+
+    <!-- ── Section 20 ── -->
+    <section class="policy-section" id="sec-20">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">20</div>
+            <h2>الروابط والخدمات الخارجية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يحتوي التطبيق على روابط أو محتوى يؤدي إلى خدمات أو مواقع خارجية.</p>
+        <p>عند الانتقال إلى خدمة خارجية:</p>
+        <ul>
+            <li>تصبح خاضعًا لشروط وسياسات تلك الجهة.</li>
+            <li>لا تتحمل Lattakia Guide Team مسؤولية محتوى أو ممارسات الجهات الخارجية.</li>
+        </ul>
+        <p>ننصح المستخدم بمراجعة سياسات الخصوصية وشروط الاستخدام الخاصة بأي خدمة خارجية يستخدمها.</p>
+    </section>
+
+    <!-- ── Section 21 ── -->
+    <section class="policy-section" id="sec-21">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">21</div>
+            <h2>الملكية الفكرية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>جميع الحقوق المتعلقة بتطبيق Lattakia Guide، بما في ذلك:</p>
+        <ul>
+            <li>التصميم.</li>
+            <li>العلامة التجارية.</li>
+            <li>الاسم التجاري.</li>
+            <li>البرمجيات.</li>
+            <li>الواجهات.</li>
+            <li>العناصر المرئية.</li>
+            <li>المحتوى الأصلي المملوك للفريق.</li>
+        </ul>
+        <p>هي ملك لـ Lattakia Guide Team أو الجهات المرخصة لها.</p>
+        <p>لا يجوز للمستخدم:</p>
+        <ul>
+            <li>نسخ التطبيق أو أجزاء منه.</li>
+            <li>إعادة توزيعه.</li>
+            <li>محاولة استخراج الشيفرة المصدرية.</li>
+            <li>استخدام العلامة التجارية دون إذن.</li>
+            <li>استغلال أي جزء من الخدمة لأغراض تجارية غير مصرح بها.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 22 ── -->
+    <section class="policy-section" id="sec-22">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">22</div>
+            <h2>حقوق المحتوى الذي يقدمه المستخدم</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يبقى المستخدم مالكًا للمحتوى الذي يقدمه.</p>
+        <p>ولكن عند إرسال المحتوى إلى التطبيق، يمنح المستخدم Lattakia Guide Team ترخيصًا ضروريًا لتشغيل الخدمة، ويشمل ذلك:</p>
+        <ul>
+            <li>تخزين المحتوى.</li>
+            <li>عرضه داخل التطبيق.</li>
+            <li>تنظيمه.</li>
+            <li>تحسين طريقة عرضه.</li>
+            <li>استخدامه لتقديم وظائف الخدمة.</li>
+        </ul>
+        <p>لا يمنح هذا الترخيص Lattakia Guide Team ملكية المحتوى.</p>
+    </section>
+
+    <!-- ── Section 23 ── -->
+    <section class="policy-section" id="sec-23">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">23</div>
+            <h2>دقة المعلومات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تسعى Lattakia Guide Team إلى توفير معلومات مفيدة ودقيقة، ولكن:</p>
+        <ul>
+            <li>قد تتغير معلومات الأماكن أو الخدمات مع مرور الوقت.</li>
+            <li>قد تكون بعض المعلومات مقدمة من المستخدمين أو أصحاب الأماكن.</li>
+            <li>لا يمكن ضمان أن جميع المعلومات محدثة دائمًا.</li>
+        </ul>
+        <p>ننصح المستخدم بالتحقق من المعلومات المهمة قبل اتخاذ قرارات تعتمد عليها.</p>
+    </section>
+
+    <!-- ── Section 24 ── -->
+    <section class="policy-section" id="sec-24">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">24</div>
+            <h2>عدم تقديم ضمانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يتم توفير الخدمة "كما هي" ووفق الإمكانيات المتاحة.</p>
+        <p>لا تضمن Lattakia Guide Team:</p>
+        <ul>
+            <li>توفر الخدمة دون انقطاع دائم.</li>
+            <li>خلو التطبيق من جميع الأخطاء.</li>
+            <li>دقة جميع المعلومات المقدمة من المستخدمين.</li>
+            <li>استمرار جميع الميزات دون تغييرات مستقبلية.</li>
+        </ul>
+        <p>نسعى باستمرار إلى تحسين الخدمة ومعالجة المشكلات التقنية.</p>
+    </section>
+
+    <!-- ── Section 25 ── -->
+    <section class="policy-section" id="sec-25">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">25</div>
+            <h2>حدود المسؤولية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>إلى الحد الذي يسمح به القانون، لا تتحمل Lattakia Guide Team مسؤولية:</p>
+        <ul>
+            <li>الأضرار الناتجة عن استخدام معلومات غير صحيحة من المستخدمين.</li>
+            <li>الاتفاقات أو التعاملات التي تتم بين المستخدمين وأصحاب الأماكن خارج التطبيق.</li>
+            <li>المحتوى الذي ينشره المستخدمون.</li>
+            <li>مشاكل ناتجة عن خدمات خارجية.</li>
+            <li>فقدان البيانات الناتج عن ظروف خارجة عن السيطرة المعقولة.</li>
+        </ul>
+        <p>يبقى المستخدم مسؤولًا عن قراراته واستخدامه للمعلومات المتوفرة عبر الخدمة.</p>
+    </section>
+
+    <!-- ── Section 26 ── -->
+    <section class="policy-section" id="sec-26">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">26</div>
+            <h2>توفر الخدمة والتحديثات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تقوم Lattakia Guide Team في أي وقت بـ:</p>
+        <ul>
+            <li>تحديث التطبيق.</li>
+            <li>إضافة ميزات جديدة.</li>
+            <li>تعديل ميزات موجودة.</li>
+            <li>إيقاف بعض الخدمات عند الحاجة.</li>
+        </ul>
+        <p>قد تتطلب بعض التحديثات استخدام إصدار حديث من التطبيق أو نظام التشغيل.</p>
+    </section>
+
+    <!-- ── Section 27 ── -->
+    <section class="policy-section" id="sec-27">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">27</div>
+            <h2>إنهاء أو تقييد الوصول</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يجوز لـ Lattakia Guide Team تقييد أو إنهاء وصول المستخدم إلى الخدمة في حال:</p>
+        <ul>
+            <li>مخالفة شروط الاستخدام.</li>
+            <li>الإضرار بالخدمة أو المستخدمين.</li>
+            <li>استخدام وسائل احتيالية.</li>
+            <li>مخالفة القوانين المعمول بها.</li>
+        </ul>
+        <p>ولا يؤثر ذلك على الحقوق أو الالتزامات التي نشأت قبل الإنهاء.</p>
+    </section>
+
+    <!-- ── Section 28 ── -->
+    <section class="policy-section" id="sec-28">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">28</div>
+            <h2>تعديل شروط الاستخدام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم تحديث هذه الشروط من وقت لآخر بسبب:</p>
+        <ul>
+            <li>تطوير التطبيق.</li>
+            <li>إضافة خدمات جديدة.</li>
+            <li>تغييرات تشغيلية.</li>
+            <li>متطلبات قانونية أو تنظيمية.</li>
+        </ul>
+        <p>سيتم تحديث تاريخ "آخر تحديث" في بداية الوثيقة عند إجراء تغييرات مهمة.</p>
+        <p>استمرار استخدام التطبيق بعد تحديث الشروط يعني قبول النسخة الجديدة.</p>
+    </section>
+
+    <!-- ── Section 29 ── -->
+    <section class="policy-section" id="sec-29">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">29</div>
+            <h2>القانون والالتزام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يتم استخدام الخدمة وفق القوانين والأنظمة المعمول بها.</p>
+        <p>يلتزم المستخدم بعدم استخدام التطبيق لأي غرض يخالف القوانين أو حقوق الآخرين.</p>
+    </section>
+
+    <!-- ── Section 30 ── -->
+    <section class="policy-section" id="sec-30">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">30</div>
+            <h2>التواصل معنا</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>لأي استفسار يتعلق بهذه الشروط أو بالخدمة، يمكن التواصل معنا عبر:</p>
+        <p><strong>Lattakia Guide Team</strong></p>
+        <p>البريد الإلكتروني:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+        <p>الموقع:</p>
+        <div class="highlight-box">
+            <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+        </div>
+    </section>
+
+    <!-- ── Section 31 ── -->
+    <section class="policy-section" id="sec-31">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">31</div>
+            <h2>الموافقة على شروط الاستخدام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>باستخدام تطبيق Lattakia Guide أو الموقع الإلكتروني، يقر المستخدم بأنه:</p>
+        <ul>
+            <li>قرأ هذه الشروط.</li>
+            <li>فهم أحكامها.</li>
+            <li>يوافق على الالتزام بها.</li>
+        </ul>
+        <p>إذا لم يوافق المستخدم على هذه الشروط، يجب عليه التوقف عن استخدام الخدمة.</p>
+    </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer" role="contentinfo">
+    <p class="footer-brand">Lattakia Guide Team</p>
+    <p>
+        البريد الإلكتروني:
+        <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        &nbsp;·&nbsp;
+        الموقع:
+        <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+    </p>
+    <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية شروط الاستخدام</p>
+</footer>
+
+</body>
+</html>

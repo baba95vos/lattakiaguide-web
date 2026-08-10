@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سياسة الخصوصية – Lattakia Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ───────── Design Tokens ───────── */
+        :root {
+          --clr-bg:        #F7F8FA;
+          --clr-surface:   #FFFFFF;
+          --clr-brand:     #1A5C8A;
+          --clr-brand-mid: #2478B5;
+          --clr-accent:    #E8A020;
+          --clr-accent-lt: #FEF3DC;
+          --clr-text:      #1C1E26;
+          --clr-muted:     #5A6070;
+          --clr-border:    #DDE1EA;
+          --clr-divider:   #EEF0F5;
+
+          --ff-display: 'Cairo', sans-serif;
+          --ff-body:    'Tajawal', sans-serif;
+
+          --radius-sm: 6px;
+          --radius-md: 12px;
+          --radius-lg: 20px;
+
+          --shadow-card: 0 2px 16px rgba(26, 92, 138, 0.07), 0 1px 4px rgba(0,0,0,0.04);
+
+          --max-w: 860px;
+        }
+
+        /* ───────── Reset & Base ───────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: var(--ff-body);
+          font-size: clamp(15px, 1.6vw, 17px);
+          line-height: 1.85;
+          color: var(--clr-text);
+          background: var(--clr-bg);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ───────── Skip Link ───────── */
+        .skip-link {
+          position: absolute;
+          top: -999px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--clr-brand);
+          color: #fff;
+          padding: 8px 20px;
+          border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+          font-family: var(--ff-display);
+          z-index: 999;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ───────── Header / Hero ───────── */
+        .site-header {
+          background: linear-gradient(135deg, var(--clr-brand) 0%, var(--clr-brand-mid) 60%, #30A5E8 100%);
+          color: #fff;
+          padding: clamp(40px, 7vw, 80px) 24px clamp(32px, 5vw, 60px);
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .site-header::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 200'%3E%3Cpath fill='rgba(255,255,255,0.05)' d='M0,80 C150,160 350,0 600,100 C750,160 850,60 900,80 L900,200 L0,200Z'/%3E%3C/svg%3E") bottom / cover no-repeat;
+          pointer-events: none;
+        }
+
+        .header-badge {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 999px;
+          padding: 5px 18px;
+          font-family: var(--ff-display);
+          font-size: clamp(11px, 1.3vw, 13px);
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          margin-bottom: 18px;
+        }
+
+        .site-header h1 {
+          font-family: var(--ff-display);
+          font-size: clamp(22px, 4vw, 40px);
+          font-weight: 800;
+          line-height: 1.3;
+          margin-bottom: 14px;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-meta {
+          font-size: clamp(12px, 1.4vw, 14px);
+          opacity: 0.8;
+          font-weight: 300;
+        }
+
+        .header-divider {
+          display: block;
+          width: 48px;
+          height: 3px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          margin: 16px auto 0;
+        }
+
+        /* ───────── Layout ───────── */
+        .page-body {
+          max-width: var(--max-w);
+          margin: 0 auto;
+          padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px) 80px;
+        }
+
+        /* ───────── TOC ───────── */
+        .toc-card {
+          background: var(--clr-surface);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--radius-lg);
+          padding: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 36px);
+          margin-bottom: 40px;
+          box-shadow: var(--shadow-card);
+        }
+
+        .toc-title {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 16px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .toc-title::before {
+          content: '';
+          display: inline-block;
+          width: 4px;
+          height: 18px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
+
+        .toc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 6px 20px;
+          list-style: none;
+        }
+        .toc-grid li a {
+          color: var(--clr-muted);
+          text-decoration: none;
+          font-size: clamp(12px, 1.4vw, 14px);
+          line-height: 1.6;
+          display: flex;
+          align-items: baseline;
+          gap: 6px;
+          transition: color 0.2s;
+        }
+        .toc-grid li a:hover { color: var(--clr-brand); }
+
+        .toc-num {
+          font-family: var(--ff-display);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--clr-accent);
+          flex-shrink: 0;
+          min-width: 22px;
+        }
+
+        /* ───────── Sections ───────── */
+        .policy-section {
+          background: var(--clr-surface);
+          border-radius: var(--radius-lg);
+          padding: clamp(24px, 3.5vw, 40px) clamp(20px, 3.5vw, 40px);
+          margin-bottom: 24px;
+          box-shadow: var(--shadow-card);
+          border: 1px solid var(--clr-border);
+          scroll-margin-top: 24px;
+        }
+
+        .section-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .section-num {
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          background: linear-gradient(135deg, var(--clr-brand), var(--clr-brand-mid));
+          color: #fff;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--ff-display);
+          font-size: 14px;
+          font-weight: 800;
+          box-shadow: 0 3px 10px rgba(26,92,138,0.25);
+        }
+
+        .section-header h2 {
+          font-family: var(--ff-display);
+          font-size: clamp(16px, 2vw, 20px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          line-height: 1.4;
+          padding-top: 8px;
+        }
+
+        /* Sub-headings h3 */
+        .policy-section h3 {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.7vw, 16px);
+          font-weight: 700;
+          color: var(--clr-text);
+          margin: 24px 0 10px;
+          padding-right: 12px;
+          border-right: 3px solid var(--clr-accent);
+        }
+
+        /* Sub-headings h4 */
+        .policy-section h4 {
+          font-family: var(--ff-display);
+          font-size: clamp(13px, 1.5vw, 15px);
+          font-weight: 600;
+          color: var(--clr-brand-mid);
+          margin: 18px 0 8px;
+        }
+
+        /* Paragraphs */
+        .policy-section p {
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          margin-bottom: 14px;
+          line-height: 1.9;
+        }
+        .policy-section p:last-child { margin-bottom: 0; }
+
+        /* Definition list (for section 3) */
+        .def-list { margin: 10px 0 16px; }
+        .def-item {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          gap: 0 16px;
+          margin-bottom: 14px;
+          align-items: baseline;
+        }
+        .def-term {
+          font-family: var(--ff-display);
+          font-size: clamp(13px, 1.5vw, 15px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          white-space: nowrap;
+          background: var(--clr-accent-lt);
+          border-radius: var(--radius-sm);
+          padding: 2px 10px;
+        }
+        .def-desc {
+          color: var(--clr-muted);
+          font-size: clamp(13px, 1.5vw, 15px);
+          line-height: 1.8;
+        }
+
+        /* Lists */
+        .policy-section ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0 16px;
+        }
+        .policy-section ul li {
+          position: relative;
+          padding-right: 22px;
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          line-height: 1.85;
+          margin-bottom: 8px;
+        }
+        .policy-section ul li::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 10px;
+          width: 7px;
+          height: 7px;
+          background: var(--clr-accent);
+          border-radius: 50%;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+          background: var(--clr-accent-lt);
+          border: 1px solid rgba(232,160,32,0.3);
+          border-radius: var(--radius-md);
+          padding: 16px 20px;
+          margin: 14px 0;
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 15px);
+          font-weight: 600;
+          color: var(--clr-brand);
+        }
+        .highlight-box a {
+          color: var(--clr-brand);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        /* Info box (light blue) */
+        .info-box {
+          background: #EBF4FB;
+          border: 1px solid #B8D9F0;
+          border-radius: var(--radius-md);
+          padding: 14px 18px;
+          margin: 12px 0;
+          color: var(--clr-brand);
+          font-size: clamp(13px, 1.5vw, 15px);
+          line-height: 1.8;
+        }
+
+        /* Section divider line */
+        .section-divider {
+          height: 1px;
+          background: var(--clr-divider);
+          margin: 6px 0 20px;
+        }
+
+        /* Sub-section group card */
+        .sub-card {
+          background: var(--clr-bg);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--radius-md);
+          padding: 18px 22px;
+          margin: 16px 0;
+        }
+        .sub-card h4 {
+          margin-top: 0;
+        }
+
+        /* ───────── Footer ───────── */
+        .site-footer {
+          background: var(--clr-brand);
+          color: rgba(255,255,255,0.75);
+          text-align: center;
+          padding: clamp(28px, 4vw, 44px) 24px;
+          font-size: clamp(12px, 1.4vw, 14px);
+          font-family: var(--ff-body);
+        }
+        .site-footer .footer-brand {
+          font-family: var(--ff-display);
+          font-size: clamp(15px, 1.8vw, 18px);
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+        .site-footer a { color: var(--clr-accent); text-decoration: none; }
+        .site-footer a:hover { text-decoration: underline; }
+        .footer-copy { margin-top: 12px; font-size: 12px; opacity: 0.6; }
+
+        /* ───────── Responsive ───────── */
+        @media (max-width: 600px) {
+          .section-num { width: 34px; height: 34px; min-width: 34px; font-size: 12px; }
+          .toc-grid { grid-template-columns: 1fr; }
+          .policy-section { border-radius: var(--radius-md); }
+          .def-item { grid-template-columns: 1fr; gap: 4px 0; }
+        }
+
+        /* ───────── Print ───────── */
+        @media print {
+          body { background: #fff; }
+          .site-header { background: var(--clr-brand) !important; print-color-adjust: exact; }
+          .toc-card, .policy-section { box-shadow: none; border: 1px solid #ddd; }
+          .page-body { padding: 16px; }
+        }
+
+        /* ───────── Reduced motion ───────── */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="site-header" role="banner">
+    <div class="header-badge">Lattakia Guide</div>
+    <h1>سياسة الخصوصية</h1>
+    <p class="header-meta">آخر تحديث: 15 يوليو 2026</p>
+    <span class="header-divider" aria-hidden="true"></span>
+</header>
+
+<!-- ═══════════ PAGE BODY ═══════════ -->
+<main id="main-content" class="page-body">
+
+    <!-- Table of Contents -->
+    <nav class="toc-card" aria-label="فهرس سياسة الخصوصية">
+        <p class="toc-title">فهرس المحتويات</p>
+        <ol class="toc-grid">
+            <li><a href="#sec-1"><span class="toc-num">1.</span> مقدمة</a></li>
+            <li><a href="#sec-2"><span class="toc-num">2.</span> نطاق هذه السياسة</a></li>
+            <li><a href="#sec-3"><span class="toc-num">3.</span> التعريفات</a></li>
+            <li><a href="#sec-4"><span class="toc-num">4.</span> من نحن</a></li>
+            <li><a href="#sec-5"><span class="toc-num">5.</span> الفئات العمرية</a></li>
+            <li><a href="#sec-6"><span class="toc-num">6.</span> أنواع الحسابات</a></li>
+            <li><a href="#sec-7"><span class="toc-num">7.</span> البيانات التي نجمعها</a></li>
+            <li><a href="#sec-8"><span class="toc-num">8.</span> البيانات التي لا نجمعها</a></li>
+            <li><a href="#sec-9"><span class="toc-num">9.</span> كيفية استخدام البيانات</a></li>
+            <li><a href="#sec-10"><span class="toc-num">10.</span> مشاركة البيانات</a></li>
+            <li><a href="#sec-11"><span class="toc-num">11.</span> الخدمات الخارجية المستخدمة</a></li>
+            <li><a href="#sec-12"><span class="toc-num">12.</span> الصور والمحتوى المرفوع</a></li>
+            <li><a href="#sec-13"><span class="toc-num">13.</span> الإشعارات</a></li>
+            <li><a href="#sec-14"><span class="toc-num">14.</span> التحليلات وتحسين الخدمة</a></li>
+            <li><a href="#sec-15"><span class="toc-num">15.</span> حماية الحسابات ومنع إساءة الاستخدام</a></li>
+            <li><a href="#sec-16"><span class="toc-num">16.</span> ملفات السجل</a></li>
+            <li><a href="#sec-17"><span class="toc-num">17.</span> ملفات تعريف الارتباط</a></li>
+            <li><a href="#sec-18"><span class="toc-num">18.</span> تخزين البيانات</a></li>
+            <li><a href="#sec-19"><span class="toc-num">19.</span> مدة الاحتفاظ بالبيانات</a></li>
+            <li><a href="#sec-20"><span class="toc-num">20.</span> حذف الحساب والبيانات</a></li>
+            <li><a href="#sec-21"><span class="toc-num">21.</span> حذف محتوى الأماكن</a></li>
+            <li><a href="#sec-22"><span class="toc-num">22.</span> أمن البيانات</a></li>
+            <li><a href="#sec-23"><span class="toc-num">23.</span> حماية الأطفال</a></li>
+            <li><a href="#sec-24"><span class="toc-num">24.</span> حقوق المستخدم</a></li>
+            <li><a href="#sec-25"><span class="toc-num">25.</span> الاستخدام من خارج سوريا</a></li>
+            <li><a href="#sec-26"><span class="toc-num">26.</span> خدمات الأماكن والميزات الحصرية</a></li>
+            <li><a href="#sec-27"><span class="toc-num">27.</span> مسؤولية المستخدم</a></li>
+            <li><a href="#sec-28"><span class="toc-num">28.</span> تحديث سياسة الخصوصية</a></li>
+            <li><a href="#sec-29"><span class="toc-num">29.</span> التواصل معنا</a></li>
+            <li><a href="#sec-30"><span class="toc-num">30.</span> الموافقة على السياسة</a></li>
+        </ol>
+    </nav>
+
+    <!-- ── Section 1 ── -->
+    <section class="policy-section" id="sec-1">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">1</div>
+            <h2>مقدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>مرحبًا بكم في <strong>Lattakia Guide</strong>.</p>
+        <p>تحترم <strong>Lattakia Guide Team</strong> خصوصية مستخدميها، وتلتزم بحماية المعلومات الشخصية التي يتم جمعها عند استخدام تطبيق <strong>Lattakia Guide</strong> أو أي خدمات مرتبطة به.</p>
+        <p>توضح هذه السياسة أنواع البيانات التي نجمعها، وكيفية استخدامها، وكيفية حمايتها، والحالات التي قد تتم فيها مشاركتها مع مزودي الخدمات أو الجهات المخولة قانونًا، بالإضافة إلى الحقوق المتاحة للمستخدم فيما يتعلق ببياناته.</p>
+        <p>يُعد استخدام التطبيق موافقة على الممارسات الموضحة في هذه السياسة.</p>
+    </section>
+
+    <!-- ── Section 2 ── -->
+    <section class="policy-section" id="sec-2">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">2</div>
+            <h2>نطاق هذه السياسة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تنطبق هذه السياسة على:</p>
+        <ul>
+            <li>تطبيق Lattakia Guide.</li>
+            <li>الموقع الإلكتروني الرسمي: <strong>lattakiaguide.app</strong></li>
+            <li>جميع الخدمات الرقمية التابعة لـ Lattakia Guide Team.</li>
+        </ul>
+        <p>ولا تنطبق على المواقع أو الخدمات التابعة لأطراف خارجية التي قد يتم الوصول إليها من خلال التطبيق.</p>
+    </section>
+
+    <!-- ── Section 3 ── -->
+    <section class="policy-section" id="sec-3">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">3</div>
+            <h2>التعريفات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يقصد بالمصطلحات التالية المعاني الموضحة أمام كل منها:</p>
+        <div class="def-list">
+            <div class="def-item">
+                <span class="def-term">التطبيق</span>
+                <span class="def-desc">تطبيق Lattakia Guide بجميع إصداراته.</span>
+            </div>
+            <div class="def-item">
+                <span class="def-term">الخدمة</span>
+                <span class="def-desc">جميع الخدمات التي يقدمها التطبيق والموقع الإلكتروني.</span>
+            </div>
+            <div class="def-item">
+                <span class="def-term">المستخدم</span>
+                <span class="def-desc">أي شخص يستخدم التطبيق سواء بحساب مسجل أو كضيف.</span>
+            </div>
+            <div class="def-item">
+                <span class="def-term">الحساب</span>
+                <span class="def-desc">حساب المستخدم الذي يتم إنشاؤه باستخدام البريد الإلكتروني أو تسجيل الدخول بواسطة Google.</span>
+            </div>
+            <div class="def-item">
+                <span class="def-term">المحتوى</span>
+                <span class="def-desc">جميع البيانات أو الصور أو النصوص أو المعلومات التي يرسلها المستخدم.</span>
+            </div>
+            <div class="def-item">
+                <span class="def-term">البيانات الشخصية</span>
+                <span class="def-desc">أي معلومات يمكن استخدامها للتعرف على المستخدم بشكل مباشر أو غير مباشر.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Section 4 ── -->
+    <section class="policy-section" id="sec-4">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">4</div>
+            <h2>من نحن</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يتم تشغيل وإدارة الخدمة بواسطة:</p>
+        <p><strong>Lattakia Guide Team</strong></p>
+        <p>البريد الإلكتروني الرسمي للدعم:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+    </section>
+
+    <!-- ── Section 5 ── -->
+    <section class="policy-section" id="sec-5">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">5</div>
+            <h2>الفئات العمرية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>التطبيق مناسب للاستخدام من قبل مختلف الفئات العمرية.</p>
+        <p>ومع ذلك، قد تتطلب بعض الخدمات إنشاء حساب، كما قد تتطلب بعض الميزات التحقق من العمر وفقًا لسياسات التطبيق.</p>
+        <p>لا يُسمح بإدخال بيانات غير صحيحة أو انتحال شخصية أي شخص آخر.</p>
+    </section>
+
+    <!-- ── Section 6 ── -->
+    <section class="policy-section" id="sec-6">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">6</div>
+            <h2>أنواع الحسابات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يدعم التطبيق الأنواع التالية من الاستخدام:</p>
+
+        <h3>أولًا: حساب المستخدم</h3>
+        <p>يمكن إنشاء حساب باستخدام:</p>
+        <ul>
+            <li>البريد الإلكتروني وكلمة المرور.</li>
+            <li>تسجيل الدخول بواسطة Google.</li>
+        </ul>
+        <p>يتيح الحساب للمستخدم استخدام جميع الميزات المتاحة بحسب صلاحياته.</p>
+
+        <h3>ثانيًا: وضع الضيف</h3>
+        <p>يمكن استخدام التطبيق كضيف دون إنشاء حساب.</p>
+        <p>في وضع الضيف لا يتم طلب المعلومات الشخصية الخاصة بالحساب، إلا أن بعض البيانات التقنية اللازمة لتشغيل الخدمة قد تُسجل، مثل معلومات الجلسة أو المعرفات التقنية اللازمة لحماية الخدمة ومنع إساءة الاستخدام.</p>
+        <p>قد لا تتوفر بعض الميزات للمستخدم الضيف.</p>
+    </section>
+
+    <!-- ── Section 7 ── -->
+    <section class="policy-section" id="sec-7">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">7</div>
+            <h2>البيانات التي نجمعها</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد نجمع الفئات التالية من البيانات:</p>
+
+        <h3>أ) بيانات الحساب</h3>
+        <p>عند إنشاء حساب قد نجمع:</p>
+        <ul>
+            <li>الاسم الأول.</li>
+            <li>الاسم الأخير.</li>
+            <li>البريد الإلكتروني.</li>
+            <li>رقم الهاتف.</li>
+            <li>تاريخ الميلاد.</li>
+            <li>الصورة الشخصية (عند إضافتها).</li>
+        </ul>
+
+        <h3>ب) بيانات التحقق</h3>
+        <p>عند استخدام ميزات تتطلب التحقق من الهوية أو ملكية مكان، قد يتم جمع:</p>
+        <ul>
+            <li>الاسم القانوني.</li>
+            <li>رقم الهاتف.</li>
+            <li>تاريخ الميلاد.</li>
+            <li>المعلومات المطلوبة لإتمام عملية التحقق.</li>
+        </ul>
+        <p>ولا يتم استخدام هذه البيانات إلا للأغراض المرتبطة بالتحقق وإدارة الخدمة.</p>
+
+        <h3>ج) بيانات المحتوى الذي ينشئه المستخدم</h3>
+        <p>قد يقوم المستخدم بإرسال:</p>
+        <ul>
+            <li>أماكن جديدة.</li>
+            <li>صور.</li>
+            <li>وصف للأماكن.</li>
+            <li>معلومات عن الخدمات.</li>
+            <li>فرص عمل.</li>
+            <li>طلبات إضافة أو تعديل أماكن.</li>
+            <li>منتجات أو عناصر مرتبطة بالأماكن (عند توفر هذه الميزة).</li>
+        </ul>
+        <p>تخضع جميع الطلبات للمراجعة الإدارية قبل نشرها متى كانت الخدمة تتطلب ذلك.</p>
+
+        <h3>د) بيانات الاستخدام</h3>
+        <p>قد نقوم بجمع بيانات تساعدنا على تحسين الخدمة، مثل:</p>
+        <ul>
+            <li>عدد مرات استخدام التطبيق.</li>
+            <li>مدة استخدام بعض الشاشات.</li>
+            <li>عدد الجلسات.</li>
+            <li>عمليات البحث داخل التطبيق.</li>
+            <li>سجل التفاعل مع بعض الميزات.</li>
+        </ul>
+        <p>تُستخدم هذه البيانات لأغراض التحسين والإحصاء وتحسين تجربة المستخدم، ولا تُستخدم لاتخاذ قرارات آلية تؤثر على حقوق المستخدم.</p>
+
+        <h3>هـ) البيانات التقنية</h3>
+        <p>قد يجمع التطبيق بعض البيانات التقنية اللازمة لتشغيل الخدمة، مثل:</p>
+        <ul>
+            <li>معرف الجهاز المستخدم لأغراض الحماية ومنع إساءة الاستخدام.</li>
+            <li>رمز الإشعارات (FCM Token).</li>
+            <li>إصدار نظام التشغيل.</li>
+            <li>حالة الاتصال بالشبكة عند الحاجة لتشغيل بعض الخدمات.</li>
+        </ul>
+        <p>ولا يتم جمع معرّف الإعلانات (Advertising ID) ضمن التطبيق.</p>
+
+        <h3>و) بيانات الموقع</h3>
+        <p>لا يقوم التطبيق بتتبع الموقع الجغرافي للمستخدم أثناء الاستخدام اليومي.</p>
+        <p>يُطلب إذن الموقع فقط عند استخدام ميزة إضافة مكان جديد، وذلك لمساعدة المستخدم في تحديد موقع المكان المطلوب إضافته على الخريطة.</p>
+        <p>ويتم استخدام الموقع لهذا الغرض فقط.</p>
+        <p>لا يتم تتبع الموقع في الخلفية.</p>
+        <p>ولا يستخدم التطبيق الموقع لاقتراح الأماكن القريبة أو لمراقبة تحركات المستخدم.</p>
+
+        <h3>ز) الصور</h3>
+        <p>يمكن للمستخدم اختيار صور من معرض الجهاز عند استخدام بعض الميزات.</p>
+        <p>يتم استخدام الصور فقط للأغراض التي اختارها المستخدم، مثل:</p>
+        <ul>
+            <li>إضافة مكان.</li>
+            <li>تحديث بيانات مكان.</li>
+            <li>رفع صورة مرتبطة بالخدمة.</li>
+        </ul>
+        <p>ولا يصل التطبيق إلى الصور الموجودة على الجهاز إلا بعد منح الإذن المناسب وقيام المستخدم باختيار الصور بنفسه.</p>
+    </section>
+
+    <!-- ── Section 8 ── -->
+    <section class="policy-section" id="sec-8">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">8</div>
+            <h2>البيانات التي لا نجمعها</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>لا يجمع التطبيق عمدًا:</p>
+        <ul>
+            <li>جهات الاتصال.</li>
+            <li>الرسائل النصية.</li>
+            <li>سجل المكالمات.</li>
+            <li>تسجيلات الصوت.</li>
+            <li>الفيديوهات الخاصة بالمستخدم.</li>
+            <li>الموقع الجغرافي في الخلفية.</li>
+            <li>معرف الإعلانات (Advertising ID).</li>
+            <li>بيانات الحسابات البنكية أو بطاقات الدفع.</li>
+            <li>كلمات المرور الخاصة بالخدمات الأخرى.</li>
+            <li>بيانات صحية أو بيومترية.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 9 ── -->
+    <section class="policy-section" id="sec-9">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">9</div>
+            <h2>كيفية استخدام البيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تُستخدم البيانات التي نجمعها للأغراض التالية:</p>
+        <ul>
+            <li>إنشاء الحساب وإدارته.</li>
+            <li>التحقق من هوية المستخدم عند الحاجة.</li>
+            <li>تشغيل خدمات التطبيق.</li>
+            <li>مراجعة المحتوى قبل نشره.</li>
+            <li>حماية المنصة من إساءة الاستخدام.</li>
+            <li>منع الاحتيال والحسابات المخالفة.</li>
+            <li>إرسال الإشعارات المتعلقة بالحساب أو بالخدمة.</li>
+            <li>تحسين أداء التطبيق.</li>
+            <li>تحليل الأخطاء التقنية.</li>
+            <li>تحسين تجربة المستخدم.</li>
+            <li>الرد على طلبات الدعم الفني.</li>
+            <li>الامتثال للالتزامات القانونية عند الاقتضاء.</li>
+        </ul>
+        <p>ولا يتم بيع البيانات الشخصية للمستخدمين لأي طرف ثالث.</p>
+    </section>
+
+    <!-- ── Section 10 ── -->
+    <section class="policy-section" id="sec-10">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">10</div>
+            <h2>مشاركة البيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تحرص <strong>Lattakia Guide Team</strong> على عدم بيع البيانات الشخصية للمستخدمين أو تأجيرها أو المتاجرة بها.</p>
+        <p>قد تتم مشاركة بعض البيانات فقط في الحالات التالية:</p>
+
+        <h3>أ) مزودو الخدمات</h3>
+        <p>نعتمد على عدد من مزودي الخدمات الخارجيين لتشغيل التطبيق وتحسين أدائه، وقد تتم معالجة بعض البيانات بواسطة هؤلاء المزودين وفقًا لسياساتهم الخاصة، وبالقدر اللازم لتقديم الخدمة.</p>
+        <p>ومن أمثلة ذلك:</p>
+        <ul>
+            <li>خدمات المصادقة.</li>
+            <li>خدمات قواعد البيانات.</li>
+            <li>خدمات التخزين.</li>
+            <li>خدمات الخرائط.</li>
+            <li>خدمات الإشعارات.</li>
+            <li>خدمات الحماية من إساءة الاستخدام.</li>
+            <li>خدمات استضافة الصور.</li>
+            <li>خدمات تشخيص الأعطال.</li>
+        </ul>
+        <p>ولا يسمح لهؤلاء المزودين باستخدام بيانات المستخدم لأغراض لا تتعلق بتقديم الخدمات المطلوبة لصالح التطبيق.</p>
+
+        <h3>ب) الالتزامات القانونية</h3>
+        <p>قد نفصح عن بعض البيانات إذا كان ذلك مطلوبًا بموجب:</p>
+        <ul>
+            <li>حكم قضائي.</li>
+            <li>أمر صادر عن جهة مختصة.</li>
+            <li>التزام قانوني نافذ.</li>
+            <li>حماية حقوق التطبيق أو مستخدميه.</li>
+            <li>منع الاحتيال أو الجرائم الإلكترونية أو إساءة استخدام الخدمة.</li>
+        </ul>
+        <p>وسيتم الإفصاح في الحدود التي يفرضها القانون فقط.</p>
+
+        <h3>ج) حماية الحقوق</h3>
+        <p>قد تتم مشاركة المعلومات عندما يكون ذلك ضروريًا من أجل:</p>
+        <ul>
+            <li>حماية أمن المستخدمين.</li>
+            <li>حماية البنية التقنية للتطبيق.</li>
+            <li>التحقيق في الأنشطة المخالفة.</li>
+            <li>منع محاولات الاختراق أو الاحتيال.</li>
+            <li>تطبيق شروط الاستخدام.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 11 ── -->
+    <section class="policy-section" id="sec-11">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">11</div>
+            <h2>الخدمات الخارجية المستخدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يعتمد التطبيق على عدد من الخدمات التقنية التابعة لجهات خارجية.</p>
+
+        <h3>أولًا: Firebase</h3>
+        <p>يعتمد التطبيق على خدمات Firebase لتوفير بعض وظائفه الأساسية، والتي قد تشمل:</p>
+        <ul>
+            <li>إنشاء الحسابات وتسجيل الدخول.</li>
+            <li>إدارة جلسات المستخدم.</li>
+            <li>قواعد البيانات.</li>
+            <li>التخزين السحابي.</li>
+            <li>الإشعارات.</li>
+            <li>وظائف الخادم.</li>
+            <li>تشخيص الأعطال.</li>
+            <li>حماية التطبيق.</li>
+        </ul>
+        <p>وقد تقوم Firebase بمعالجة بعض البيانات التقنية اللازمة لتشغيل الخدمة وفقًا لسياساتها الخاصة.</p>
+
+        <h3>ثانيًا: Google Maps</h3>
+        <p>تُستخدم خرائط Google فقط لمساعدة المستخدم عند تحديد موقع المكان أثناء إرسال طلب إضافة مكان.</p>
+        <p>ولا تستخدم الخرائط لتتبع المستخدم بشكل مستمر.</p>
+
+        <h3>ثالثًا: imgBB</h3>
+        <p>قد يتم رفع الصور التي يختار المستخدم إرسالها إلى خدمة استضافة الصور <strong>imgBB</strong> لغرض استضافتها وإتاحتها داخل التطبيق.</p>
+        <p>ويقتصر ذلك على الصور التي يختار المستخدم رفعها بنفسه.</p>
+        <p>ولا يتم رفع أي صور من جهاز المستخدم دون اختياره الصريح.</p>
+
+        <h3>رابعًا: reCAPTCHA</h3>
+        <p>قد يستخدم التطبيق خدمات <strong>reCAPTCHA</strong> للمساعدة في:</p>
+        <ul>
+            <li>منع إساءة الاستخدام.</li>
+            <li>اكتشاف النشاطات الآلية.</li>
+            <li>حماية عمليات التسجيل والتحقق.</li>
+        </ul>
+        <p>وقد تتم معالجة بعض الإشارات التقنية اللازمة للتحقق من سلامة الطلبات.</p>
+
+        <h3>خامسًا: Crashlytics</h3>
+        <p>قد يستخدم التطبيق خدمة <strong>Firebase Crashlytics</strong> لجمع تقارير الأعطال التقنية.</p>
+        <p>وتساعد هذه التقارير على:</p>
+        <ul>
+            <li>اكتشاف الأخطاء.</li>
+            <li>تحسين استقرار التطبيق.</li>
+            <li>إصلاح المشكلات البرمجية.</li>
+        </ul>
+        <p>ولا تُستخدم هذه البيانات لإنشاء ملفات تعريف تسويقية للمستخدمين.</p>
+    </section>
+
+    <!-- ── Section 12 ── -->
+    <section class="policy-section" id="sec-12">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">12</div>
+            <h2>الصور والمحتوى المرفوع</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>عند قيام المستخدم برفع صور أو محتوى داخل التطبيق:</p>
+        <ul>
+            <li>يكون المستخدم مسؤولًا عن امتلاكه الحق القانوني في رفع ذلك المحتوى.</li>
+            <li>يمنح التطبيق حق استضافة هذا المحتوى وعرضه ضمن الخدمات التي يقدمها.</li>
+            <li>لا تنتقل ملكية المحتوى إلى التطبيق.</li>
+            <li>يجوز إزالة المحتوى إذا خالف القوانين أو شروط الاستخدام أو إرشادات المجتمع.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 13 ── -->
+    <section class="policy-section" id="sec-13">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">13</div>
+            <h2>الإشعارات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يرسل التطبيق إشعارات للمستخدم تشمل على سبيل المثال:</p>
+        <ul>
+            <li>تحديثات الحساب.</li>
+            <li>حالة الطلبات.</li>
+            <li>التنبيهات الإدارية.</li>
+            <li>التحذيرات المتعلقة بالحساب.</li>
+            <li>تحديثات تخص الأماكن المضافة.</li>
+            <li>الحملات أو الرسائل التعريفية المتعلقة بخدمات التطبيق.</li>
+        </ul>
+        <p>ويمكن للمستخدم التحكم في استقبال الإشعارات من خلال إعدادات جهازه، مع مراعاة أن تعطيلها قد يؤثر في وصول بعض التنبيهات المهمة.</p>
+    </section>
+
+    <!-- ── Section 14 ── -->
+    <section class="policy-section" id="sec-14">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">14</div>
+            <h2>التحليلات وتحسين الخدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يستخدم التطبيق بعض البيانات الإحصائية لتحسين جودة الخدمة، مثل:</p>
+        <ul>
+            <li>مدة استخدام بعض الشاشات.</li>
+            <li>عدد الجلسات.</li>
+            <li>عمليات البحث.</li>
+            <li>عدد مرات استخدام بعض الميزات.</li>
+            <li>تقارير الأعطال.</li>
+        </ul>
+        <p>وتهدف هذه البيانات إلى:</p>
+        <ul>
+            <li>تحسين الأداء.</li>
+            <li>تحسين تجربة المستخدم.</li>
+            <li>اكتشاف المشكلات التقنية.</li>
+            <li>تطوير الخدمات المستقبلية.</li>
+        </ul>
+        <p>ولا يتم استخدام هذه البيانات لاتخاذ قرارات آلية تؤثر على المستخدم أو لإنشاء ملفات تعريف تسويقية مخصصة.</p>
+    </section>
+
+    <!-- ── Section 15 ── -->
+    <section class="policy-section" id="sec-15">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">15</div>
+            <h2>حماية الحسابات ومنع إساءة الاستخدام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يستخدم التطبيق بعض المعرفات التقنية للمساعدة في:</p>
+        <ul>
+            <li>منع إنشاء حسابات مخالفة.</li>
+            <li>مكافحة الاحتيال.</li>
+            <li>تطبيق قرارات الحظر عند مخالفة شروط الاستخدام.</li>
+            <li>حماية المنصة من محاولات إساءة الاستخدام.</li>
+        </ul>
+        <p>وتُستخدم هذه البيانات للأغراض الأمنية فقط.</p>
+    </section>
+
+    <!-- ── Section 16 ── -->
+    <section class="policy-section" id="sec-16">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">16</div>
+            <h2>ملفات السجل</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم إنشاء سجلات تقنية عند استخدام التطبيق، وقد تتضمن معلومات مثل:</p>
+        <ul>
+            <li>وقت استخدام الخدمة.</li>
+            <li>نوع العملية المنفذة.</li>
+            <li>نتائج بعض الطلبات التقنية.</li>
+            <li>معلومات تشخيص الأعطال.</li>
+        </ul>
+        <p>وتُستخدم هذه السجلات لتحسين استقرار التطبيق وحماية الخدمة.</p>
+    </section>
+
+    <!-- ── Section 17 ── -->
+    <section class="policy-section" id="sec-17">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">17</div>
+            <h2>ملفات تعريف الارتباط</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>لا يستخدم تطبيق Android ملفات تعريف الارتباط (Cookies) بالشكل المستخدم في مواقع الويب التقليدية.</p>
+        <p>ومع ذلك، قد يستخدم التطبيق تقنيات مشابهة لإدارة الجلسات أو حفظ بعض الإعدادات المحلية أو تشغيل بعض الخدمات، وذلك بما يتوافق مع طبيعة تطبيقات الأجهزة المحمولة.</p>
+    </section>
+
+    <!-- ── Section 18 ── -->
+    <section class="policy-section" id="sec-18">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">18</div>
+            <h2>تخزين البيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم تخزين البيانات على خوادم أو بنى تحتية سحابية تديرها الجهات المزودة للخدمات المستخدمة في التطبيق.</p>
+        <p>وقد تتم معالجة البيانات في مراكز بيانات تقع خارج الدولة التي يقيم فيها المستخدم، وذلك وفقًا للبنية التشغيلية لمقدمي الخدمات.</p>
+        <p>ويتم اتخاذ إجراءات معقولة للمساعدة في حماية البيانات أثناء النقل والتخزين.</p>
+    </section>
+
+    <!-- ── Section 19 ── -->
+    <section class="policy-section" id="sec-19">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">19</div>
+            <h2>مدة الاحتفاظ بالبيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تحتفظ <strong>Lattakia Guide Team</strong> بالبيانات فقط للمدة اللازمة لتحقيق الأغراض الموضحة في هذه السياسة، أو للمدة التي تتطلبها الالتزامات القانونية أو الأمنية أو التشغيلية.</p>
+        <p>قد تختلف مدة الاحتفاظ حسب نوع البيانات:</p>
+
+        <h3>بيانات الحساب</h3>
+        <p>قد يتم الاحتفاظ ببيانات الحساب طالما كان الحساب نشطًا أو طالما كانت هناك حاجة تشغيلية أو قانونية للاحتفاظ بها.</p>
+        <p>عند طلب حذف الحساب، تتم معالجة الطلب وفق سياسة حذف الحساب الخاصة بالتطبيق.</p>
+
+        <h3>المحتوى الذي ينشئه المستخدم</h3>
+        <p>قد يتم الاحتفاظ بالمحتوى المرتبط بالأماكن أو الطلبات أو الخدمات التي أرسلها المستخدم وفقًا للحاجة التشغيلية، مثل:</p>
+        <ul>
+            <li>إدارة الأماكن.</li>
+            <li>منع إساءة الاستخدام.</li>
+            <li>الاحتفاظ بسجلات المراجعة الإدارية.</li>
+        </ul>
+
+        <h3>السجلات الأمنية</h3>
+        <p>قد يتم الاحتفاظ ببعض السجلات المتعلقة بالأمان أو إساءة الاستخدام لفترة مناسبة بهدف:</p>
+        <ul>
+            <li>حماية المستخدمين.</li>
+            <li>التحقيق في المخالفات.</li>
+            <li>منع تكرار إساءة الاستخدام.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 20 ── -->
+    <section class="policy-section" id="sec-20">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">20</div>
+            <h2>حذف الحساب والبيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يحق للمستخدم طلب حذف حسابه وبياناته الشخصية.</p>
+        <p>يمكن تقديم طلب الحذف من خلال الوسائل التي يوفرها التطبيق أو عبر التواصل مع:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+        <p>عند استلام طلب حذف الحساب، تتم مراجعة الطلب وتنفيذه وفق الإجراءات الأمنية المعتمدة.</p>
+        <p>قد يتطلب حذف بعض البيانات التحقق من هوية صاحب الحساب، وذلك لمنع حذف حسابات أو محتويات من قبل أشخاص غير مخولين.</p>
+
+        <h3>ماذا يحدث عند حذف الحساب؟</h3>
+        <p>عند تنفيذ حذف الحساب:</p>
+        <p>قد يتم حذف أو تعطيل البيانات المرتبطة بالحساب وفقًا لطبيعة البيانات والغرض منها.</p>
+        <p>قد يتم الاحتفاظ ببعض المعلومات المحدودة عند الحاجة، مثل:</p>
+        <ul>
+            <li>السجلات الأمنية.</li>
+            <li>سجلات منع الاحتيال.</li>
+            <li>المعلومات المطلوبة للالتزامات القانونية.</li>
+        </ul>
+        <p>ولا يتم الاحتفاظ بهذه البيانات بهدف تقديم الخدمة للمستخدم بعد حذف الحساب.</p>
+    </section>
+
+    <!-- ── Section 21 ── -->
+    <section class="policy-section" id="sec-21">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">21</div>
+            <h2>حذف محتوى الأماكن</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن للمستخدم طلب حذف الأماكن أو المحتوى الذي قام بإرساله.</p>
+        <p>بعض أنواع الحذف، خصوصًا الأماكن المنشورة أو المرتبطة بأصحاب أعمال، قد تتطلب مراجعة إدارية قبل التنفيذ.</p>
+        <p>يهدف هذا الإجراء إلى:</p>
+        <ul>
+            <li>حماية أصحاب الأماكن من عمليات الحذف غير المصرح بها.</li>
+            <li>منع إساءة استخدام الحسابات المخترقة.</li>
+            <li>التأكد من صحة طلب الحذف.</li>
+        </ul>
+        <p>قد يتم التواصل مع صاحب المكان أو الجهة المرتبطة به قبل تنفيذ الحذف.</p>
+    </section>
+
+    <!-- ── Section 22 ── -->
+    <section class="policy-section" id="sec-22">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">22</div>
+            <h2>أمن البيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تستخدم <strong>Lattakia Guide Team</strong> إجراءات تقنية وتنظيمية مناسبة للمساعدة في حماية بيانات المستخدمين، وتشمل على سبيل المثال:</p>
+        <ul>
+            <li>استخدام الاتصالات الآمنة HTTPS.</li>
+            <li>الاعتماد على أنظمة مصادقة موثوقة.</li>
+            <li>تطبيق قواعد صلاحيات الوصول على قواعد البيانات.</li>
+            <li>حماية الخدمات الخلفية.</li>
+            <li>استخدام وسائل الحماية من الطلبات الضارة وإساءة الاستخدام.</li>
+        </ul>
+        <p>ومع ذلك، لا توجد أي وسيلة نقل أو تخزين إلكتروني يمكن ضمان أمنها بنسبة 100%، ولذلك لا يمكن تقديم ضمان مطلق للأمان.</p>
+    </section>
+
+    <!-- ── Section 23 ── -->
+    <section class="policy-section" id="sec-23">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">23</div>
+            <h2>حماية الأطفال</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تم تصميم التطبيق ليكون مناسبًا للاستخدام العام.</p>
+        <p>لا يهدف التطبيق إلى جمع بيانات الأطفال أو إنشاء ملفات تعريف خاصة بهم.</p>
+        <p>إذا قام ولي أمر أو مستخدم باكتشاف أن بيانات طفل قد تم تقديمها بشكل مخالف لهذه السياسة، يمكن التواصل معنا لاتخاذ الإجراءات المناسبة.</p>
+    </section>
+
+    <!-- ── Section 24 ── -->
+    <section class="policy-section" id="sec-24">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">24</div>
+            <h2>حقوق المستخدم</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>وفقًا لطبيعة الخدمة والأنظمة المعمول بها، يمكن للمستخدم:</p>
+        <ul>
+            <li>معرفة أنواع البيانات التي يتم جمعها.</li>
+            <li>طلب تصحيح البيانات غير الصحيحة.</li>
+            <li>طلب حذف الحساب.</li>
+            <li>التحكم في بعض الأذونات من إعدادات الجهاز.</li>
+            <li>إيقاف الإشعارات من إعدادات الجهاز.</li>
+            <li>التواصل معنا بخصوص أي استفسار يتعلق بالخصوصية.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 25 ── -->
+    <section class="policy-section" id="sec-25">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">25</div>
+            <h2>استخدام الخدمات من خارج سوريا</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تم تصميم Lattakia Guide ليكون متاحًا للمستخدمين في مختلف الدول، مع تركيز خاص على المحتوى والخدمات المتعلقة بسوريا.</p>
+        <p>قد تختلف طريقة معالجة البيانات حسب موقع المستخدم ومزودي الخدمات المستخدمين لتشغيل التطبيق.</p>
+    </section>
+
+    <!-- ── Section 26 ── -->
+    <section class="policy-section" id="sec-26">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">26</div>
+            <h2>خدمات الأماكن والميزات الحصرية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يوفر التطبيق بعض الميزات الخاصة المتعلقة بأصحاب الأماكن، مثل طلبات إبراز أو تحسين ظهور المكان.</p>
+        <p>لا يتم تنفيذ عمليات الدفع داخل التطبيق باستخدام Google Play Billing.</p>
+        <p>قد يتم التواصل مع أصحاب الأماكن عبر وسائل خارج التطبيق مثل:</p>
+        <ul>
+            <li>البريد الإلكتروني.</li>
+            <li>واتساب.</li>
+            <li>وسائل التواصل المتفق عليها.</li>
+        </ul>
+        <p>ولا يقوم التطبيق بتخزين بيانات البطاقات البنكية أو معلومات الدفع.</p>
+    </section>
+
+    <!-- ── Section 27 ── -->
+    <section class="policy-section" id="sec-27">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">27</div>
+            <h2>مسؤولية المستخدم</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يلتزم المستخدم بما يلي:</p>
+        <ul>
+            <li>تقديم معلومات صحيحة.</li>
+            <li>عدم استخدام حسابات الآخرين.</li>
+            <li>عدم رفع محتوى مخالف للقوانين.</li>
+            <li>عدم نشر معلومات مضللة.</li>
+            <li>عدم محاولة اختراق أو تعطيل الخدمة.</li>
+        </ul>
+        <p>قد يؤدي انتهاك هذه الشروط إلى تقييد الحساب أو إيقافه.</p>
+    </section>
+
+    <!-- ── Section 28 ── -->
+    <section class="policy-section" id="sec-28">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">28</div>
+            <h2>تحديث سياسة الخصوصية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تقوم <strong>Lattakia Guide Team</strong> بتحديث هذه السياسة من وقت لآخر بسبب:</p>
+        <ul>
+            <li>تطوير ميزات جديدة.</li>
+            <li>تغييرات تقنية.</li>
+            <li>تغييرات قانونية.</li>
+            <li>تحديثات متطلبات المنصات مثل Google Play.</li>
+        </ul>
+        <p>سيتم تحديث تاريخ "آخر تحديث" الموجود أعلى الصفحة عند إجراء تغييرات جوهرية.</p>
+        <p>ننصح المستخدمين بمراجعة هذه الصفحة بشكل دوري.</p>
+    </section>
+
+    <!-- ── Section 29 ── -->
+    <section class="policy-section" id="sec-29">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">29</div>
+            <h2>التواصل معنا</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>إذا كان لديك أي سؤال أو طلب متعلق بالخصوصية أو البيانات الشخصية، يمكنك التواصل معنا عبر:</p>
+        <p><strong>Lattakia Guide Team</strong></p>
+        <p>البريد الإلكتروني:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+        <p>الموقع:</p>
+        <div class="highlight-box">
+            <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+        </div>
+    </section>
+
+    <!-- ── Section 30 ── -->
+    <section class="policy-section" id="sec-30">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">30</div>
+            <h2>الموافقة على السياسة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>باستخدام تطبيق Lattakia Guide، يقر المستخدم بأنه قرأ هذه السياسة وفهم كيفية جمع واستخدام وحماية بياناته كما هو موضح فيها.</p>
+        <p>إذا لم يوافق المستخدم على هذه السياسة، يجب عليه التوقف عن استخدام التطبيق.</p>
+    </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer" role="contentinfo">
+    <p class="footer-brand">Lattakia Guide Team</p>
+    <p>
+        البريد الإلكتروني:
+        <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        &nbsp;·&nbsp;
+        الموقع:
+        <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+    </p>
+    <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية سياسة الخصوصية</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>سياسة حذف الحساب والبيانات – Lattakia Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ───────── Design Tokens ───────── */
+        :root {
+          --clr-bg:        #F7F8FA;
+          --clr-surface:   #FFFFFF;
+          --clr-brand:     #1A5C8A;
+          --clr-brand-mid: #2478B5;
+          --clr-accent:    #E8A020;
+          --clr-accent-lt: #FEF3DC;
+          --clr-text:      #1C1E26;
+          --clr-muted:     #5A6070;
+          --clr-border:    #DDE1EA;
+          --clr-divider:   #EEF0F5;
+
+          --ff-display: 'Cairo', sans-serif;
+          --ff-body:    'Tajawal', sans-serif;
+
+          --radius-sm: 6px;
+          --radius-md: 12px;
+          --radius-lg: 20px;
+
+          --shadow-card: 0 2px 16px rgba(26, 92, 138, 0.07), 0 1px 4px rgba(0,0,0,0.04);
+          --shadow-hero: 0 8px 48px rgba(26, 92, 138, 0.18);
+
+          --max-w: 860px;
+        }
+
+        /* ───────── Reset & Base ───────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: var(--ff-body);
+          font-size: clamp(15px, 1.6vw, 17px);
+          line-height: 1.85;
+          color: var(--clr-text);
+          background: var(--clr-bg);
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ───────── Skip Link ───────── */
+        .skip-link {
+          position: absolute;
+          top: -999px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--clr-brand);
+          color: #fff;
+          padding: 8px 20px;
+          border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+          font-family: var(--ff-display);
+          z-index: 999;
+        }
+        .skip-link:focus { top: 0; }
+
+        /* ───────── Header / Hero ───────── */
+        .site-header {
+          background: linear-gradient(135deg, var(--clr-brand) 0%, var(--clr-brand-mid) 60%, #30A5E8 100%);
+          color: #fff;
+          padding: clamp(40px, 7vw, 80px) 24px clamp(32px, 5vw, 60px);
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Decorative wave blob */
+        .site-header::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 200'%3E%3Cpath fill='rgba(255,255,255,0.05)' d='M0,80 C150,160 350,0 600,100 C750,160 850,60 900,80 L900,200 L0,200Z'/%3E%3C/svg%3E") bottom / cover no-repeat;
+          pointer-events: none;
+        }
+
+        .header-badge {
+          display: inline-block;
+          background: rgba(255,255,255,0.15);
+          border: 1px solid rgba(255,255,255,0.3);
+          border-radius: 999px;
+          padding: 5px 18px;
+          font-family: var(--ff-display);
+          font-size: clamp(11px, 1.3vw, 13px);
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          margin-bottom: 18px;
+        }
+
+        .site-header h1 {
+          font-family: var(--ff-display);
+          font-size: clamp(22px, 4vw, 40px);
+          font-weight: 800;
+          line-height: 1.3;
+          margin-bottom: 14px;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-meta {
+          font-size: clamp(12px, 1.4vw, 14px);
+          opacity: 0.8;
+          font-weight: 300;
+        }
+
+        .header-divider {
+          display: block;
+          width: 48px;
+          height: 3px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          margin: 16px auto 0;
+        }
+
+        /* ───────── Layout ───────── */
+        .page-body {
+          max-width: var(--max-w);
+          margin: 0 auto;
+          padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 24px) 80px;
+        }
+
+        /* ───────── TOC ───────── */
+        .toc-card {
+          background: var(--clr-surface);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--radius-lg);
+          padding: clamp(20px, 3vw, 32px) clamp(20px, 3vw, 36px);
+          margin-bottom: 40px;
+          box-shadow: var(--shadow-card);
+        }
+
+        .toc-title {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 16px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .toc-title::before {
+          content: '';
+          display: inline-block;
+          width: 4px;
+          height: 18px;
+          background: var(--clr-accent);
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
+
+        .toc-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 6px 20px;
+          list-style: none;
+        }
+
+        .toc-grid li a {
+          color: var(--clr-muted);
+          text-decoration: none;
+          font-size: clamp(12px, 1.4vw, 14px);
+          line-height: 1.6;
+          display: flex;
+          align-items: baseline;
+          gap: 6px;
+          transition: color 0.2s;
+        }
+
+        .toc-grid li a:hover { color: var(--clr-brand); }
+
+        .toc-num {
+          font-family: var(--ff-display);
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--clr-accent);
+          flex-shrink: 0;
+          min-width: 22px;
+        }
+
+        /* ───────── Sections ───────── */
+        .policy-section {
+          background: var(--clr-surface);
+          border-radius: var(--radius-lg);
+          padding: clamp(24px, 3.5vw, 40px) clamp(20px, 3.5vw, 40px);
+          margin-bottom: 24px;
+          box-shadow: var(--shadow-card);
+          border: 1px solid var(--clr-border);
+          scroll-margin-top: 24px;
+        }
+
+        /* Section Number Badge */
+        .section-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .section-num {
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          background: linear-gradient(135deg, var(--clr-brand), var(--clr-brand-mid));
+          color: #fff;
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: var(--ff-display);
+          font-size: 14px;
+          font-weight: 800;
+          box-shadow: 0 3px 10px rgba(26,92,138,0.25);
+        }
+
+        .section-header h2 {
+          font-family: var(--ff-display);
+          font-size: clamp(16px, 2vw, 20px);
+          font-weight: 700;
+          color: var(--clr-brand);
+          line-height: 1.4;
+          padding-top: 8px;
+        }
+
+        /* Sub-headings (h3) */
+        .policy-section h3 {
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.7vw, 16px);
+          font-weight: 700;
+          color: var(--clr-text);
+          margin: 24px 0 10px;
+          padding-right: 12px;
+          border-right: 3px solid var(--clr-accent);
+        }
+
+        /* Paragraphs */
+        .policy-section p {
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          margin-bottom: 14px;
+          line-height: 1.9;
+        }
+
+        .policy-section p:last-child { margin-bottom: 0; }
+
+        /* Lists */
+        .policy-section ul {
+          list-style: none;
+          padding: 0;
+          margin: 10px 0 16px;
+        }
+
+        .policy-section ul li {
+          position: relative;
+          padding-right: 22px;
+          color: var(--clr-muted);
+          font-size: clamp(14px, 1.6vw, 16px);
+          line-height: 1.85;
+          margin-bottom: 8px;
+        }
+
+        .policy-section ul li::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 10px;
+          width: 7px;
+          height: 7px;
+          background: var(--clr-accent);
+          border-radius: 50%;
+        }
+
+        /* Highlight box (used for email/contact) */
+        .highlight-box {
+          background: var(--clr-accent-lt);
+          border: 1px solid rgba(232,160,32,0.3);
+          border-radius: var(--radius-md);
+          padding: 16px 20px;
+          margin: 14px 0;
+          font-family: var(--ff-display);
+          font-size: clamp(14px, 1.6vw, 15px);
+          font-weight: 600;
+          color: var(--clr-brand);
+        }
+
+        .highlight-box a {
+          color: var(--clr-brand);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+        }
+
+        /* Divider between sections */
+        .section-divider {
+          height: 1px;
+          background: var(--clr-divider);
+          margin: 6px 0 20px;
+        }
+
+        /* ───────── Footer ───────── */
+        .site-footer {
+          background: var(--clr-brand);
+          color: rgba(255,255,255,0.75);
+          text-align: center;
+          padding: clamp(28px, 4vw, 44px) 24px;
+          font-size: clamp(12px, 1.4vw, 14px);
+          font-family: var(--ff-body);
+        }
+
+        .site-footer .footer-brand {
+          font-family: var(--ff-display);
+          font-size: clamp(15px, 1.8vw, 18px);
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 8px;
+        }
+
+        .site-footer a {
+          color: var(--clr-accent);
+          text-decoration: none;
+        }
+
+        .site-footer a:hover { text-decoration: underline; }
+
+        .footer-copy {
+          margin-top: 12px;
+          font-size: 12px;
+          opacity: 0.6;
+        }
+
+        /* ───────── Responsive ───────── */
+        @media (max-width: 600px) {
+          .section-num {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            font-size: 12px;
+          }
+
+          .toc-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .policy-section {
+            border-radius: var(--radius-md);
+          }
+        }
+
+        /* ───────── Print ───────── */
+        @media print {
+          body { background: #fff; }
+          .site-header { background: var(--clr-brand) !important; print-color-adjust: exact; }
+          .toc-card, .policy-section { box-shadow: none; border: 1px solid #ddd; }
+          .page-body { padding: 16px; }
+        }
+
+        /* ───────── Reduced motion ───────── */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="site-header" role="banner">
+    <div class="header-badge">Lattakia Guide</div>
+    <h1>سياسة حذف الحساب والبيانات</h1>
+    <p class="header-meta">آخر تحديث: 15 يوليو 2026</p>
+    <span class="header-divider" aria-hidden="true"></span>
+</header>
+
+<!-- ═══════════ PAGE BODY ═══════════ -->
+<main id="main-content" class="page-body">
+
+    <!-- Table of Contents -->
+    <nav class="toc-card" aria-label="فهرس السياسة">
+        <p class="toc-title">فهرس المحتويات</p>
+        <ol class="toc-grid">
+            <li><a href="#sec-1"><span class="toc-num">1.</span> مقدمة</a></li>
+            <li><a href="#sec-2"><span class="toc-num">2.</span> من يمكنه طلب الحذف؟</a></li>
+            <li><a href="#sec-3"><span class="toc-num">3.</span> كيفية طلب الحذف</a></li>
+            <li><a href="#sec-4"><span class="toc-num">4.</span> التحقق من طلب الحذف</a></li>
+            <li><a href="#sec-5"><span class="toc-num">5.</span> ماذا يحدث عند الحذف؟</a></li>
+            <li><a href="#sec-6"><span class="toc-num">6.</span> حذف بيانات المصادقة</a></li>
+            <li><a href="#sec-7"><span class="toc-num">7.</span> حذف المحتوى الذي أنشأه المستخدم</a></li>
+            <li><a href="#sec-8"><span class="toc-num">8.</span> البيانات التي قد يتم الاحتفاظ بها</a></li>
+            <li><a href="#sec-9"><span class="toc-num">9.</span> السجلات الأمنية</a></li>
+            <li><a href="#sec-10"><span class="toc-num">10.</span> حذف بيانات المستخدم الضيف</a></li>
+            <li><a href="#sec-11"><span class="toc-num">11.</span> حذف الصور والمحتوى المرئي</a></li>
+            <li><a href="#sec-12"><span class="toc-num">12.</span> بيانات التحليلات والاستخدام</a></li>
+            <li><a href="#sec-13"><span class="toc-num">13.</span> مدة تنفيذ طلب الحذف</a></li>
+            <li><a href="#sec-14"><span class="toc-num">14.</span> طلب تصحيح البيانات</a></li>
+            <li><a href="#sec-15"><span class="toc-num">15.</span> طلب معلومات عن البيانات</a></li>
+            <li><a href="#sec-16"><span class="toc-num">16.</span> ماذا يحدث بعد الحذف؟</a></li>
+            <li><a href="#sec-17"><span class="toc-num">17.</span> الحذف وحماية الآخرين</a></li>
+            <li><a href="#sec-18"><span class="toc-num">18.</span> تحديث السياسة</a></li>
+            <li><a href="#sec-19"><span class="toc-num">19.</span> التواصل معنا</a></li>
+            <li><a href="#sec-20"><span class="toc-num">20.</span> الموافقة على سياسة الحذف</a></li>
+        </ol>
+    </nav>
+
+    <!-- ── Section 1 ── -->
+    <section class="policy-section" id="sec-1">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">1</div>
+            <h2>مقدمة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تلتزم <strong>Lattakia Guide Team</strong> بمنح المستخدمين القدرة على التحكم في بياناتهم، بما في ذلك إمكانية طلب حذف حسابهم والبيانات المرتبطة به.</p>
+        <p>توضح هذه السياسة:</p>
+        <ul>
+            <li>كيفية طلب حذف الحساب.</li>
+            <li>أنواع البيانات التي يتم حذفها.</li>
+            <li>أنواع البيانات التي قد يتم الاحتفاظ بها لفترة محدودة.</li>
+            <li>الأسباب التي قد تستدعي الاحتفاظ ببعض البيانات.</li>
+            <li>طريقة التواصل معنا بخصوص طلبات الحذف.</li>
+        </ul>
+        <p>تعتبر هذه السياسة جزءًا من سياسة الخصوصية وشروط الاستخدام الخاصة بـ Lattakia Guide.</p>
+    </section>
+
+    <!-- ── Section 2 ── -->
+    <section class="policy-section" id="sec-2">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">2</div>
+            <h2>من يمكنه طلب حذف الحساب؟</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن لأي مستخدم لديه حساب في Lattakia Guide طلب حذف حسابه.</p>
+        <p>يشمل ذلك الحسابات التي تم إنشاؤها باستخدام:</p>
+        <ul>
+            <li>البريد الإلكتروني وكلمة المرور.</li>
+            <li>تسجيل الدخول بواسطة Google.</li>
+        </ul>
+        <p>لا يحتاج المستخدم إلى تقديم سبب لحذف الحساب، إلا إذا كان هناك سبب أمني يستدعي التحقق من الطلب.</p>
+    </section>
+
+    <!-- ── Section 3 ── -->
+    <section class="policy-section" id="sec-3">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">3</div>
+            <h2>كيفية طلب حذف الحساب</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن للمستخدم طلب حذف حسابه من خلال:</p>
+
+        <h3>داخل التطبيق</h3>
+        <p>من خلال خيار حذف الحساب المتوفر في إعدادات الحساب أو الملف الشخصي.</p>
+
+        <h3>عبر البريد الإلكتروني</h3>
+        <p>يمكن إرسال طلب حذف الحساب إلى:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+        <p>يجب أن يتم إرسال الطلب من البريد المرتبط بالحساب أو تقديم معلومات كافية للتحقق من ملكية الحساب.</p>
+    </section>
+
+    <!-- ── Section 4 ── -->
+    <section class="policy-section" id="sec-4">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">4</div>
+            <h2>التحقق من طلب الحذف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تطلب Lattakia Guide Team التحقق من هوية صاحب الحساب قبل تنفيذ الحذف.</p>
+        <p>يهدف ذلك إلى:</p>
+        <ul>
+            <li>منع حذف حسابات الآخرين.</li>
+            <li>حماية أصحاب الأماكن.</li>
+            <li>منع إساءة استخدام نظام الحذف.</li>
+        </ul>
+        <p>قد يتطلب التحقق:</p>
+        <ul>
+            <li>تأكيد البريد الإلكتروني.</li>
+            <li>معلومات مرتبطة بالحساب.</li>
+            <li>أي إجراءات أمنية مناسبة.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 5 ── -->
+    <section class="policy-section" id="sec-5">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">5</div>
+            <h2>ماذا يحدث عند حذف الحساب؟</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>عند الموافقة على طلب الحذف، تتم معالجة البيانات المرتبطة بالحساب وفق طبيعة كل نوع من البيانات.</p>
+        <p>قد تشمل عملية الحذف:</p>
+        <ul>
+            <li>تعطيل الحساب.</li>
+            <li>إزالة بيانات الملف الشخصي.</li>
+            <li>إزالة معلومات الاتصال المرتبطة بالحساب.</li>
+            <li>إزالة رمز الإشعارات المرتبط بالحساب.</li>
+            <li>إزالة البيانات التي لم تعد هناك حاجة تشغيلية للاحتفاظ بها.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 6 ── -->
+    <section class="policy-section" id="sec-6">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">6</div>
+            <h2>حذف بيانات المصادقة</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يتم حذف أو تعطيل بيانات المصادقة المرتبطة بالحساب عند تنفيذ حذف الحساب.</p>
+        <p>يشمل ذلك الحساب المستخدم للدخول إلى التطبيق مثل:</p>
+        <ul>
+            <li>البريد الإلكتروني.</li>
+            <li>بيانات تسجيل الدخول المرتبطة بالحساب.</li>
+        </ul>
+        <p>بعد اكتمال العملية، لن يستطيع المستخدم استخدام الحساب السابق للدخول إلى الخدمة.</p>
+    </section>
+
+    <!-- ── Section 7 ── -->
+    <section class="policy-section" id="sec-7">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">7</div>
+            <h2>حذف المحتوى الذي أنشأه المستخدم</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد تشمل بيانات المستخدم:</p>
+        <ul>
+            <li>طلبات إضافة الأماكن.</li>
+            <li>معلومات الأماكن.</li>
+            <li>الصور.</li>
+            <li>فرص العمل.</li>
+            <li>المنتجات أو الخدمات المرتبطة بالأماكن.</li>
+        </ul>
+        <p>يتم التعامل مع هذه البيانات حسب طبيعتها.</p>
+
+        <h3>المحتوى المرتبط بالمستخدم فقط</h3>
+        <p>قد يتم حذفه عند عدم وجود سبب للاحتفاظ به.</p>
+
+        <h3>المحتوى المرتبط بالخدمة أو بأطراف أخرى</h3>
+        <p>مثل الأماكن المنشورة أو المعلومات التجارية، قد يحتاج حذفها إلى مراجعة إضافية.</p>
+        <p>السبب:</p>
+        <ul>
+            <li>حماية أصحاب الأماكن.</li>
+            <li>منع حذف محتوى نتيجة اختراق حساب.</li>
+            <li>التأكد من أن المستخدم يملك صلاحية طلب الحذف.</li>
+        </ul>
+        <p>قد يتم التواصل مع صاحب المكان أو الجهة المرتبطة به قبل إزالة المحتوى.</p>
+    </section>
+
+    <!-- ── Section 8 ── -->
+    <section class="policy-section" id="sec-8">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">8</div>
+            <h2>البيانات التي قد يتم الاحتفاظ بها</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>في بعض الحالات، قد تحتفظ Lattakia Guide Team ببيانات محدودة بعد حذف الحساب.</p>
+        <p>يتم ذلك فقط عند وجود سبب مشروع، مثل:</p>
+        <ul>
+            <li>منع الاحتيال.</li>
+            <li>حماية أمن الخدمة.</li>
+            <li>التحقيق في إساءة الاستخدام.</li>
+            <li>الالتزامات القانونية.</li>
+            <li>الحفاظ على سجلات تشغيلية ضرورية.</li>
+        </ul>
+        <p>لا تستخدم هذه البيانات لتقديم خدمات عادية للمستخدم بعد حذف حسابه.</p>
+    </section>
+
+    <!-- ── Section 9 ── -->
+    <section class="policy-section" id="sec-9">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">9</div>
+            <h2>السجلات الأمنية</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم الاحتفاظ ببعض السجلات الأمنية لفترة محدودة، مثل:</p>
+        <ul>
+            <li>سجلات إساءة الاستخدام.</li>
+            <li>سجلات الحماية من الاحتيال.</li>
+            <li>معلومات مرتبطة بحوادث أمنية.</li>
+        </ul>
+        <p>الغرض من ذلك هو حماية المستخدمين والمنصة ومنع تكرار المخالفات.</p>
+    </section>
+
+    <!-- ── Section 10 ── -->
+    <section class="policy-section" id="sec-10">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">10</div>
+            <h2>حذف بيانات المستخدم الضيف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يسمح تطبيق Lattakia Guide باستخدام بعض الميزات بدون إنشاء حساب من خلال وضع الضيف.</p>
+        <p>عند استخدام وضع الضيف:</p>
+        <ul>
+            <li>لا يتم إنشاء ملف حساب شخصي للمستخدم.</li>
+            <li>لا يتم تخزين بيانات التسجيل المعتادة مثل الاسم أو البريد الإلكتروني أو رقم الهاتف.</li>
+        </ul>
+        <p>قد يتم الاحتفاظ ببعض البيانات التقنية المؤقتة أو الإحصائية اللازمة لتشغيل الخدمة وحمايتها، مثل معلومات الجلسة أو بيانات الاستخدام العامة.</p>
+        <p>يمكن للمستخدم حذف هذه البيانات المحلية من خلال:</p>
+        <ul>
+            <li>حذف التطبيق من الجهاز.</li>
+            <li>مسح بيانات التطبيق من إعدادات الجهاز.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 11 ── -->
+    <section class="policy-section" id="sec-11">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">11</div>
+            <h2>حذف الصور والمحتوى المرئي</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>عند طلب حذف الحساب، تتم مراجعة الصور والمحتوى المرئي المرتبط بالمستخدم وفق طبيعة استخدامه.</p>
+        <p>قد يتم حذف:</p>
+        <ul>
+            <li>الصور الشخصية.</li>
+            <li>الصور المرتبطة بطلبات غير منشورة.</li>
+            <li>المحتوى الذي لم يعد هناك سبب للاحتفاظ به.</li>
+        </ul>
+        <p>أما الصور المرتبطة بأماكن منشورة أو خدمات قائمة، فقد تخضع لمراجعة قبل الإزالة بهدف:</p>
+        <ul>
+            <li>حماية معلومات الأماكن.</li>
+            <li>منع إزالة محتوى بشكل غير مصرح به.</li>
+            <li>الحفاظ على جودة الدليل.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 12 ── -->
+    <section class="policy-section" id="sec-12">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">12</div>
+            <h2>بيانات التحليلات والاستخدام</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم الاحتفاظ ببعض البيانات الإحصائية أو التقنية بعد حذف الحساب إذا كانت:</p>
+        <ul>
+            <li>غير مخصصة لتحديد هوية المستخدم بشكل مباشر.</li>
+            <li>ضرورية لتحليل أداء الخدمة.</li>
+            <li>مرتبطة بأمان التطبيق.</li>
+        </ul>
+        <p>لا يتم استخدام بيانات الحساب المحذوف لإنشاء ملف مستخدم جديد أو لإرسال رسائل تسويقية.</p>
+    </section>
+
+    <!-- ── Section 13 ── -->
+    <section class="policy-section" id="sec-13">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">13</div>
+            <h2>مدة تنفيذ طلب الحذف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>تسعى Lattakia Guide Team إلى معالجة طلبات حذف الحساب خلال فترة زمنية مناسبة.</p>
+        <p>قد تختلف مدة التنفيذ حسب:</p>
+        <ul>
+            <li>نوع البيانات.</li>
+            <li>الحاجة إلى التحقق من ملكية الحساب.</li>
+            <li>وجود محتوى يحتاج مراجعة.</li>
+            <li>المتطلبات الأمنية أو القانونية.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 14 ── -->
+    <section class="policy-section" id="sec-14">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">14</div>
+            <h2>طلب تصحيح البيانات قبل الحذف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>إذا كان المستخدم يرغب في تصحيح بيانات معينة بدل حذف الحساب بالكامل، يمكنه التواصل معنا.</p>
+        <p>قد تتوفر بعض البيانات القابلة للتعديل من خلال ميزات التطبيق، بينما قد تتطلب بعض التغييرات مراجعة إدارية.</p>
+    </section>
+
+    <!-- ── Section 15 ── -->
+    <section class="policy-section" id="sec-15">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">15</div>
+            <h2>طلب معلومات عن البيانات</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>يمكن للمستخدم التواصل مع فريق Lattakia Guide Team للاستفسار عن البيانات المرتبطة بحسابه.</p>
+        <p>لا توفر الخدمة حاليًا نظامًا آليًا لتنزيل نسخة كاملة من البيانات، ولكن يمكن للمستخدم التواصل معنا بخصوص أي استفسار متعلق ببياناته.</p>
+    </section>
+
+    <!-- ── Section 16 ── -->
+    <section class="policy-section" id="sec-16">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">16</div>
+            <h2>ماذا يحدث بعد حذف الحساب؟</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>بعد اكتمال حذف الحساب:</p>
+        <ul>
+            <li>لا يمكن استخدام الحساب السابق للدخول.</li>
+            <li>لا يمكن استعادة الحساب المحذوف إلا إذا كان ذلك ممكنًا تقنيًا وخلال الفترة المسموح بها.</li>
+            <li>قد يتطلب إنشاء حساب جديد التسجيل من البداية.</li>
+        </ul>
+    </section>
+
+    <!-- ── Section 17 ── -->
+    <section class="policy-section" id="sec-17">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">17</div>
+            <h2>حذف الحساب وحماية الآخرين</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد لا يؤدي حذف حساب المستخدم إلى حذف جميع البيانات المرتبطة بالمنصة إذا كانت هذه البيانات:</p>
+        <ul>
+            <li>ضرورية لتشغيل الخدمة.</li>
+            <li>مرتبطة بحقوق مستخدمين آخرين.</li>
+            <li>مرتبطة بمحتوى عام أو تجاري.</li>
+            <li>مطلوبة لأغراض أمنية أو قانونية.</li>
+        </ul>
+        <p>يتم التعامل مع هذه الحالات وفق مبدأ تقليل البيانات والاحتفاظ بالحد الأدنى الضروري فقط.</p>
+    </section>
+
+    <!-- ── Section 18 ── -->
+    <section class="policy-section" id="sec-18">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">18</div>
+            <h2>تحديث سياسة حذف الحساب</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>قد يتم تحديث هذه السياسة عند الحاجة بسبب:</p>
+        <ul>
+            <li>تغييرات في التطبيق.</li>
+            <li>إضافة طرق حذف جديدة.</li>
+            <li>تحديث متطلبات Google Play.</li>
+            <li>تغييرات قانونية أو تشغيلية.</li>
+        </ul>
+        <p>سيتم تحديث تاريخ الوثيقة عند إجراء تغييرات مهمة.</p>
+    </section>
+
+    <!-- ── Section 19 ── -->
+    <section class="policy-section" id="sec-19">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">19</div>
+            <h2>التواصل معنا</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>لأي طلب متعلق بحذف الحساب أو البيانات:</p>
+        <p><strong>Lattakia Guide Team</strong></p>
+        <p>البريد الإلكتروني:</p>
+        <div class="highlight-box">
+            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
+        <p>الموقع:</p>
+        <div class="highlight-box">
+            <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+        </div>
+    </section>
+
+    <!-- ── Section 20 ── -->
+    <section class="policy-section" id="sec-20">
+        <div class="section-header">
+            <div class="section-num" aria-hidden="true">20</div>
+            <h2>الموافقة على سياسة الحذف</h2>
+        </div>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p>باستخدام Lattakia Guide، يقر المستخدم بأنه فهم آلية حذف الحساب والبيانات الموضحة في هذه السياسة.</p>
+    </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer" role="contentinfo">
+    <p class="footer-brand">Lattakia Guide Team</p>
+    <p>
+        البريد الإلكتروني:
+        <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        &nbsp;·&nbsp;
+        الموقع:
+        <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>
+    </p>
+    <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية سياسة حذف الحساب والبيانات</p>
+</footer>
+
+</body>
+</html>
