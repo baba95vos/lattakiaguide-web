@@ -1115,19 +1115,7 @@
   }
 
       function returnToApp() {
-        // Try deep link first (app is open)
-        const deepLink = 'lattakia://subscribe_success';
-        const fallback = 'https://play.google.com/store/apps/details?id=com.example.lattakia_guide';
-
-        const start = Date.now();
-        window.location.href = deepLink;
-
-        setTimeout(() => {
-          // If app didn't open (took more than 1.5s), go to Play Store
-          if (Date.now() - start < 2000) {
-            window.location.href = fallback;
-          }
-        }, 1500);
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.example.lattakia_guide';
       }
 
   async function generateAndUploadReceipt(requestId, requestData, addSecond, otherPlan, discountedTotal) {
