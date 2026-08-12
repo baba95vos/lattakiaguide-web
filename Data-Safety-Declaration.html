@@ -277,6 +277,7 @@
             <tr><td>هل يتم بيع بيانات المستخدمين؟</td><td><span class="badge-no">لا</span></td></tr>
             <tr><td>هل يتم استخدام البيانات للإعلانات المخصصة؟</td><td><span class="badge-no">لا</span></td></tr>
             <tr><td>هل يستخدم التطبيق Advertising ID؟</td><td><span class="badge-no">لا</span></td></tr>
+            <tr><td>هل يتم مشاركة البيانات مع أطراف ثالثة؟</td><td><span class="badge-yes">نعم</span> — imgBB لاستضافة الصور · Firebase/Google لتشغيل الخدمات التقنية</td></tr>
             </tbody>
         </table>
     </section>
@@ -363,13 +364,14 @@
         <div class="data-item">
             <div class="data-item-header">الموقع الدقيق</div>
             <div class="data-item-body">
-                <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-yes">نعم</span></div></div>
-                <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Location → Precise location</span></div></div>
-                <div class="data-row"><div class="data-label">متى يتم جمعه؟</div><div class="data-value">فقط عند استخدام ميزة: <strong>إضافة مكان جديد</strong>.</div></div>
-                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">تحديد موقع المكان المطلوب إضافته.</div></div>
+                <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-opt">جزئياً</span></div></div>
+                <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Location → Approximate location</span></div></div>
+                <div class="data-row"><div class="data-label">الوصف</div><div class="data-value">لا يصل التطبيق إلى GPS الجهاز ولا يطلب إذن الموقع. عند إضافة مكان، يختار المستخدم الموقع يدوياً عبر تحريك الخريطة (Pin Drop)، وتُخزَّن الإحداثيات التي اختارها في قاعدة البيانات كجزء من بيانات المكان.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">تحديد موقع المكان على الخريطة وعرضه للمستخدمين.</div></div>
                 <div class="data-row"><div class="data-label">هل يستخدم للتتبع؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
                 <div class="data-row"><div class="data-label">هل يجمع في الخلفية؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
-                <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
+                <div class="data-row"><div class="data-label">هل هو موقع المستخدم؟</div><div class="data-value"><span class="badge-no">لا</span> — هو موقع المكان الذي يضيفه المستخدم، لا موقع الجهاز.</div></div>
+                <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value">يكون ظاهراً لمستخدمي التطبيق كجزء من بيانات المكان العام.</div></div>
             </div>
         </div>
     </section>
@@ -610,8 +612,8 @@
             </tr>
             <tr>
                 <td>الموقع</td>
-                <td><span class="badge-opt">اختياري</span></td>
-                <td>يطلب فقط عند إضافة مكان جديد.</td>
+                <td><span class="badge-no">لا</span></td>
+                <td>لا يجمع التطبيق موقع الجهاز تلقائياً. عند إضافة مكان، يقوم المستخدم باختيار الموقع يدوياً عبر تحريك الخريطة (Pin Drop) دون الوصول إلى GPS الجهاز.</td>
             </tr>
             <tr>
                 <td>وضع الضيف</td>
