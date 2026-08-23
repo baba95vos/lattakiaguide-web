@@ -206,7 +206,7 @@
     <div class="header-badge">Lattakia Guide</div><br>
     <div class="header-sub">Google Play Data Safety Declaration</div>
     <h1>إقرار أمان البيانات</h1>
-    <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 15 يوليو 2026</p>
+    <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 24 أغسطس 2026</p>
     <span class="header-divider" aria-hidden="true"></span>
 </header>
 
@@ -277,7 +277,7 @@
             <tr><td>هل يتم بيع بيانات المستخدمين؟</td><td><span class="badge-no">لا</span></td></tr>
             <tr><td>هل يتم استخدام البيانات للإعلانات المخصصة؟</td><td><span class="badge-no">لا</span></td></tr>
             <tr><td>هل يستخدم التطبيق Advertising ID؟</td><td><span class="badge-no">لا</span></td></tr>
-            <tr><td>هل يتم مشاركة البيانات مع أطراف ثالثة؟</td><td><span class="badge-yes">نعم</span> — imgBB لاستضافة الصور · Firebase/Google لتشغيل الخدمات التقنية</td></tr>
+            <tr><td>هل يتم مشاركة البيانات مع أطراف ثالثة؟</td><td><span class="badge-yes">نعم</span> — imgBB لاستضافة الصور · Google (reCAPTCHA/Vision) للحماية · Firebase للخدمات التقنية</td></tr>
             </tbody>
         </table>
     </section>
@@ -387,7 +387,7 @@
             <div class="data-item-body">
                 <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-yes">نعم</span></div></div>
                 <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Device or other IDs</span></div></div>
-                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">حماية الحسابات · منع الاحتيال · تطبيق إجراءات الأمان.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">حماية الحسابات · منع الاحتيال · إدارة الحساب · تطبيق إجراءات الأمان.</div></div>
                 <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
                 <div class="data-row"><div class="data-label">هل يمكن حذفه؟</div><div class="data-value">يتم التعامل معه ضمن إجراءات حذف الحساب، مع إمكانية الاحتفاظ ببيانات أمنية محدودة عند الحاجة لمنع إساءة الاستخدام.</div></div>
             </div>
@@ -418,7 +418,7 @@
                 <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">App activity → App interactions</span></div></div>
                 <div class="data-row"><div class="data-label">البيانات المسجلة</div><div class="data-value">التفاعل مع بعض شاشات التطبيق · مدة البقاء في بعض الصفحات · عدد الجلسات · استخدام بعض الميزات.</div></div>
                 <div class="data-row"><div class="data-label">المصدر</div><div class="data-value">يتم جمعها أثناء استخدام المستخدم للتطبيق.</div></div>
-                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">تحسين تجربة المستخدم · تحليل استخدام الميزات · تحسين أداء التطبيق.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">تحسين تجربة المستخدم · تحليل استخدام الميزات (Analytics) · تحسين أداء التطبيق.</div></div>
                 <div class="data-row"><div class="data-label">هل يتم مشاركتها؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
                 <div class="data-row"><div class="data-label">هل يمكن حذفها؟</div><div class="data-value">يمكن طلب حذف البيانات المرتبطة بالحساب وفق سياسة حذف الحساب.</div></div>
             </div>
@@ -568,7 +568,7 @@
         <div class="data-item">
             <div class="data-item-header">Firebase / Google Services</div>
             <div class="data-item-body">
-                <div class="data-row"><div class="data-label">نوع البيانات</div><div class="data-value">البيانات اللازمة لتقديم: المصادقة · قواعد البيانات · الإشعارات · تقارير الأعطال · الحماية.</div></div>
+                <div class="data-row"><div class="data-label">نوع البيانات</div><div class="data-value">البيانات اللازمة لتقديم: المصادقة · قواعد البيانات · الإشعارات · تقارير الأعطال · الحماية (reCAPTCHA) · فحص الصور (Vision API).</div></div>
             </div>
         </div>
     </section>
@@ -587,8 +587,11 @@
         <div class="section-divider" aria-hidden="true"></div>
         <p><span class="badge-yes">نعم</span></p>
         <p>يوفر التطبيق إمكانية طلب حذف الحساب والبيانات المرتبطة به.</p>
-        <p>يمكن تقديم الطلب عبر:</p>
-        <div class="highlight-box"><a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a></div>
+        <p>يمكن تقديم الطلب عبر التطبيق مباشرة (إعدادات الحساب)، أو عبر الرابط الخارجي المخصص، أو البريد الإلكتروني:</p>
+        <div class="highlight-box">
+            رابط طلب حذف الحساب: <a href="https://lattakiaguide.app/delete-account" target="_blank">lattakiaguide.app/delete-account</a><br>
+            البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        </div>
     </section>
 
     <!-- ── 17 ── -->
@@ -611,9 +614,9 @@
                 <td>يتم طلبها فقط عند استخدام ميزات تحتاج رفع صور.</td>
             </tr>
             <tr>
-                <td>الموقع</td>
-                <td><span class="badge-no">لا</span></td>
-                <td>لا يجمع التطبيق موقع الجهاز تلقائياً. عند إضافة مكان، يقوم المستخدم باختيار الموقع يدوياً عبر تحريك الخريطة (Pin Drop) دون الوصول إلى GPS الجهاز.</td>
+                <td>الموقع الجغرافي</td>
+                <td><span class="badge-yes">نعم (تقريبي)</span></td>
+                <td>يتم تحديد موقع المكان يدوياً من قبل المستخدم على الخريطة (Pin Drop) لغرض عرض الأماكن. لا يطلب التطبيق إذن الوصول إلى GPS الجهاز ولا يتتبع موقع المستخدم.</td>
             </tr>
             <tr>
                 <td>وضع الضيف</td>
