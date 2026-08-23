@@ -167,15 +167,124 @@
 
     <!-- ── 2 ── -->
     <section class="policy-section" id="sec-2">
-        <div class="section-header"><div class="section-num" aria-hidden="true">2</div><h2>طلب الحذف عبر البريد الإلكتروني</h2></div>
+        <div class="section-header"><div class="section-num" aria-hidden="true">2</div><h2>طلب الحذف من الموقع مباشرةً (بدون تسجيل دخول)</h2></div>
         <div class="section-divider" aria-hidden="true"></div>
-        <p>إذا لم تتمكن من الوصول إلى حسابك أو واجهت أي مشكلة، يمكنك إرسال طلب الحذف مباشرةً إلى فريقنا:</p>
+        <p>إذا لم تتمكن من الوصول إلى التطبيق، يمكنك تقديم <strong>طلب حذف</strong> من هنا مباشرةً. أدخل بريدك الإلكتروني المسجَّل، وسنرسل رمز تأكيد للتحقق من ملكية الحساب قبل تسجيل الطلب.</p>
+
+        <form id="delReqForm" novalidate style="margin-top:20px;">
+            <div style="margin-bottom:14px;">
+                <label for="delEmail" style="display:block; font-family:var(--ff-display); font-size:13px; font-weight:700; color:var(--clr-brand); margin-bottom:6px;">البريد الإلكتروني المرتبط بحسابك</label>
+                <input type="email" id="delEmail" required placeholder="example@email.com" dir="ltr"
+                    style="width:100%; padding:12px 16px; border:1px solid var(--clr-border); border-radius:var(--radius-md); font-size:15px; font-family:var(--ff-body); background:var(--clr-bg); color:var(--clr-text); box-sizing:border-box;">
+            </div>
+            <button type="submit" id="delSendCodeBtn"
+                style="width:100%; padding:14px; border:none; border-radius:var(--radius-md); background:linear-gradient(135deg,var(--clr-brand),var(--clr-brand-mid)); color:#fff; font-family:var(--ff-display); font-weight:700; font-size:15px; cursor:pointer;">
+                إرسال رمز التأكيد
+            </button>
+        </form>
+
+        <form id="delConfirmForm" novalidate style="display:none; margin-top:20px;">
+            <div class="info-banner" id="delCodeSentMsg" style="margin-bottom:16px;"></div>
+            <div style="margin-bottom:14px;">
+                <label for="delCode" style="display:block; font-family:var(--ff-display); font-size:13px; font-weight:700; color:var(--clr-brand); margin-bottom:6px;">رمز التأكيد (6 أرقام)</label>
+                <input type="text" id="delCode" required inputmode="numeric" maxlength="6" placeholder="000000" dir="ltr"
+                    style="width:100%; padding:12px 16px; border:1px solid var(--clr-border); border-radius:var(--radius-md); font-size:20px; letter-spacing:6px; text-align:center; font-family:var(--ff-body); background:var(--clr-bg); color:var(--clr-text); box-sizing:border-box;">
+            </div>
+            <div style="margin-bottom:14px;">
+                <label for="delReason" style="display:block; font-family:var(--ff-display); font-size:13px; font-weight:700; color:var(--clr-brand); margin-bottom:6px;">سبب الحذف (اختياري)</label>
+                <textarea id="delReason" rows="2" maxlength="500"
+                    style="width:100%; padding:12px 16px; border:1px solid var(--clr-border); border-radius:var(--radius-md); font-size:14px; font-family:var(--ff-body); background:var(--clr-bg); color:var(--clr-text); box-sizing:border-box; resize:vertical;"></textarea>
+            </div>
+            <button type="submit" id="delConfirmBtn"
+                style="width:100%; padding:14px; border:none; border-radius:var(--radius-md); background:linear-gradient(135deg,var(--clr-brand),var(--clr-brand-mid)); color:#fff; font-family:var(--ff-display); font-weight:700; font-size:15px; cursor:pointer;">
+                تأكيد طلب الحذف
+            </button>
+        </form>
+
+        <div id="delResultMsg" role="status" style="margin-top:16px; display:none;"></div>
+
+        <p style="margin-top:24px;">تفضّل التواصل بالبريد مباشرةً بدلاً من النموذج أعلاه؟</p>
         <div class="highlight-box">
             📧 <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a><br>
             <small style="font-weight:400; font-family: var(--ff-body);">أرسل البريد من العنوان المرتبط بحسابك مع ذكر "طلب حذف الحساب" في العنوان.</small>
         </div>
-        <p>سيقوم فريقنا بمعالجة طلبك خلال <strong>7 أيام عمل</strong> وإرسال تأكيد بالحذف.</p>
+        <p>سيقوم فريقنا بمعالجة طلبك (من النموذج أو من البريد) خلال <strong>7 أيام عمل</strong> وإرسال تأكيد بالحذف.</p>
     </section>
+
+    <script>
+    (function () {
+        var API_BASE = 'https://europe-west1-device-streaming-a7432e75.cloudfunctions.net/';
+        var reqForm = document.getElementById('delReqForm');
+        var confirmForm = document.getElementById('delConfirmForm');
+        var resultMsg = document.getElementById('delResultMsg');
+        var codeSentMsg = document.getElementById('delCodeSentMsg');
+        var lastEmail = '';
+
+        function showResult(text, isError) {
+            resultMsg.style.display = 'block';
+            resultMsg.textContent = text;
+            resultMsg.className = isError ? 'warning-box' : 'info-banner';
+        }
+
+        function setBusy(btn, busy, label) {
+            btn.disabled = busy;
+            btn.textContent = busy ? '...جارٍ الإرسال' : label;
+        }
+
+        async function callFn(name, payload) {
+            var res = await fetch(API_BASE + name, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: payload })
+            });
+            var json = await res.json();
+            if (!res.ok) {
+                var err = (json && json.error && json.error.message) || 'حدث خطأ، حاول مرة أخرى.';
+                throw new Error(err);
+            }
+            return json.result || {};
+        }
+
+        reqForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            resultMsg.style.display = 'none';
+            var email = document.getElementById('delEmail').value.trim();
+            if (!email) return;
+            var btn = document.getElementById('delSendCodeBtn');
+            setBusy(btn, true, 'إرسال رمز التأكيد');
+            try {
+                var result = await callFn('request_account_deletion_web', { email: email });
+                lastEmail = email;
+                codeSentMsg.textContent = result.message || 'إذا كان هذا البريد مرتبطاً بحساب لدينا، فسيصلك رمز تأكيد خلال دقائق.';
+                reqForm.style.display = 'none';
+                confirmForm.style.display = 'block';
+            } catch (err) {
+                showResult(err.message, true);
+            } finally {
+                setBusy(btn, false, 'إرسال رمز التأكيد');
+            }
+        });
+
+        confirmForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            resultMsg.style.display = 'none';
+            var code = document.getElementById('delCode').value.trim();
+            var reason = document.getElementById('delReason').value.trim();
+            if (!code) return;
+            var btn = document.getElementById('delConfirmBtn');
+            setBusy(btn, true, 'تأكيد طلب الحذف');
+            try {
+                var result = await callFn('confirm_account_deletion_web', { email: lastEmail, code: code, reason: reason });
+                confirmForm.style.display = 'none';
+                showResult(result.message || 'تم استلام طلبك، سيتم التواصل معك قريباً.', false);
+            } catch (err) {
+                showResult(err.message, true);
+            } finally {
+                setBusy(btn, false, 'تأكيد طلب الحذف');
+            }
+        });
+    })();
+    </script>
 
     <!-- ── 3 ── -->
     <section class="policy-section" id="sec-3">
