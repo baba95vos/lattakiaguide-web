@@ -275,9 +275,9 @@
             </thead>
             <tbody>
             <tr><td>هل يتم بيع بيانات المستخدمين؟</td><td><span class="badge-no">لا</span></td></tr>
-            <tr><td>هل يتم استخدام البيانات للإعلانات المخصصة؟</td><td><span class="badge-no">لا</span></td></tr>
-            <tr><td>هل يستخدم التطبيق Advertising ID؟</td><td><span class="badge-no">لا</span></td></tr>
-            <tr><td>هل يتم مشاركة البيانات مع أطراف ثالثة؟</td><td><span class="badge-yes">نعم</span> — imgBB لاستضافة الصور · Google (reCAPTCHA/Vision) للحماية · Firebase للخدمات التقنية</td></tr>
+            <tr><td>هل يتم استخدام البيانات للإعلانات المخصصة؟</td><td><span class="badge-yes">يعتمد على إعدادات جهاز المستخدم</span></td></tr>
+            <tr><td>هل يستخدم التطبيق Advertising ID؟</td><td><span class="badge-yes">نعم</span> — عبر Google AdMob فقط</td></tr>
+            <tr><td>هل يتم مشاركة البيانات مع أطراف ثالثة؟</td><td><span class="badge-yes">نعم</span> — imgBB لاستضافة الصور · Google (reCAPTCHA/Vision/AdMob) للحماية والإعلانات · Firebase للخدمات التقنية</td></tr>
             </tbody>
         </table>
     </section>
@@ -639,21 +639,21 @@
     <section class="policy-section" id="sec-19">
         <div class="section-header"><div class="section-num" aria-hidden="true">19</div><h2>هل يستخدم التطبيق الإعلانات؟</h2></div>
         <div class="section-divider" aria-hidden="true"></div>
-        <p><span class="badge-no">لا</span></p>
-        <p>لا يحتوي التطبيق على:</p>
+        <p><span class="badge-yes">نعم</span></p>
+        <p>يحتوي التطبيق على:</p>
         <ul>
-            <li>AdMob.</li>
-            <li>إعلانات طرف ثالث.</li>
-            <li>معرفات إعلانية.</li>
+            <li>إعلانات عبر Google AdMob (نوع Native وInterstitial حصراً).</li>
+            <li>معرّف إعلاني (Advertising ID) — تُعالجه Google وفق سياستها الخاصة.</li>
         </ul>
+        <p>يمكن لفريق التطبيق إيقاف عرض الإعلانات بالكامل عن بُعد في أي وقت. المحتوى الإعلاني مضبوط على مستوى عام مناسب لكل الأعمار.</p>
     </section>
 
     <!-- ── 20 ── -->
     <section class="policy-section" id="sec-20">
         <div class="section-header"><div class="section-num" aria-hidden="true">20</div><h2>هل يستخدم التطبيق التتبع للإعلانات؟</h2></div>
         <div class="section-divider" aria-hidden="true"></div>
-        <p><span class="badge-no">لا</span></p>
-        <p>لا يتم جمع بيانات بهدف إنشاء ملف إعلاني أو عرض إعلانات مخصصة.</p>
+        <p><span class="badge-yes">نعم، جزئياً</span></p>
+        <p>تعالج Google AdMob بيانات تقنية (منها معرّف الإعلانات) لعرض الإعلانات وقياس أدائها. لا يبني التطبيق نفسه أي ملف تعريف إعلاني إضافي خاص به بمعزل عمّا تقوم به AdMob، ومستوى تخصيص الإعلانات يتأثر بإعدادات المستخدم على مستوى الجهاز.</p>
     </section>
 
 </main>
