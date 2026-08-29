@@ -88,6 +88,13 @@
     @media(max-width:600px){.section-num{width:34px;height:34px;min-width:34px;font-size:12px}.toc-grid{grid-template-columns:1fr}.policy-section{border-radius:var(--radius-md)}}
     @media print{body{background:#fff}.site-header{background:var(--clr-brand)!important;print-color-adjust:exact}.toc-card,.policy-section{box-shadow:none;border:1px solid #ddd}.page-body{padding:16px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+    /* Email protection fallback (Solution 2) */
+    .reverse-email {
+      unicode-bidi: bidi-override;
+      direction: rtl;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -528,7 +535,7 @@
     <p>للاستفسارات أو الإبلاغ عن مشكلة تتعلق بالمحتوى أو السلوك داخل التطبيق:</p>
     <p><strong>Lattakia Guide Team</strong></p>
     <p>البريد الإلكتروني:</p>
-    <div class="highlight-box"><a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a></div>
+    <div class="highlight-box"><a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a></div>
     <p>الموقع:</p>
     <div class="highlight-box"><a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></div>
   </section>
@@ -544,7 +551,7 @@
 
 <footer class="site-footer" role="contentinfo">
   <p class="footer-brand">Lattakia Guide Team</p>
-  <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
+  <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
   <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية إرشادات المجتمع</p>
 </footer>
 

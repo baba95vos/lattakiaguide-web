@@ -333,6 +333,13 @@
         @media (prefers-reduced-motion: reduce) {
           *, *::before, *::after { transition: none !important; animation: none !important; }
         }
+
+        /* Email protection fallback (Solution 2) */
+        .reverse-email {
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -951,7 +958,7 @@
         <p><strong>Lattakia Guide Team</strong></p>
         <p>البريد الإلكتروني:</p>
         <div class="highlight-box">
-            <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+            <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a>
         </div>
         <p>الموقع:</p>
         <div class="highlight-box">
@@ -997,7 +1004,7 @@
     <p class="footer-brand">Lattakia Guide Team</p>
     <p>
         البريد الإلكتروني:
-        <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+        <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a>
         &nbsp;·&nbsp;
         الموقع:
         <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a>

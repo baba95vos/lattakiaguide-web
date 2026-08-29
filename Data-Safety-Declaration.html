@@ -196,6 +196,13 @@
         }
         @media print { body { background: #fff; } .site-header { background: var(--clr-brand)!important; print-color-adjust: exact; } .toc-card, .policy-section { box-shadow: none; border: 1px solid #ddd; } .page-body { padding: 16px; } }
         @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition: none!important; animation: none!important; } }
+
+        /* Email protection fallback (Solution 2) */
+        .reverse-email {
+          unicode-bidi: bidi-override;
+          direction: rtl;
+          display: inline-block;
+        }
     </style>
 </head>
 <body>
@@ -590,7 +597,7 @@
         <p>يمكن تقديم الطلب عبر التطبيق مباشرة (إعدادات الحساب)، أو عبر الرابط الخارجي المخصص، أو البريد الإلكتروني:</p>
         <div class="highlight-box">
             رابط طلب حذف الحساب: <a href="https://lattakiaguide.app/delete-account" target="_blank">lattakiaguide.app/delete-account</a><br>
-            البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a>
+            البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a>
         </div>
     </section>
 
@@ -661,7 +668,7 @@
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer" role="contentinfo">
     <p class="footer-brand">Lattakia Guide Team</p>
-    <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app">help@lattakiaguide.app</a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
+    <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
     <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية إقرار أمان البيانات</p>
 </footer>
 
