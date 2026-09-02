@@ -213,7 +213,7 @@
     <div class="header-badge">Lattakia Guide</div><br>
     <div class="header-sub">Google Play Data Safety Declaration</div>
     <h1>إقرار أمان البيانات</h1>
-    <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 24 أغسطس 2026</p>
+    <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 3 سبتمبر 2026</p>
     <span class="header-divider" aria-hidden="true"></span>
 </header>
 
@@ -326,7 +326,8 @@
             <div class="data-item-body">
                 <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-yes">نعم</span></div></div>
                 <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Personal info → Phone number</span></div></div>
-                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">التحقق · إدارة الحساب · بعض إجراءات الأمان.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">إدارة الحساب · تسهيل بعض إجراءات الأمان لاحقاً (لا يوجد تحقق SMS فعلي للرقم حالياً).</div></div>
+                <div class="data-row"><div class="data-label">هل هو اختياري؟</div><div class="data-value"><span class="badge-opt">اختياري</span> — حقل غير إلزامي عند إكمال الملف الشخصي، يمكن إنشاء الحساب واستخدام التطبيق بالكامل بدونه.</div></div>
                 <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
                 <div class="data-row"><div class="data-label">هل يمكن حذفه؟</div><div class="data-value"><span class="badge-yes">نعم</span> — عند حذف الحساب وفق الإجراءات المعتمدة.</div></div>
             </div>
@@ -339,6 +340,7 @@
                 <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-yes">نعم</span></div></div>
                 <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Personal info → Date of birth</span></div></div>
                 <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">التحقق من متطلبات العمر · إدارة بعض بيانات الحساب.</div></div>
+                <div class="data-row"><div class="data-label">هل هو اختياري؟</div><div class="data-value"><span class="badge-yes">مطلوب</span> — حقل إلزامي عند إكمال الملف الشخصي.</div></div>
                 <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
                 <div class="data-row"><div class="data-label">هل يمكن حذفه؟</div><div class="data-value"><span class="badge-yes">نعم</span> — ضمن طلب حذف الحساب.</div></div>
             </div>
@@ -368,17 +370,18 @@
         <div class="section-header"><div class="section-num" aria-hidden="true">5</div><h2>الموقع الجغرافي (Location)</h2></div>
         <div class="section-divider" aria-hidden="true"></div>
 
+        <div class="info-banner"><strong>لا يجمع التطبيق موقع المستخدم أو جهازه إطلاقاً.</strong><br>لا يطلب التطبيق أي صلاحية موقع من نظام Android (لا <code>ACCESS_FINE_LOCATION</code> ولا <code>ACCESS_COARSE_LOCATION</code>)، ولا يقرأ GPS الجهاز أو موقعه التقريبي عبر الشبكة في أي وقت. لذلك <strong>لا يُصرَّح بأي بيانات "Location" في نموذج Google Play Data Safety لهذا التطبيق.</strong></div>
+
         <div class="data-item">
-            <div class="data-item-header">الموقع الدقيق</div>
+            <div class="data-item-header">إحداثيات المكان (Pin Drop)</div>
             <div class="data-item-body">
-                <div class="data-row"><div class="data-label">هل يتم جمعه؟</div><div class="data-value"><span class="badge-opt">جزئياً</span></div></div>
-                <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">Location → Approximate location</span></div></div>
-                <div class="data-row"><div class="data-label">الوصف</div><div class="data-value">لا يصل التطبيق إلى GPS الجهاز ولا يطلب إذن الموقع. عند إضافة مكان، يختار المستخدم الموقع يدوياً عبر تحريك الخريطة (Pin Drop)، وتُخزَّن الإحداثيات التي اختارها في قاعدة البيانات كجزء من بيانات المكان.</div></div>
-                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">تحديد موقع المكان على الخريطة وعرضه للمستخدمين.</div></div>
-                <div class="data-row"><div class="data-label">هل يستخدم للتتبع؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
-                <div class="data-row"><div class="data-label">هل يجمع في الخلفية؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
-                <div class="data-row"><div class="data-label">هل هو موقع المستخدم؟</div><div class="data-value"><span class="badge-no">لا</span> — هو موقع المكان الذي يضيفه المستخدم، لا موقع الجهاز.</div></div>
-                <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value">يكون ظاهراً لمستخدمي التطبيق كجزء من بيانات المكان العام.</div></div>
+                <div class="data-row"><div class="data-label">هل هي "Location" حسب تصنيف Google Play؟</div><div class="data-value"><span class="badge-no">لا</span> — هذه إحداثيات محل/مكان تجاري يُدخلها المستخدم يدوياً كجزء من محتوى ينشئه (User Generated Content)، وليست بيانات عن موقع المستخدم أو جهازه.</div></div>
+                <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">User generated content</span></div></div>
+                <div class="data-row"><div class="data-label">الوصف</div><div class="data-value">عند إضافة مكان، يبحث المستخدم عن عنوان أو يضغط يدوياً على نقطة بالخريطة (تبدأ افتراضياً على مركز مدينة اللاذقية، وليس على موقع جهاز المستخدم)، وتُخزَّن هذه الإحداثيات كجزء من بيانات المكان العامة.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">عرض موقع المكان (المتجر/الخدمة) على الخريطة للمستخدمين.</div></div>
+                <div class="data-row"><div class="data-label">هل يُستخدم لتتبع المستخدم؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
+                <div class="data-row"><div class="data-label">هل يُجمع في الخلفية؟</div><div class="data-value"><span class="badge-no">لا</span></div></div>
+                <div class="data-row"><div class="data-label">هل يتم مشاركته؟</div><div class="data-value">يظهر علناً لكل مستخدمي التطبيق كجزء من صفحة المكان العامة (نفس مبدأ اسم المكان ووصفه وصوره).</div></div>
             </div>
         </div>
     </section>
@@ -611,9 +614,14 @@
             </thead>
             <tbody>
             <tr>
-                <td>بيانات الحساب (الاسم · البريد · الهاتف)</td>
+                <td>الاسم · البريد الإلكتروني · تاريخ الميلاد</td>
                 <td><span class="badge-yes">مطلوبة</span></td>
-                <td>قد تكون مطلوبة لإنشاء الحساب واستخدام الميزات المرتبطة به.</td>
+                <td>حقول إلزامية لا يمكن إتمام إنشاء الحساب (بالبريد أو بحساب Google) بدونها.</td>
+            </tr>
+            <tr>
+                <td>رقم الهاتف</td>
+                <td><span class="badge-opt">اختياري</span></td>
+                <td>حقل اختياري صراحة عند إكمال الملف الشخصي — يمكن إتمام إنشاء الحساب واستخدام التطبيق بالكامل بدونه.</td>
             </tr>
             <tr>
                 <td>الصور</td>
@@ -621,9 +629,9 @@
                 <td>يتم طلبها فقط عند استخدام ميزات تحتاج رفع صور.</td>
             </tr>
             <tr>
-                <td>الموقع الجغرافي</td>
-                <td><span class="badge-yes">نعم (تقريبي)</span></td>
-                <td>يتم تحديد موقع المكان يدوياً من قبل المستخدم على الخريطة (Pin Drop) لغرض عرض الأماكن. لا يطلب التطبيق إذن الوصول إلى GPS الجهاز ولا يتتبع موقع المستخدم.</td>
+                <td>إحداثيات المكان (Pin Drop)</td>
+                <td>—</td>
+                <td>ليست بيانات موقع للمستخدم بل عنوان مكان تجاري يُدخله كمحتوى — غير مصرَّحة ضمن فئة Location أصلاً (راجع القسم 5).</td>
             </tr>
             <tr>
                 <td>وضع الضيف</td>
