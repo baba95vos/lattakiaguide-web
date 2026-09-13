@@ -560,6 +560,36 @@
         </div>
     </section>
 
+    <!-- ── 13-b — المساعد الذكي ── -->
+    <section class="policy-section" id="sec-13b">
+        <div class="section-header"><div class="section-num" aria-hidden="true">13</div><h2>أسئلة المساعد الذكي (AI Assistant)</h2></div>
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <div class="data-item">
+            <div class="data-item-header">نص السؤال المُرسَل إلى المساعد</div>
+            <div class="data-item-body">
+                <div class="data-row"><div class="data-label">هل يتم جمعها؟</div><div class="data-value"><span class="badge-yes">نعم</span></div></div>
+                <div class="data-row"><div class="data-label">النوع في Google Play</div><div class="data-value"><span class="gplay-tag">App activity → Other user-generated content</span></div></div>
+                <div class="data-row"><div class="data-label">المصدر</div><div class="data-value">نص يكتبه المستخدم بنفسه داخل شاشة المساعد الذكي.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value"><span class="gplay-tag">App functionality</span> — الإجابة على السؤال · تحسين جودة الإجابات · منع إساءة الاستخدام.</div></div>
+                <div class="data-row"><div class="data-label">هل تحتوي على معلومات شخصية؟</div><div class="data-value">لا تُرسَل مع السؤال أي بيانات تعريف: لا اسم ولا بريد ولا هاتف ولا موقع.</div></div>
+                <div class="data-row"><div class="data-label">هل يتم مشاركتها؟</div><div class="data-value"><span class="badge-yes">نعم</span> — تُرسَل إلى <strong>Google Gemini API</strong> لمعالجتها وصياغة الرد.</div></div>
+                <div class="data-row"><div class="data-label">مدة الاحتفاظ</div><div class="data-value">مؤقتة: يُحذف نص السؤال آلياً بعد <strong>30 يوماً</strong> كحد أقصى، وتُحذف الإجابات المخزَّنة مؤقتاً خلال ساعات.</div></div>
+                <div class="data-row"><div class="data-label">هل يمكن حذفها؟</div><div class="data-value"><span class="badge-yes">نعم</span> — تُحذف آلياً، وتُحذف فوراً عند حذف الحساب.</div></div>
+                <div class="data-row"><div class="data-label">مطلوبة أم اختيارية؟</div><div class="data-value">اختيارية بالكامل — لا يؤثر عدم استخدام المساعد على أي ميزة أخرى.</div></div>
+            </div>
+        </div>
+
+        <div class="data-item">
+            <div class="data-item-header">بيانات حماية مرافقة</div>
+            <div class="data-item-body">
+                <div class="data-row"><div class="data-label">ما هي؟</div><div class="data-value">عدّاد الأسئلة اليومي، ونسخة مشفَّرة (Hash) من عنوان الإنترنت لا يمكن الرجوع منها إلى العنوان الأصلي.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">منع إساءة الاستخدام والحد من الاستهلاك.</div></div>
+                <div class="data-row"><div class="data-label">هل يتم مشاركتها؟</div><div class="data-value"><span class="badge-no">لا</span> — لا تغادر خوادم التطبيق.</div></div>
+            </div>
+        </div>
+    </section>
+
     <!-- ── 14 ── -->
     <section class="policy-section" id="sec-14">
         <div class="section-header"><div class="section-num" aria-hidden="true">14</div><h2>مشاركة البيانات مع الأطراف الخارجية</h2></div>
@@ -572,6 +602,15 @@
             <div class="data-item-body">
                 <div class="data-row"><div class="data-label">نوع البيانات</div><div class="data-value">الصور التي يختار المستخدم رفعها.</div></div>
                 <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">استضافة الصور وعرضها داخل التطبيق.</div></div>
+            </div>
+        </div>
+
+        <div class="data-item">
+            <div class="data-item-header">Google Gemini API</div>
+            <div class="data-item-body">
+                <div class="data-row"><div class="data-label">نوع البيانات</div><div class="data-value">نص السؤال الذي يكتبه المستخدم في شاشة المساعد الذكي، مع نتائج بحث مختصرة من قاعدة بيانات التطبيق.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">معالجة السؤال وصياغة الرد (App functionality).</div></div>
+                <div class="data-row"><div class="data-label">ما لا يُرسَل</div><div class="data-value">أي معرّف للمستخدم أو بريده أو هاتفه أو موقعه، وأي أرقام إحصائية خاصة بأصحاب الأماكن.</div></div>
             </div>
         </div>
 
