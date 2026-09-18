@@ -370,7 +370,41 @@
         <div class="section-header"><div class="section-num" aria-hidden="true">5</div><h2>الموقع الجغرافي (Location)</h2></div>
         <div class="section-divider" aria-hidden="true"></div>
 
-        <div class="info-banner"><strong>لا يجمع التطبيق موقع المستخدم أو جهازه إطلاقاً.</strong><br>لا يطلب التطبيق أي صلاحية موقع من نظام Android (لا <code>ACCESS_FINE_LOCATION</code> ولا <code>ACCESS_COARSE_LOCATION</code>)، ولا يقرأ GPS الجهاز أو موقعه التقريبي عبر الشبكة في أي وقت. لذلك <strong>لا يُصرَّح بأي بيانات "Location" في نموذج Google Play Data Safety لهذا التطبيق.</strong></div>
+        <div class="info-banner"><strong>يطلب التطبيق الموقع بمستويين منفصلين تماماً، وكلاهما اختياري ولا يُخزَّن كإحداثيات:</strong><br>
+        <strong>١) الموقع التقريبي (<code>ACCESS_COARSE_LOCATION</code>)</strong> — داخل شاشة المساعد الذكي وحدها، لتحويله فوراً إلى اسم منطقة وحساب المسافة إلى الأماكن، ثم إهماله.<br>
+        <strong>٢) الموقع الدقيق (<code>ACCESS_FINE_LOCATION</code>)</strong> — زرّ اختياري واحد فقط عند إضافة مكان جديد («تحديد موقعي»)، ليضع صاحب النشاط دبوس مكانه بدقة بدل تخمينه يدوياً على الخريطة.<br>
+        يُصرَّح في نموذج Google Play Data Safety ببندي <strong>Approximate location</strong> و<strong>Precise location</strong> معاً — كلاهما <span class="badge-no">مُجمَّع</span> لحظياً فقط، <span class="badge-no">غير مخزَّن كإحداثيات</span> بمعزل عن الاستعمال المباشر، <span class="badge-no">غير مُشارَك</span>، <span class="badge-no">غير مستخدَم للتتبع</span>، و<span class="badge-no">اختياري</span> بالكامل.</div>
+
+        <div class="data-item">
+            <div class="data-item-header">الموقع التقريبي (Approximate location)</div>
+            <div class="data-item-body">
+                <div class="data-row"><div class="data-label">الصلاحية</div><div class="data-value"><code>ACCESS_COARSE_LOCATION</code> فقط. دقتها مئات الأمتار إلى كيلومترات، وهي كل ما يحتاجه التطبيق لأن استعماله على مستوى الحي لا العنوان.</div></div>
+                <div class="data-row"><div class="data-label">هل الجمع اختياري؟</div><div class="data-value"><span class="badge-no">اختياري تماماً</span> — لا يُطلَب الإذن عند تشغيل التطبيق ولا عند التسجيل. يظهر عرض لتفعيله داخل شاشة المساعد الذكي وحدها، ورفضه لا يعطّل أي ميزة: المساعد وبقية التطبيق يعملان كاملين بدونه.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">App functionality — معرفة الحي الذي يوجد فيه المستخدم، وحساب المسافة بينه وبين الأماكن، ليقترح المساعد الأقرب إليه فعلاً بدل أن يطلب منه كتابة اسم منطقته.</div></div>
+                <div class="data-row"><div class="data-label">ماذا يحدث بالإحداثيات بالضبط؟</div><div class="data-value">تُقرأ على الجهاز وتُرسَل مع السؤال إلى خادم التطبيق، فيحوّلها الخادم فوراً إلى <strong>اسم منطقة مسجَّلة</strong> من قائمة مناطق اللاذقية، ويحسب بها <strong>المسافة بالكيلومترات</strong> إلى الأماكن ذات الإحداثيات المنشورة، ثم <strong>يُهملها</strong>. <strong>الإحداثيات لا تُكتَب في قاعدة البيانات ولا في أي سجل.</strong></div></div>
+                <div class="data-row"><div class="data-label">ما الذي يُخزَّن فعلاً؟</div><div class="data-value">عدّاد واحد فقط: معرّف المنطقة وعدد المرات التي كان المستخدم فيها عند سؤاله المساعد (مثلاً <code>LAT_A_0042: 3</code>). لا إحداثيات، ولا أوقات، ولا مسار حركة.</div></div>
+                <div class="data-row"><div class="data-label">هل يُجمع في الخلفية؟</div><div class="data-value"><span class="badge-no">لا</span> — لا تُطلَب صلاحية <code>ACCESS_BACKGROUND_LOCATION</code>، ولا تُقرأ إلا أثناء استعمال شاشة المساعد.</div></div>
+                <div class="data-row"><div class="data-label">هل يُستخدم لتتبع المستخدم؟</div><div class="data-value"><span class="badge-no">لا</span> — لا إعلانات ولا تحليلات ولا مشاركة مع أي طرف ثالث.</div></div>
+                <div class="data-row"><div class="data-label">هل يصل مزوّد الذكاء الاصطناعي؟</div><div class="data-value"><span class="badge-no">لا</span> — ما قد يصل Google Gemini هو <strong>اسم منطقة عامة</strong> ضمن سياق السؤال (مثل «الأميركان»)، لا إحداثيات ولا معرّف مستخدم.</div></div>
+                <div class="data-row"><div class="data-label">هل يمكن حذفه؟</div><div class="data-value">نعم — سحب صلاحية الموقع من إعدادات النظام يوقف الجمع فوراً، وحذف الحساب يحذف عدّاد المناطق معه.</div></div>
+            </div>
+        </div>
+
+        <div class="data-item">
+            <div class="data-item-header">الموقع الدقيق (Precise location) — عند إضافة مكان فقط</div>
+            <div class="data-item-body">
+                <div class="data-row"><div class="data-label">الصلاحية</div><div class="data-value"><code>ACCESS_FINE_LOCATION</code> — مستقلة تماماً عن صلاحية المساعد الذكي أعلاه، ولا تُطلَب معها أبداً في نفس الشاشة.</div></div>
+                <div class="data-row"><div class="data-label">أين تحديداً؟</div><div class="data-value">زرّ واحد اسمه «تحديد موقعي» في شاشة إضافة مكان جديد (خطوة الموقع)، ولا يظهر في أي شاشة أخرى بالتطبيق.</div></div>
+                <div class="data-row"><div class="data-label">هل الجمع اختياري؟</div><div class="data-value"><span class="badge-no">اختياري تماماً</span> — لا يُطلَب الإذن إلا عند الضغط على هذا الزرّ تحديداً. من لا يمنحه يضع دبوس مكانه يدوياً بالنقر على الخريطة كما كان دائماً، وهذا لا يمنعه من إتمام إضافة مكانه.</div></div>
+                <div class="data-row"><div class="data-label">لماذا دقيق لا تقريبي هنا؟</div><div class="data-value">هذا الزرّ يحدّد <strong>عنوان مكان تجاري عام</strong> سيظهر على خريطة التطبيق لكل المستخدمين — الموقع التقريبي (دقة مئات الأمتار) كان يضع الدبوس في شارع مختلف فعلياً، فينتج عنوان خاطئ يبقى منشوراً للعموم.</div></div>
+                <div class="data-row"><div class="data-label">الغرض</div><div class="data-value">App functionality — تحديد موقع نشاط تجاري بدقة عند إنشائه، لا تتبّع صاحب المكان.</div></div>
+                <div class="data-row"><div class="data-label">ماذا يحدث بالإحداثية بالضبط؟</div><div class="data-value">تُقرأ مرة واحدة فور الضغط على الزرّ وتُستخدَم فوراً لوضع الدبوس على الخريطة داخل الشاشة نفسها، ثم <strong>تُهمَل من ذاكرة التطبيق</strong> — لا تُرسَل إلى أي خادم تحليلات ولا تُسجَّل في أي سجل بمعزل عن استعمالها المباشر هذا.</div></div>
+                <div class="data-row"><div class="data-label">ما الذي يُخزَّن فعلاً؟</div><div class="data-value">فقط ما يضغط عليه المستخدم لاحقاً بإرسال النموذج: حقلا <code>latitude</code>/<code>longitude</code> على <strong>مستند المكان نفسه</strong> — نفس حقلي «إحداثيات المكان (Pin Drop)» أدناه تماماً وبنفس التصنيف (User generated content)، لا بيانات موقع شخصي عن صاحب النشاط.</div></div>
+                <div class="data-row"><div class="data-label">هل يُجمع في الخلفية؟</div><div class="data-value"><span class="badge-no">لا</span> — لا صلاحية خلفية، ولا قراءة إلا عند ضغطة الزرّ صراحة.</div></div>
+                <div class="data-row"><div class="data-label">هل يُستخدم لتتبع المستخدم أو يصل مزوّد ذكاء اصطناعي؟</div><div class="data-value"><span class="badge-no">لا</span> — لا علاقة له بالمساعد الذكي ولا بأي إعلان أو تحليل.</div></div>
+                <div class="data-row"><div class="data-label">هل يمكن حذفه؟</div><div class="data-value">نعم — سحب صلاحية الموقع من إعدادات النظام يمنع استعمال الزرّ فقط (بلا أثر على أي ميزة أخرى)، وحذف المكان أو تعديل موقعه يدوياً يستبدل الإحداثية المخزَّنة كأي حقل بيانات عادي.</div></div>
+            </div>
+        </div>
 
         <div class="data-item">
             <div class="data-item-header">إحداثيات المكان (Pin Drop)</div>
@@ -670,7 +704,7 @@
             <tr>
                 <td>إحداثيات المكان (Pin Drop)</td>
                 <td>—</td>
-                <td>ليست بيانات موقع للمستخدم بل عنوان مكان تجاري يُدخله كمحتوى — غير مصرَّحة ضمن فئة Location أصلاً (راجع القسم 5).</td>
+                <td>ليست بيانات موقع للمستخدم بل عنوان مكان تجاري يُدخله كمحتوى — تُصرَّح ضمن User generated content لا ضمن Location (راجع القسم 5).</td>
             </tr>
             <tr>
                 <td>وضع الضيف</td>

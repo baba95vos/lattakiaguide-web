@@ -1,4 +1,24 @@
+# Cloudflare Pages — ترويسات HTTP لكل الموقع.
+# كل سطر ترويسة يُزاح بمسافتين تحت المسار الذي ينطبق عليه، والقواعد تتراكم:
+# قواعد /* تنطبق مع القواعد الخاصة ولا تُلغيها.
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Content-Security-Policy: frame-ancestors 'none'
+  Referrer-Policy: strict-origin-when-cross-origin
+  # لا صفحة في هذا الموقع تستعمل الموقع ولا الكاميرا ولا الميكروفون ولا الدفع،
+  # فإغلاقها صراحةً يمنع أي سكربت طرف ثالث من طلبها باسم نطاقنا.
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# ── خريطة الأزرار — للمساعد الذكي لا لمحركات البحث ──────────────────────────
+# ترويسة X-Robots-Tag أقوى من وسم <meta> داخل الصفحة: تُحترَم حتى لو لم يُنفَّذ
+# الـHTML أصلاً.
+# المساران كلاهما مطلوبان: الموقع يخدم الصفحة بالامتداد وبدونه معاً، ومنع
+# أحدهما وحده يترك الآخر مفهرَساً.
+/app_navigation
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+/app_navigation.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
