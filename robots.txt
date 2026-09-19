@@ -1,3 +1,7 @@
 User-agent: *
 Disallow: /app_navigation.html
 Disallow: /app_navigation
+Disallow: /subscribe.html
+Disallow: /subscribe
+Disallow: /receipts.html
+Disallow: /receipts

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل اللاذقية — تحميل مباشر</title>
+    <title>دليل اللاذقية — تحميل التطبيق</title>
     <meta name="description" content="حمّل تطبيق دليل اللاذقية مباشرة بلا حاجة لمتجر Google Play، بكل ميزاته كاملة.">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -312,7 +312,7 @@
         </div>
         <nav class="drawer-content">
             <a href="index.html" class="drawer-item">🏠 الرئيسية</a>
-            <a href="download.html" class="drawer-item active">📲 تحميل مباشر</a>
+            <a href="download.html" class="drawer-item active">📲 تحميل التطبيق</a>
             <a href="user_guide.html" class="drawer-item">📖 دليل الاستخدام</a>
             <a href="community-guide.html" class="drawer-item">🤝 دليل المجتمع</a>
             <a href="add_place_guide.html" class="drawer-item">📍 دليل إضافة مكان</a>
@@ -338,25 +338,37 @@
         <div class="hero-section">
             <div class="app-icon">🗺️</div>
             <h1 class="main-title">دليل اللاذقية</h1>
-            <p class="main-subtitle">دليلك الشامل لاستكشاف أجمل الأماكن والخدمات والفرص في عروس الساحل — النسخة الرسمية لتحميل التطبيق مباشرة.</p>
+            <p class="main-subtitle">دليلك الشامل لاستكشاف أجمل الأماكن والخدمات والفرص في عروس الساحل.</p>
         </div>
 
+        <!--
+          قسم التحميل المباشر يُفتَح ويُغلَق من Firestore:
+          app_config/settings.enableAppWebDownload
+          الحالة المكتوبة في HTML هي «قريباً» عمداً (fail-closed): إن تعطّل جافاسكربت أو
+          فشلت قراءة Firestore، تبقى الصفحة على Google Play وحده ولا يظهر رابط التحميل
+          المباشر إطلاقاً. الرابط نفسه غير مكتوب في HTML بل يُركَّب بجافاسكربت بعد قراءة
+          العلم — فلا يظهر في مصدر الصفحة ولا لزاحف لا ينفّذ جافاسكربت.
+        -->
         <div class="cta-card">
-            <a id="downloadBtn"
-               href="https://firebasestorage.googleapis.com/v0/b/device-streaming-a7432e75.firebasestorage.app/o/releases%2Flattakia-guide-owner-latest.apk?alt=media"
-               class="btn btn-primary">
-                <span>⬇️</span>
-                <span>تحميل التطبيق</span>
+            <a href="https://play.google.com/store/apps/details?id=com.lattakia.guide"
+               target="_blank" rel="noopener" class="btn btn-primary">
+                <span>▶️</span>
+                <span>تحميل من Google Play</span>
             </a>
             <p class="btn-sub">متوافق مع أندرويد 7.0 فما فوق</p>
 
-            <div class="divider-or">أو</div>
+            <div id="directWrap" hidden>
+                <div class="divider-or">أو</div>
+                <a id="downloadBtn" href="#" class="btn btn-secondary">
+                    <span>⬇️</span>
+                    <span>تحميل مباشر</span>
+                </a>
+            </div>
 
-            <a href="https://play.google.com/store/apps/details?id=com.lattakia.guide"
-               target="_blank" rel="noopener" class="btn btn-secondary">
-                <span>▶️</span>
-                <span>عبر Google Play</span>
-            </a>
+            <div id="directSoon">
+                <div class="divider-or">أو</div>
+                <p class="btn-sub" style="margin-top:0">التحميل المباشر: قريباً</p>
+            </div>
         </div>
 
         <div class="card" style="animation-delay: 0.1s;">
@@ -386,7 +398,7 @@
         <div class="card" style="animation-delay: 0.42s;">
             <div class="card-icon">🏪</div>
             <h2 class="card-h">لأصحاب الأماكن</h2>
-            <p class="card-p">أضف نشاطك التجاري، أدره بالكامل، وفعّل ظهوره المميز أو الموصى به مباشرة من التطبيق.</p>
+            <p class="card-p">أضف نشاطك التجاري، وحدّث بياناته وصوره وقائمته، وتابع إحصائيات زوّاره من داخل التطبيق.</p>
         </div>
 
         <div class="card" style="animation-delay: 0.5s;">
@@ -399,6 +411,7 @@
 
     <!-- Firebase (لعدّاد التحميل فقط — لا يؤثر على رابط التحميل نفسه) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-functions-compat.js"></script>
 
     <script>
@@ -416,8 +429,14 @@
             }
         }
 
-        // عدّاد تحميل — لا يمنع ولا يؤخر التحميل الفعلي بأي حال، حتى لو فشل بصمت
-        // (مثلاً بسبب حد المعدل لكل IP — 3 كل ساعة — وهو أمر متوقَّع وسليم)
+        // رابط التحميل المباشر مُفكَّك عمداً: لا يظهر كنص واحد في مصدر الصفحة،
+        // ولا يُركَّب إلا بعد أن يقول Firestore إن التحميل المباشر مفتوح.
+        const APK_PARTS = [
+            'https://firebasestorage.googleapis.com/v0/b/',
+            'device-streaming-a7432e75.firebasestorage.app',
+            '/o/releases%2Flattakia-guide-owner-latest.apk?alt=media'
+        ];
+
         try {
             firebase.initializeApp({
                 apiKey:            "AIzaSyAT8auOR8cfT7C-kRzm27iQRIPriCy9jQE",
@@ -427,12 +446,30 @@
                 messagingSenderId: "6321458513",
                 appId:             "1:6321458513:web:583c16a20cc6101977d770"
             });
+
             const functions = firebase.app().functions('europe-west1');
-            document.getElementById('downloadBtn').addEventListener('click', function () {
-                try {
-                    functions.httpsCallable('record_owner_apk_download')().catch(function () {});
-                } catch (e) {}
-            });
+
+            // app_config/settings مقروء للجميع (allow read: if true) — لا حاجة لمصادقة.
+            // غياب الحقل أو فشل القراءة = مغلق (false)، لا مفتوح.
+            firebase.firestore().collection('app_config').doc('settings').get()
+                .then(function (doc) {
+                    var enabled = doc.exists && doc.data().enableAppWebDownload === true;
+                    if (!enabled) return;
+
+                    var btn = document.getElementById('downloadBtn');
+                    btn.href = APK_PARTS.join('');
+                    btn.addEventListener('click', function () {
+                        // عدّاد لا يمنع ولا يؤخر التحميل، حتى لو فشل بصمت (مثلاً بسبب
+                        // حد المعدل لكل IP — وهو متوقَّع وسليم)
+                        try {
+                            functions.httpsCallable('record_owner_apk_download')().catch(function () {});
+                        } catch (e) {}
+                    });
+
+                    document.getElementById('directSoon').hidden = true;
+                    document.getElementById('directWrap').hidden = false;
+                })
+                .catch(function () { /* يبقى مغلقاً */ });
         } catch (e) {}
     </script>
 </body>

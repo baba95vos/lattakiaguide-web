@@ -22,3 +22,19 @@
 
 /app_navigation.html
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# ── صفحة الاشتراك — تُفتَح برابط دخول لمرة واحدة لا من محرك بحث ──────────
+# أي زيارة مباشرة تُحوّل إلى index.html داخل الصفحة نفسها، وهذه الترويسة تمنع
+# وصولها إلى الفهرسة أصلاً. المساران مطلوبان معاً (بالامتداد وبدونه).
+/subscribe
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+/subscribe.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# ── صفحة الوصولات — تُفتَح برابط خاص لا من محرك بحث ──────────────────────────
+/receipts
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+/receipts.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet

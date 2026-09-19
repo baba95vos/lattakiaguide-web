@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- صفحة خاصة تُفتَح برابط يحمل معرّف الحساب، لا من محرك بحث. -->
+    <meta name="robots" content="noindex, nofollow">
     <title>وصولات الدفع — دليل اللاذقية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -190,6 +192,13 @@
     const db = firebase.firestore();
     const urlParams = new URLSearchParams(window.location.search);
     const uid = urlParams.get('uid');
+
+    // زيارة مباشرة بلا معرّف حساب = باب خطأ (زائر أو زاحف) → الرئيسية بلا رسالة،
+    // نفس سلوك subscribe.html. لا قيمة أمنية هنا: القواعد هي التي تمنع القراءة فعلاً.
+    if (!uid) {
+        window.location.replace('index.html');
+        throw new Error('no uid — redirected to home');
+    }
 
     async function fetchReceipts() {
         if (!uid) {

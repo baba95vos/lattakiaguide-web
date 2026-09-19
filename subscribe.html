@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- لا تُفتَح هذه الصفحة إلا برابط دخول لمرة واحدة، فلا معنى لفهرستها —
+         أي زائر يصل إليها من محرك بحث سيُحوّل إلى الرئيسية فوراً (راجع حارس الدخول أسفل). -->
+    <meta name="robots" content="noindex, nofollow">
     <title>دليل اللاذقية — الاشتراك المميز</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
@@ -121,7 +124,8 @@
         input[type="text"],
         input[type="tel"],
         input[type="date"],
-        input[type="email"] {
+        input[type="email"],
+        select {
           width: 100%;
           padding: 0.8rem 1rem;
           border: 2px solid var(--border);
@@ -135,6 +139,41 @@
         }
         input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-l); }
         input.err   { border-color: var(--err); }
+
+
+        /* ══ تاريخ الميلاد: ثلاث قوائم بدل <input type="date"> ══
+           منتقي التاريخ الأصلي يفتح على الشهر الحالي، فيضطر من وُلد سنة 1990 إلى
+           تمرير أكثر من أربعمئة شهر للخلف. القوائم تصل للسنة مباشرة.
+           القيمة النهائية تُكتب في #k-dob المخفي بصيغة YYYY-MM-DD كما كانت تماماً،
+           فلا يتغيّر شيء فيما بعده (التحقق، الحفظ، الوصل). */
+        .dob-row {
+          display: grid;
+          /* اليوم / الشهر / السنة — الشهر أوسعها (اسم كامل) والسنة أربعة أرقام */
+          /* «تشرين الثاني» و«كانون الأول» أطول أسماء الشهور — العمود الأوسط يتسع لها */
+          grid-template-columns: 0.78fr 1.9fr 1.05fr;
+          gap: 0.4rem;
+        }
+        .dob-row select {
+          font-size: 0.88rem;
+          /* حشوة إضافية من جهة السهم حتى لا يمرّ فوق النص في العمود الضيق */
+          padding: 0.8rem 0.4rem 0.8rem 1.7rem;
+          text-align: center;
+          text-align-last: center;
+          cursor: pointer;
+          appearance: none;
+          -webkit-appearance: none;
+          background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                            linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+          background-position: calc(0% + 14px) calc(50% + 2px), calc(0% + 19px) calc(50% + 2px);
+          background-size: 5px 5px, 5px 5px;
+          background-repeat: no-repeat;
+        }
+        .dob-hint {
+          font-size: 0.75rem;
+          color: var(--muted);
+          margin-top: 0.4rem;
+        }
+        .dob-hint.ok { color: var(--green); font-weight: 700; }
 
         .err-msg { font-size: 0.78rem; color: var(--err); margin-top: 0.35rem; display: none; }
         .err-msg.show { display: block; }
@@ -193,6 +232,164 @@
         .plan-price  { font-size: 1.5rem; font-weight: 900; color: var(--blue); margin-top: 0.5rem; }
         .plan-period { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
 
+
+        /* ══ وصف مختصر تحت كل خطة — كان المستخدم يختار بالاسم والسعر فقط ══ */
+        .plan-desc {
+          font-size: 0.79rem;
+          color: var(--muted);
+          line-height: 1.6;
+          margin-top: 0.35rem;
+        }
+
+        /* ══════════ بطاقة «الخطتان معاً» ══════════
+           كانت مربع اختيار باهتاً داخل صندوق أخضر: لا يوضّح أنها اشتراكان، ولا كم
+           يوفّر، ولا ما الذي يتغيّر عند تأشيرها. صارت بطاقة قائمة بذاتها تُظهر
+           الخطتين كرقاقتين بينهما «+»، وحسبةً مرئية بسعر مشطوب ومبلغ توفير. */
+        .bundle-card {
+          position: relative;
+          margin-top: 1rem;
+          border: 2px dashed #86efac;
+          background: #f7fefa;
+          border-radius: 18px;
+          padding: 1.1rem 1.1rem 0.9rem;
+          transition: border-color .2s, background .2s, box-shadow .2s;
+        }
+        .bundle-card.on {
+          border-style: solid;
+          border-color: var(--green);
+          background: #f0fdf4;
+          box-shadow: 0 0 0 3px rgba(22,163,74,.12);
+        }
+
+        .bundle-ribbon {
+          position: absolute;
+          top: -11px; inset-inline-start: 16px;
+          background: linear-gradient(135deg, #16a34a, #15803d);
+          color: #fff;
+          font-size: 0.72rem;
+          font-weight: 900;
+          padding: 0.25rem 0.7rem;
+          border-radius: 999px;
+          box-shadow: 0 2px 8px rgba(22,163,74,.35);
+          letter-spacing: .2px;
+        }
+
+        .bundle-combo {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          flex-wrap: wrap;
+          margin-bottom: 0.55rem;
+        }
+        .combo-chip {
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: #fff;
+          padding: 0.28rem 0.7rem;
+          border-radius: 999px;
+          white-space: nowrap;
+        }
+        .combo-chip.is-pro  { background: linear-gradient(135deg, #f59e0b, #ea580c); }
+        .combo-chip.is-feat { background: linear-gradient(135deg, #1a3f7c, #4a7fd4); }
+        .combo-plus {
+          font-size: 1rem;
+          font-weight: 900;
+          color: var(--green);
+          line-height: 1;
+        }
+
+        .bundle-title {
+          font-size: 1rem;
+          font-weight: 900;
+          color: #14532d;
+        }
+        .bundle-sub {
+          font-size: 0.82rem;
+          color: #166534;
+          line-height: 1.65;
+          margin-top: 0.25rem;
+        }
+
+        /* الحسبة — الرقم المشطوب هو ما يجعل التوفير مفهوماً بلا شرح */
+        .bundle-math {
+          margin-top: 0.85rem;
+          background: #fff;
+          border: 1px solid #d7f0e0;
+          border-radius: 12px;
+          padding: 0.7rem 0.85rem;
+        }
+        .bm-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 0.6rem;
+          font-size: 0.82rem;
+          color: var(--muted);
+          padding: 0.18rem 0;
+        }
+        .bm-row b { color: var(--ink); font-weight: 700; }
+        .bm-sep { border-top: 1px dashed #d7f0e0; margin: 0.4rem 0; }
+        .bm-strike span:last-child { text-decoration: line-through; opacity: .75; }
+        .bm-total {
+          font-size: 1rem;
+          color: #14532d;
+          font-weight: 900;
+          padding-top: 0.1rem;
+        }
+        .bm-save {
+          margin-top: 0.5rem;
+          text-align: center;
+          background: #dcfce7;
+          color: #15803d;
+          font-size: 0.82rem;
+          font-weight: 900;
+          border-radius: 9px;
+          padding: 0.4rem 0.5rem;
+        }
+
+        /* مفتاح تبديل حقيقي بدل مربع اختيار صغير */
+        .bundle-toggle {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          margin-top: 0.85rem;
+          cursor: pointer;
+          user-select: none;
+        }
+        .bundle-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+        .bundle-switch {
+          flex-shrink: 0;
+          width: 46px; height: 27px;
+          border-radius: 999px;
+          background: #cbd5d3;
+          position: relative;
+          transition: background .2s;
+        }
+        .bundle-knob {
+          position: absolute;
+          top: 3px; inset-inline-start: 3px;
+          width: 21px; height: 21px;
+          border-radius: 50%;
+          background: #fff;
+          box-shadow: 0 1px 3px rgba(0,0,0,.25);
+          transition: transform .2s;
+        }
+        .bundle-toggle input:checked ~ .bundle-switch { background: var(--green); }
+        /* الصفحة rtl — المقبض يتحرك يساراً بصرياً */
+        .bundle-toggle input:checked ~ .bundle-switch .bundle-knob { transform: translateX(-19px); }
+        .bundle-toggle input:focus-visible ~ .bundle-switch { outline: 2px solid var(--blue); outline-offset: 2px; }
+        .bundle-toggle-text {
+          font-size: 0.87rem;
+          font-weight: 800;
+          color: #14532d;
+          line-height: 1.5;
+        }
+
+        @media (max-width: 360px) {
+          .bundle-card { padding: 1rem 0.85rem 0.8rem; }
+          .combo-chip  { font-size: 0.7rem; }
+        }
+
         /* ── Payment box ────────────────────────── */
         .payment-box {
           background: var(--blue-l);
@@ -206,7 +403,8 @@
         .pay-amount { font-size: 2rem; font-weight: 900; color: var(--blue); margin: 0.2rem 0 0.8rem; }
         .pay-to     { font-size: 0.88rem; color: var(--ink); font-weight: 600; margin-bottom: 0.5rem; }
         .account-num {
-          font-family: 'Courier New', monospace;
+          font-family: 'Cairo', sans-serif;
+          font-variant-numeric: tabular-nums;
           font-size: 0.78rem;
           background: var(--ink);
           color: #4ecca3;
@@ -225,7 +423,7 @@
           padding: 10px;
           box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        .qr-wrap img { display: block; border-radius: 6px; }
+        .qr-wrap img { display: block; border-radius: 6px; width: 190px; height: auto; max-width: 100%; }
         .qr-hint { font-size: 0.75rem; color: var(--muted); margin-top: 0.6rem; }
 
         /* ── Warning ────────────────────────────── */
@@ -285,7 +483,8 @@
           background: var(--blue-l);
           border: 1px solid var(--blue);
           color: var(--blue);
-          font-family: monospace;
+          font-family: 'Cairo', sans-serif;
+          font-variant-numeric: tabular-nums;
           font-size: 0.9rem;
           font-weight: 700;
           letter-spacing: 2px;
@@ -389,29 +588,50 @@
                 </div>
                 <div class="plan-check" id="chk-pro">✓</div>
             </div>
-            <div class="plan-price" id="pro-price">٩٩٩ ل.س <span class="plan-period">/ شهر</span></div>
+            <div class="plan-price" id="pro-price">—</div>
+            <div class="plan-desc">بطاقة ذهبية بإطار متحرّك، وفتح الإحصائيات المقفلة، وتحكّم كامل بتصميم بطاقتك، وخمس صور لكل صنف.</div>
         </div>
 
         <div class="plan-card" id="pc-featured" onclick="selectPlan('featured')">
             <div class="plan-card-top">
                 <div class="plan-name-row">
-                    <span class="badge badge-feat">موصى به</span>
-                    <span class="plan-title">مُروَّج</span>
+                    <span class="badge badge-feat">FEATURED</span>
+                    <span class="plan-title">موصى به</span>
                 </div>
                 <div class="plan-check" id="chk-feat">✓</div>
             </div>
-            <div class="plan-price" id="feat-price">٦٩٩ ل.س <span class="plan-period">/ أسبوع</span></div>
+            <div class="plan-price" id="feat-price">—</div>
+            <div class="plan-desc">بانر بصورة كبيرة في أعلى الصفحة الرئيسية وتبويب «اكتشف»، بمقاعد محدودة.</div>
         </div>
 
-        <!-- Bundle offer — shown after plan selection -->
-        <div id="bundle-offer" style="display:none;margin-top:0.8rem;padding:1rem 1.2rem;background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;">
-          <div style="font-size:1rem;font-weight:800;color:#15803d;margin-bottom:0.4rem;">🎉 عرض خاص</div>
-          <div id="bundle-offer-text" style="font-size:0.88rem;color:#166534;margin-bottom:0.7rem;line-height:1.6;"></div>
-          <label style="display:flex;align-items:flex-start;gap:10px;font-size:0.88rem;color:#166534;cursor:pointer;direction:rtl;">
-            <input type="checkbox" id="add-second-plan" style="margin-top:3px;flex-shrink:0;" onchange="onBundleToggle(); updatePaymentDisplay();">
-            <span id="bundle-checkbox-label"></span>
+        <!-- عرض الخطتين معاً — يظهر بعد اختيار خطة -->
+        <div class="bundle-card" id="bundle-offer" style="display:none">
+          <div class="bundle-ribbon" id="bundle-ribbon"></div>
+
+          <div class="bundle-combo">
+            <span class="combo-chip" id="combo-a"></span>
+            <span class="combo-plus">+</span>
+            <span class="combo-chip" id="combo-b"></span>
+          </div>
+
+          <div class="bundle-title">اشترك بالخطتين معاً</div>
+          <div class="bundle-sub" id="bundle-sub"></div>
+
+          <div class="bundle-math">
+            <div class="bm-row"><span id="bm-a-name"></span><span><b id="bm-a-amt"></b></span></div>
+            <div class="bm-row"><span id="bm-b-name"></span><span><b id="bm-b-amt"></b></span></div>
+            <div class="bm-sep"></div>
+            <div class="bm-row bm-strike"><span>المجموع بلا خصم</span><span id="bm-full"></span></div>
+            <div class="bm-row bm-total"><span>تدفع</span><span id="bm-total"></span></div>
+            <div class="bm-save" id="bm-save"></div>
+          </div>
+
+          <label class="bundle-toggle" for="add-second-plan">
+            <input type="checkbox" id="add-second-plan"
+                   onchange="onBundleToggle(); updatePaymentDisplay();">
+            <span class="bundle-switch"><span class="bundle-knob"></span></span>
+            <span class="bundle-toggle-text" id="bundle-toggle-text"></span>
           </label>
-          <div id="bundle-discounted-price" style="margin-top:0.5rem;font-size:0.85rem;font-weight:700;color:#15803d;display:none;"></div>
         </div>
 
         <div class="err-msg" id="err-plan"></div>
@@ -442,7 +662,14 @@
         </div>
         <div class="form-group">
             <label>تاريخ الميلاد</label>
-            <input type="date" id="k-dob">
+            <div class="dob-row">
+                <select id="k-dob-d" onchange="syncDob()" aria-label="اليوم"></select>
+                <select id="k-dob-m" onchange="syncDob()" aria-label="الشهر"></select>
+                <select id="k-dob-y" onchange="syncDob()" aria-label="السنة"></select>
+            </div>
+            <!-- القيمة الموحَّدة YYYY-MM-DD — كل ما بعد هذه النقطة يقرأ من هنا كما كان -->
+            <input type="hidden" id="k-dob">
+            <div class="dob-hint" id="dob-hint">اختر اليوم والشهر والسنة</div>
             <div class="err-msg" id="err-kdob">يجب أن يكون عمرك 18 سنة أو أكثر</div>
         </div>
 
@@ -461,7 +688,8 @@
             <div class="pay-to">حوّل إلى رقم شام كاش التالي:</div>
             <div class="account-num" id="shamcash-num">e7777b9bee1b418ab564189b8d360a04</div>
             <div class="qr-wrap">
-                <img id="qr-img" src="" width="150" height="150" alt="QR شام كاش">
+                <img id="qr-img" src="assets/shamcash-qr.png" width="190" height="190"
+                     alt="رمز QR لحساب شام كاش" loading="lazy">
             </div>
             <div class="qr-hint">امسح الكود بتطبيق شام كاش</div>
         </div>
@@ -518,7 +746,6 @@
 
 <!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-functions-compat.js"></script>
@@ -552,13 +779,22 @@
       // ── Read URL params ──────────────────────────────────────────
       const urlParams   = new URLSearchParams(window.location.search);
       const urlUid      = (urlParams.get('uid')      || '').trim();
-      if (!urlUid || urlUid.length < 10) {
-        alert('رابط غير صالح. يرجى فتح الصفحة من داخل التطبيق.');
-        document.body.innerHTML = '';
-        throw new Error('Invalid UID in URL');
-      }
       const urlToken    = (urlParams.get('token')    || '').trim();  // HMAC token من التطبيق
-      const urlTs       = parseInt(urlParams.get('ts') || '0', 10); // timestamp إنشاء الرابط
+
+      // ── حارس الدخول: باب خطأ مقابل مفتاح قديم ────────────────────
+      // غياب uid أو token معاً = لا رابط دخول أصلاً: زائر فتح العنوان مباشرة، أو
+      // زاحف محرك بحث، أو رابط نُسخ بلا معاملاته. هؤلاء يُحوّلون إلى الرئيسية بلا رسالة:
+      // لا فائدة من إخبارهم بوجود صفحة اشتراك لا يملكون مفتاحها.
+      // أما وجود المعاملات مع بطلانها (انتهاء صلاحية، استعمال سابق، refresh) فصاحب مكان
+      // حقيقي وصل بمفتاح قديم — هؤلاء تبقى لهم شاشة killPage المفسّرة، فإرجاعهم للرئيسية
+      // بلا سبب ظاهر يتركهم حائرين. التحويل هنا راحة واجهة وليس إجراء أمني: الحماية
+      // الفعلية هي verifyAndConsumeToken (تذكرة موقّعة لمرة واحدة من create_subscription_link).
+      if (!urlUid || urlUid.length < 10 || !urlToken) {
+        window.location.replace('index.html');
+        throw new Error('no entry link — redirected to home');
+      }
+      const urlTs       = parseInt(urlParams.get('ts') || '0', 10);  // لحظة إنشاء الرابط
+      const urlExp      = parseInt(urlParams.get('exp') || '0', 10); // لحظة انتهائه (من السيرفر)
       const urlType     = (urlParams.get('type')     || '').trim(); // 'pro' | 'featured'
       const urlPlaceId  = (urlParams.get('placeId')  || '').trim();
       const urlPlaceName= (urlParams.get('placeName')|| '').trim();
@@ -573,12 +809,12 @@
       let selectedPlan = null;
       let existingKyc  = null;
       let existingSubscriptions = { pro: false, featured: false };
-      let pricing = {
-        pro_amount: 999, pro_period: 'شهر',
-        featured_amount: 699, featured_period: 'أسبوع',
-        shamcash_account: 'e7777b9bee1b418ab564189b8d360a04',
-        bundle_discount_percent: 30
-      };
+      // 🔒 المصدر الوحيد للأسعار هو app_config/pricing وحده. لا قيمة احتياطية رقمية هنا
+      // إطلاقاً: كانت سابقاً 999/699 وخصم 30% بينما المستند الحي يحمل أرقاماً مختلفة تماماً،
+      // فأي فشل قراءة كان يعرض سعراً خاطئاً ويرسل طلباً بمبلغ خاطئ بلا أي تحذير.
+      let pricing = null;
+      const SHAMCASH_ACCOUNT_FALLBACK = 'e7777b9bee1b418ab564189b8d360a04';
+      const PRICING_ERR_MSG = 'تعذّر جلب الأسعار الآن. حدّث الصفحة وحاول مجدداً.';
       let verifiedUid = null;
 
       // ── Helpers ──────────────────────────────────────────────────
@@ -603,14 +839,16 @@
         return local || intlPlus || intlZero;
       }
 
-  async function ensureAuth() {
-    if (firebase.auth().currentUser) return;
-    try {
-      await firebase.auth().signInAnonymously();
-    } catch (e) {
-      console.error('[subscribe] auth error:', e);
-    }
-  }
+  // ❌ أُزيلت ensureAuth() ومعها تسجيل الدخول المجهول بالكامل.
+  //
+  // لم تكن تُفيد شيئاً: كل قراءة كانت تعتمد عليها (kyc_profiles، pro_requests،
+  // featured_requests) ترفضها قواعد Firestore أصلاً لأنها تشترط
+  // `isNotAnonymous() && request.auth.uid == userId` — فكانت تفشل دائماً وتُبتلَع في
+  // catch. المقابل كان حقيقياً: حساب Auth مجهول جديد يُنشأ لكل من يفتح الصفحة.
+  //
+  // ما تحتاجه الصفحة فعلاً يأتي الآن من مسارين موثوقين بلا أي مصادقة عميل:
+  //   • app_config/pricing — `allow read: if true`
+  //   • verify_subscription_token / submit_subscription — Admin SDK بعد التحقق من التوكن
 
       function show(id) { const el = document.getElementById(id); if (el) el.style.display = 'block'; }
       function hide(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
@@ -649,13 +887,16 @@
         goTo('view-dead');
       }
 
-      // ── Token validation (client-side age check) ─────────────────
-      // التحقق الحقيقي من HMAC يجري على Firestore Rules / Cloud Function
-      // هنا نتحقق فقط من أن الرابط لم يتجاوز 15 دقيقة
+      // ── انتهاء الصلاحية ─────────────────────────────
+      // مرجع الصلاحية الوحيد هو حقل expiresAt في Firestore، تفحصه verify_subscription_token
+      // وsubmit_subscription معاً. هذا الفحص يوفّر رحلة ذهاب وإياب لا غير.
+      //
+      // ⚠️ كان هنا سقف ثابت 15 دقيقة مكتوباً — يقتل أي رابط أطول عمراً مهما
+      // قال السيرفر (مثل رابط الأدمن ذي الـ24 ساعة). الآن يُعتمد exp القادم مع
+      // الرابط؛ ورابط قديم بلا exp يمرّ من هنا ويحكم عليه السيرفر وحده.
       function isTokenExpired() {
-        if (!urlTs) return true; // لا يوجد timestamp
-        const AGE_LIMIT_MS = 15 * 60 * 1000; // 15 دقيقة
-        return (Date.now() - urlTs) > AGE_LIMIT_MS;
+        if (!urlExp) return false;
+        return Date.now() > urlExp;
       }
 
       // ── Main boot ────────────────────────────────────────────────
@@ -674,9 +915,18 @@
           return;
         }
 
-        // 3. تحقق: هل token موجود؟ (قد يكون اختياري في مرحلة التطوير)
+        // 3. تحقق: هل token موجود؟
         if (!urlToken) {
           killPage('no token in URL');
+          return;
+        }
+
+        // 3.5 تحقق: هل placeId موجود؟
+        // كان غير مفحوص إطلاقاً هنا، فيمضي المستخدم في كل الخطوات (اختيار باقة،
+        // KYC، دفع) ثم يفشل عند الإرسال وحده. السيرفر يرفضه فعلاً (بيانات ناقصة)،
+        // لكن الفشل يجب أن يظهر قبل أن يكتب المستخدم بياناته الشخصية لا بعده.
+        if (!urlPlaceId) {
+          killPage('no placeId in URL');
           return;
         }
 
@@ -689,7 +939,6 @@
         // 5. تحقق من صحة الـ token عبر Firestore
         // التطبيق يحفظ token مؤقت في pending_tokens/{uid}
         // عند الدخول نتحقق أنه مطابق ونحذفه (single-use)
-        await ensureAuth();
         const tokenValid = await verifyAndConsumeToken();
         if (!tokenValid) {
           killPage('token invalid or already used');
@@ -704,7 +953,7 @@
 
         // 7. حمّل الأسعار وبيانات KYC
         await Promise.all([loadPricing(), loadKyc()]);
-        existingSubscriptions = await checkExistingSubscriptions();
+        // existingSubscriptions مضبوطة فعلاً من رد verify_subscription_token أعلاه.
         applySubscriptionLabels();
 
         // 8. أظهر الصفحة
@@ -736,6 +985,12 @@
           const json = await res.json();
           if (!res.ok || !json.result || !json.result.uid) return false;
           verifiedUid = json.result.uid;
+          // السيرفر هو من يقرّر «تجديد أم جديد» — راجع verify_subscription_token
+          const ex = json.result.existing || {};
+          existingSubscriptions = {
+            pro:      ex.pro === true,
+            featured: ex.featured === true
+          };
           return true;
         } catch (e) {
           console.error('[subscribe] token verify error:', e);
@@ -744,22 +999,45 @@
       }
 
       // ── Load pricing ─────────────────────────────────────────────
+      // تُرجِع true فقط إن وصلت أسعار صالحة من app_config/pricing — وهو المصدر الوحيد.
+      // أي فشل يترك pricing = null فيُحظَر الإرسال، بدل تمرير مبلغ مخترع.
       async function loadPricing() {
+        let data = null;
         try {
           const doc = await db.collection('app_config').doc('pricing').get();
-          if (doc.exists) pricing = { ...pricing, ...doc.data() };
+          if (doc.exists) data = doc.data();
         } catch (_) {}
+
+        const valid = data
+          && Number(data.pro_amount) > 0
+          && Number(data.featured_amount) > 0;
+
+        if (!valid) {
+          pricing = null;
+          document.getElementById('pro-price').textContent  = 'غير متاح حالياً';
+          document.getElementById('feat-price').textContent = 'غير متاح حالياً';
+          return false;
+        }
+
+        pricing = {
+          pro_amount: Number(data.pro_amount),
+          pro_period: data.pro_period || '',
+          featured_amount: Number(data.featured_amount),
+          featured_period: data.featured_period || '',
+          bundle_discount_percent: Number(data.bundle_discount_percent) || 0,
+          shamcash_account: data.shamcash_account || SHAMCASH_ACCOUNT_FALLBACK
+        };
 
         document.getElementById('pro-price').innerHTML =
           `${pricing.pro_amount} ل.س <span class="plan-period">/ ${pricing.pro_period}</span>`;
         document.getElementById('feat-price').innerHTML =
           `${pricing.featured_amount} ل.س <span class="plan-period">/ ${pricing.featured_period}</span>`;
 
-        // حدّث رقم شام كاش والـ QR
-        const acc = pricing.shamcash_account || 'e7777b9bee1b418ab564189b8d360a04';
-        document.getElementById('shamcash-num').textContent = acc;
-        document.getElementById('qr-img').src =
-          `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(acc)}&bgcolor=ffffff&color=141c1b`;
+        // رقم الحساب يبقى من Firestore، أما رمز QR فصورة ثابتة في الموقع.
+        // كان يُولَّد عبر api.qrserver.com: خدمة طرف ثالث تتلقى رقم الحساب في الرابط،
+        // وتتعطّل الصفحة بلا رمز إن تعطّلت هي — والصورة الرسمية تحمل الشعار والاسم.
+        document.getElementById('shamcash-num').textContent = pricing.shamcash_account;
+        return true;
       }
 
       // ── Load KYC prefill ─────────────────────────────────────────
@@ -772,7 +1050,7 @@
             document.getElementById('k-first').value = existingKyc.firstLegalName  || '';
             document.getElementById('k-last').value  = existingKyc.secondLegalName || '';
             document.getElementById('k-phone').value = existingKyc.phoneNumber     || '';
-            document.getElementById('k-dob').value   = existingKyc.dateOfBirth     || '';
+            setDobFromValue(existingKyc.dateOfBirth);
           }
         } catch (_) {}
 
@@ -796,28 +1074,8 @@
         infoBox.style.display = 'flex';
       }
 
-      async function checkExistingSubscriptions() {
-        if (!urlPlaceId) return { pro: false, featured: false };
-        const results = { pro: false, featured: false };
-        try {
-          const [proSnap, featSnap] = await Promise.all([
-            db.collection('pro_requests')
-              .where('placeId', '==', urlPlaceId)
-              .where('status', '==', 'approved')
-              .limit(1).get(),
-            db.collection('featured_requests')
-              .where('placeId', '==', urlPlaceId)
-              .where('status', '==', 'approved')
-              .limit(1).get()
-          ]);
-          results.pro      = !proSnap.empty;
-          results.featured = !featSnap.empty;
-        } catch (e) {
-          console.error('[subscribe] subscription check error:', e);
-        }
-        return results;
-      }
-
+      // تُملأ من رد verify_subscription_token (Admin SDK) لا من قراءة مباشرة —
+      // القراءة المباشرة كانت مرفوضة بالقواعد دائماً فتعيد false دوماً.
       function applySubscriptionLabels() {
         const plans = ['pro', 'featured'];
         plans.forEach(plan => {
@@ -841,43 +1099,74 @@
 
       // ── Plan selection ───────────────────────────────────────────
   function selectPlan(p) {
+    // pricing = null يعني أن app_config/pricing لم يُقرأ — لا سعر احتياطي يُعرَض بديلاً عنه.
+    if (!pricing) { showErr('err-plan', PRICING_ERR_MSG); return; }
     selectedPlan = p;
     ['pro','featured'].forEach(x => document.getElementById('pc-' + x).classList.remove('selected'));
     document.getElementById('pc-' + p).classList.add('selected');
     clearErr('err-plan');
 
-    // Show bundle offer
-    const primaryAmount = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
-    const otherPlan     = selectedPlan === 'pro' ? 'featured' : 'pro';
-    const otherName     = otherPlan === 'pro' ? 'PRO مميز' : 'المُروَّج (موصى به)';
-    const otherAmount   = otherPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
+    renderBundleOffer();
+  }
+
+  // أسماء العرض موحَّدة في موضع واحد — كانت مكرَّرة بصيغ مختلفة في أربعة مواضع
+  // ("PRO مميز" / "المُروَّج (موصى به)" / "مُروَّج موصى به") فيظن القارئ أنها خطط مختلفة.
+  const PLAN_LABEL = { pro: 'مميز', featured: 'موصى به' };
+  const PLAN_CHIP_CLASS = { pro: 'is-pro', featured: 'is-feat' };
+  const PLAN_GAIN = {
+    pro: 'بطاقة ذهبية وإحصائيات مفتوحة',
+    featured: 'بانر في الصفحة الرئيسية'
+  };
+
+  function money(n) { return `${n} ل.س`; }
+
+  // بطاقة «الخطتان معاً»: تُبنى كاملة في كل اختيار خطة، فلا تبقى أرقام خطة سابقة.
+  function renderBundleOffer() {
+    const other = selectedPlan === 'pro' ? 'featured' : 'pro';
+    const primaryAmount = pricing[selectedPlan + '_amount'];
+    const otherAmount   = pricing[other + '_amount'];
+    const pct           = pricing.bundle_discount_percent;
 
     const fullTotal       = primaryAmount + otherAmount;
-    const discountedTotal = Math.round(fullTotal * (1 - pricing.bundle_discount_percent / 100));
+    const discountedTotal = Math.round(fullTotal * (1 - pct / 100));
     const savedAmount     = fullTotal - discountedTotal;
 
-    document.getElementById('bundle-offer-text').textContent =
-      `بما أنك اخترت باقة، يمكنك إضافة باقة ${otherName} بخصم ${pricing.bundle_discount_percent}% على المجموع الكلي.`;
-    document.getElementById('bundle-checkbox-label').textContent =
-      `نعم، أريد إضافة ${otherName} (خصم ${pricing.bundle_discount_percent}% على المجموع)`;
+    const set = (id, text) => { document.getElementById(id).textContent = text; };
 
-    document.getElementById('bundle-discounted-price').innerHTML =
-      `السعر الكامل: ${fullTotal} ل.س<br>` +
-      `خصم ${pricing.bundle_discount_percent}%: -${savedAmount} ل.س<br>` +
-      `المجموع بعد الخصم: ${discountedTotal} ل.س`;
+    // الخطة المختارة أولاً دائماً، فيرى المستخدم ما أضافه لا ترتيباً ثابتاً
+    const chipA = document.getElementById('combo-a');
+    const chipB = document.getElementById('combo-b');
+    chipA.className = 'combo-chip ' + PLAN_CHIP_CLASS[selectedPlan];
+    chipB.className = 'combo-chip ' + PLAN_CHIP_CLASS[other];
+    chipA.textContent = PLAN_LABEL[selectedPlan];
+    chipB.textContent = PLAN_LABEL[other];
 
-    // Reset checkbox
+    set('bundle-ribbon', pct > 0 ? `وفّر ${pct}%` : 'الخطتان معاً');
+    set('bundle-sub', `${PLAN_GAIN[selectedPlan]}، و${PLAN_GAIN[other]} — اشتراكان مستقلان على المكان نفسه، بفاتورة واحدة.`);
+
+    set('bm-a-name', `خطة ${PLAN_LABEL[selectedPlan]}`);
+    set('bm-a-amt',  money(primaryAmount));
+    set('bm-b-name', `خطة ${PLAN_LABEL[other]}`);
+    set('bm-b-amt',  money(otherAmount));
+    set('bm-full',   money(fullTotal));
+    set('bm-total',  money(discountedTotal));
+    set('bm-save',   savedAmount > 0 ? `توفّر ${money(savedAmount)}` : 'الخطتان معاً');
+    set('bundle-toggle-text', `أضِف خطة «${PLAN_LABEL[other]}» إلى اشتراكي`);
+
+    // إعادة الضبط عند كل تبديل خطة — وإلا بقي التأشير من اختيار سابق
     document.getElementById('add-second-plan').checked = false;
-    document.getElementById('bundle-discounted-price').style.display = 'none';
+    document.getElementById('bundle-offer').classList.remove('on');
     document.getElementById('bundle-offer').style.display = 'block';
+    document.getElementById('bundle-offer').hidden = false;
   }
 
   function onBundleToggle() {
     const checked = document.getElementById('add-second-plan').checked;
-    document.getElementById('bundle-discounted-price').style.display = checked ? 'block' : 'none';
+    document.getElementById('bundle-offer').classList.toggle('on', checked);
   }
 
       function goPlan() {
+        if (!pricing) { showErr('err-plan', PRICING_ERR_MSG); return; }
         if (!selectedPlan) { showErr('err-plan', 'يرجى اختيار نوع الاشتراك'); return; }
         goTo('view-kyc');
       }
@@ -963,6 +1252,7 @@
       }
 
       function updatePaymentDisplay() {
+        if (!pricing) return;
         const addSecond = document.getElementById('add-second-plan')?.checked === true;
         const primaryAmount = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
         const primaryPeriod = selectedPlan === 'pro' ? pricing.pro_period : pricing.featured_period;
@@ -991,7 +1281,12 @@
     document.getElementById('err-confirm').textContent = '';
     document.getElementById('err-confirm').classList.remove('show');
 
-    await loadPricing();
+    // إعادة قراءة السعر لحظة الإرسال لضمان أحدث قيمة. إن تعذّرت، يتوقف الإرسال تماماً:
+    // إرسال طلب بمبلغ مخترع أسوأ من عدم الإرسال.
+    if (!(await loadPricing())) {
+      showErr('err-confirm', PRICING_ERR_MSG);
+      return;
+    }
 
     const hawala = document.getElementById('hawala-input').value.trim();
     if (!hawala)          { showErr('err-hawala', 'أدخل رقم الحوالة'); return; }
@@ -1127,8 +1422,8 @@
 
     const primaryAmount  = selectedPlan === 'pro' ? pricing.pro_amount : pricing.featured_amount;
     const primaryPeriod  = selectedPlan === 'pro' ? pricing.pro_period : pricing.featured_period;
-    const planName       = selectedPlan === 'pro' ? 'PRO مميز' : 'مُروَّج موصى به';
-    const otherPlanName  = otherPlan    === 'pro' ? 'PRO مميز' : 'مُروَّج موصى به';
+    const planName       = PLAN_LABEL[selectedPlan];
+    const otherPlanName  = PLAN_LABEL[otherPlan];
     const finalAmount    = addSecond ? discountedTotal : primaryAmount;
     const fullTotal      = pricing.pro_amount + pricing.featured_amount;
     const savedAmount    = fullTotal - discountedTotal;
@@ -1160,7 +1455,7 @@
   td:last-child { font-weight:700; text-align:left; }
   .amount-row td { font-size:1.1rem; color:#1a3f7c; }
   .warn { background:#fffbeb; border:1px solid #f59e0b; border-radius:10px; padding:1rem; font-size:0.82rem; color:#92400e; line-height:1.7; margin-top:1rem; }
-  .ref { text-align:center; background:#e8eef7; border-radius:8px; padding:0.6rem; font-family:monospace; font-size:0.8rem; color:#1a3f7c; margin-bottom:1rem; word-break:break-all; }
+  .ref { text-align:center; background:#e8eef7; border-radius:8px; padding:0.6rem; font-family:'Cairo',sans-serif; font-variant-numeric:tabular-nums; font-size:0.8rem; color:#1a3f7c; margin-bottom:1rem; word-break:break-all; }
   @media print { body { padding:1rem; } }
 </style>
 </head>
@@ -1240,8 +1535,101 @@
     }
   }
 
-      // ── DOB max = today ──────────────────────────────────────────
-      document.getElementById('k-dob').max = new Date().toISOString().split('T')[0];
+      // ══ تاريخ الميلاد: ثلاث قوائم → قيمة واحدة YYYY-MM-DD ══
+      const DOB_MONTHS = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران',
+                          'تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+      const DOB_MIN_AGE = 18;
+      const DOB_MAX_AGE = 100;
+
+      function buildDobSelects() {
+        const dSel = document.getElementById('k-dob-d');
+        const mSel = document.getElementById('k-dob-m');
+        const ySel = document.getElementById('k-dob-y');
+
+        const opt = (v, t) => {
+          const o = document.createElement('option');
+          o.value = v; o.textContent = t;
+          return o;
+        };
+
+        dSel.appendChild(opt('', 'اليوم'));
+        for (let d = 1; d <= 31; d++) dSel.appendChild(opt(String(d), String(d)));
+
+        mSel.appendChild(opt('', 'الشهر'));
+        DOB_MONTHS.forEach((name, i) => mSel.appendChild(opt(String(i + 1), name)));
+
+        // السنوات من الأحدث للأقدم: من وُلد حديثاً يجدها أولاً بلا تمرير.
+        // السقف سنة تجعل العمر 18 تماماً — فلا تُعرَض سنة تُرفض حتماً.
+        const nowY = new Date().getFullYear();
+        ySel.appendChild(opt('', 'السنة'));
+        for (let y = nowY - DOB_MIN_AGE; y >= nowY - DOB_MAX_AGE; y--) {
+          ySel.appendChild(opt(String(y), String(y)));
+        }
+      }
+
+      // عدد أيام الشهر المختار — 31 في قائمة ثابتة تقبل 31 شباط
+      function trimDobDays() {
+        const dSel = document.getElementById('k-dob-d');
+        const m = parseInt(document.getElementById('k-dob-m').value, 10);
+        const y = parseInt(document.getElementById('k-dob-y').value, 10);
+        if (!m) return;
+        const days = new Date(y || 2000, m, 0).getDate();
+        const current = parseInt(dSel.value, 10);
+        Array.from(dSel.options).forEach(o => {
+          const v = parseInt(o.value, 10);
+          if (v) o.hidden = v > days;
+        });
+        if (current > days) dSel.value = '';
+      }
+
+      function syncDob() {
+        trimDobDays();
+        const d = document.getElementById('k-dob-d').value;
+        const m = document.getElementById('k-dob-m').value;
+        const y = document.getElementById('k-dob-y').value;
+        const hint = document.getElementById('dob-hint');
+        const hidden = document.getElementById('k-dob');
+
+        if (!d || !m || !y) {
+          hidden.value = '';
+          hint.className = 'dob-hint';
+          hint.textContent = 'اختر اليوم والشهر والسنة';
+          return;
+        }
+
+        const pad = n => String(n).padStart(2, '0');
+        hidden.value = `${y}-${pad(m)}-${pad(d)}`;
+
+        // عرض العمر فوراً — يجعل شرط الـ18 مفهوماً قبل الضغط على «متابعة»
+        const birth = new Date(Number(y), Number(m) - 1, Number(d));
+        const today = new Date();
+        let age = today.getFullYear() - birth.getFullYear();
+        const md = today.getMonth() - birth.getMonth();
+        if (md < 0 || (md === 0 && today.getDate() < birth.getDate())) age--;
+
+        if (age >= DOB_MIN_AGE) {
+          hint.className = 'dob-hint ok';
+          hint.textContent = `العمر: ${age} سنة`;
+          clearErr('err-kdob');
+        } else {
+          hint.className = 'dob-hint';
+          hint.textContent = `العمر: ${age} سنة — الحد الأدنى ${DOB_MIN_AGE} سنة`;
+        }
+      }
+
+      // تعبئة القوائم من قيمة محفوظة مسبقاً (YYYY-MM-DD)
+      function setDobFromValue(value) {
+        const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ''));
+        if (!m) return;
+        document.getElementById('k-dob-y').value = String(Number(m[1]));
+        document.getElementById('k-dob-m').value = String(Number(m[2]));
+        trimDobDays();
+        document.getElementById('k-dob-d').value = String(Number(m[3]));
+        syncDob();
+      }
+
+      buildDobSelects();
+
 
       // ── منع فتح صفحة البيانات مباشرة في history ─────────────────
       // pushState فارغ حتى Back button لا يرجع لنيف الحالة
