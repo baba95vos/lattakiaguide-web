@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل اللاذقية — تحميل مباشر</title>
+    <meta name="description" content="حمّل تطبيق دليل اللاذقية مباشرة بلا حاجة لمتجر Google Play، بكل ميزاته كاملة.">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+          --blue:   #1a3f7c;
+          --blue-d: #0e2450;
+          --blue-l: #e8eef7;
+          --ink:     #141c1b;
+          --muted:   #5a6b69;
+          --border:  #d5e3e1;
+          --bg:      #f4f8f7;
+          --white:   #ffffff;
+          --shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+          font-family: 'Cairo', sans-serif;
+          background: var(--bg);
+          color: var(--ink);
+          min-height: 100vh;
+          -webkit-font-smoothing: antialiased;
+          overflow-x: hidden;
+        }
+
+        /* ── Header ─────────────────────────────── */
+        .header {
+          background: linear-gradient(160deg, var(--blue) 0%, var(--blue-d) 100%);
+          padding: 1.2rem 1rem;
+          color: var(--white);
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+          font-size: 1.4rem;
+          font-weight: 900;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .menu-btn {
+          background: rgba(255,255,255,0.15);
+          border: none;
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          transition: background 0.2s;
+        }
+
+        .menu-btn:active { background: rgba(255,255,255,0.3); }
+
+        /* ── Drawer Menu ────────────────────────── */
+        .drawer-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(2px);
+        }
+
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+
+        .drawer {
+          position: fixed;
+          top: 0; bottom: 0; right: -280px;
+          width: 280px;
+          background: var(--white);
+          z-index: 1001;
+          transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          display: flex;
+          flex-direction: column;
+          box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+        }
+
+        .drawer.open { right: 0; }
+
+        .drawer-header {
+          padding: 2rem 1.5rem;
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          color: white;
+          text-align: center;
+        }
+
+        .drawer-logo { font-size: 1.8rem; font-weight: 900; margin-bottom: 5px; }
+        .drawer-sub { font-size: 0.85rem; opacity: 0.8; }
+        .drawer-content { padding: 1rem 0; flex: 1; overflow-y: auto; }
+
+        .drawer-item {
+          padding: 1rem 1.5rem;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          color: var(--ink);
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          transition: background 0.2s;
+          border-right: 4px solid transparent;
+        }
+
+        .drawer-item:hover, .drawer-item.active {
+          background: var(--blue-l);
+          color: var(--blue);
+          border-right-color: var(--blue);
+        }
+
+        .drawer-footer {
+          padding: 1rem;
+          border-top: 1px solid var(--border);
+          text-align: center;
+          font-size: 0.75rem;
+          color: var(--muted);
+        }
+
+        /* ── Main Content ──────────────────────── */
+        .main-container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 2rem 1.2rem 3rem;
+        }
+
+        .hero-section {
+          text-align: center;
+          margin-bottom: 1.8rem;
+          animation: fadeUp 0.6s ease both;
+        }
+
+        .app-icon {
+          width: 88px; height: 88px;
+          margin: 0 auto 1.2rem;
+          border-radius: 24px;
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2.6rem;
+          box-shadow: 0 10px 25px rgba(26,63,124,0.3);
+        }
+
+        .main-title {
+          font-size: 1.6rem;
+          font-weight: 900;
+          color: var(--blue-d);
+          margin-bottom: 0.5rem;
+        }
+
+        .main-subtitle {
+          font-size: 0.95rem;
+          color: var(--muted);
+          line-height: 1.7;
+          max-width: 460px;
+          margin: 0 auto;
+        }
+
+        /* ── Download CTA ─────────────────────── */
+        .cta-card {
+          background: var(--white);
+          border-radius: 22px;
+          padding: 1.6rem;
+          margin-bottom: 1.4rem;
+          box-shadow: var(--shadow);
+          border: 1px solid rgba(0,0,0,0.02);
+          animation: fadeUp 0.6s ease both;
+          animation-delay: 0.1s;
+        }
+
+        .btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          width: 100%;
+          padding: 1rem;
+          border-radius: 16px;
+          font-family: 'Cairo', sans-serif;
+          font-size: 1.02rem;
+          font-weight: 800;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn:active { transform: scale(0.97); }
+
+        .btn-primary {
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          color: var(--white);
+          box-shadow: 0 8px 20px rgba(26,63,124,0.35);
+          margin-bottom: 0.7rem;
+        }
+
+        .btn-secondary {
+          background: var(--white);
+          color: var(--ink);
+          border: 2px solid var(--border);
+        }
+
+        .btn-secondary:active { background: var(--bg); }
+
+        .btn-sub {
+          text-align: center;
+          font-size: 0.78rem;
+          color: var(--muted);
+          margin-top: 0.7rem;
+        }
+
+        .divider-or {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin: 1rem 0;
+          color: var(--muted);
+          font-size: 0.8rem;
+        }
+        .divider-or::before, .divider-or::after {
+          content: '';
+          flex: 1;
+          height: 1px;
+          background: var(--border);
+        }
+
+        /* ── Info Cards ─────────────────────────── */
+        .card {
+          background: var(--white);
+          border-radius: 20px;
+          padding: 1.4rem;
+          margin-bottom: 1rem;
+          box-shadow: var(--shadow);
+          border: 1px solid rgba(0,0,0,0.02);
+          animation: fadeUp 0.5s ease both;
+        }
+
+        .card-icon {
+          width: 42px; height: 42px;
+          background: var(--blue-l);
+          color: var(--blue);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          margin-bottom: 0.8rem;
+        }
+
+        .card-h {
+          font-size: 1.02rem;
+          font-weight: 800;
+          margin-bottom: 0.4rem;
+          color: var(--ink);
+        }
+
+        .card-p {
+          font-size: 0.86rem;
+          color: var(--muted);
+          line-height: 1.65;
+        }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .icon-menu::before { content: '☰'; }
+        .icon-close::before { content: '✕'; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-logo">
+            <button class="menu-btn" onclick="toggleDrawer()">
+                <span class="icon-menu"></span>
+            </button>
+            <span>دليل اللاذقية</span>
+        </div>
+        <span style="font-size:1.5rem">📲</span>
+    </header>
+
+    <!-- Side Drawer -->
+    <div class="drawer-overlay" id="overlay" onclick="toggleDrawer()"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">دليل اللاذقية</div>
+            <div class="drawer-sub">اكتشف مدينتك بسهولة</div>
+        </div>
+        <nav class="drawer-content">
+            <a href="index.html" class="drawer-item">🏠 الرئيسية</a>
+            <a href="download.html" class="drawer-item active">📲 تحميل مباشر</a>
+            <a href="user_guide.html" class="drawer-item">📖 دليل الاستخدام</a>
+            <a href="community-guide.html" class="drawer-item">🤝 دليل المجتمع</a>
+            <a href="add_place_guide.html" class="drawer-item">📍 دليل إضافة مكان</a>
+            <a href="manage_place_guide.html" class="drawer-item">⚙️ دليل إدارة المكان</a>
+            <a href="job_opportunity_guide.html" class="drawer-item">💼 دليل إضافة فرصة عمل</a>
+            <a href="job_seeker_guide.html" class="drawer-item">🧑‍💼 دليل طلب عمل</a>
+            <a href="contact.html" class="drawer-item">📩 تواصل معنا</a>
+            <a href="terms_of_use.html" class="drawer-item">📝 شروط الاستخدام</a>
+            <a href="privacy_policy.html" class="drawer-item">🛡️ سياسة الخصوصية</a>
+            <a href="claiming_policy.html" class="drawer-item">🏷️ سياسة إثبات الملكية</a>
+            <a href="Data-Safety-Declaration.html" class="drawer-item">🔒 إقرار أمان البيانات</a>
+            <a href="deletion_policy.html" class="drawer-item">🗑️ سياسة حذف البيانات</a>
+            <a href="delete-account.html" class="drawer-item">👤 حذف الحساب</a>
+        </nav>
+        <div class="drawer-footer">
+            الإصدار 1.0.0 &copy; 2026
+        </div>
+    </div>
+
+    <!-- Main Body -->
+    <main class="main-container">
+
+        <div class="hero-section">
+            <div class="app-icon">🗺️</div>
+            <h1 class="main-title">دليل اللاذقية</h1>
+            <p class="main-subtitle">دليلك الشامل لاستكشاف أجمل الأماكن والخدمات والفرص في عروس الساحل — النسخة الرسمية لتحميل التطبيق مباشرة.</p>
+        </div>
+
+        <div class="cta-card">
+            <a id="downloadBtn"
+               href="https://firebasestorage.googleapis.com/v0/b/device-streaming-a7432e75.firebasestorage.app/o/releases%2Flattakia-guide-owner-latest.apk?alt=media"
+               class="btn btn-primary">
+                <span>⬇️</span>
+                <span>تحميل التطبيق</span>
+            </a>
+            <p class="btn-sub">متوافق مع أندرويد 7.0 فما فوق</p>
+
+            <div class="divider-or">أو</div>
+
+            <a href="https://play.google.com/store/apps/details?id=com.lattakia.guide"
+               target="_blank" rel="noopener" class="btn btn-secondary">
+                <span>▶️</span>
+                <span>عبر Google Play</span>
+            </a>
+        </div>
+
+        <div class="card" style="animation-delay: 0.1s;">
+            <div class="card-icon">📍</div>
+            <h2 class="card-h">اكتشف أفضل الأماكن</h2>
+            <p class="card-p">تصفح مطاعم ومقاهي وفنادق ومعالم اللاذقية بتفاصيل دقيقة وتقييمات حقيقية من الزوار.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.18s;">
+            <div class="card-icon">🤖</div>
+            <h2 class="card-h">مساعد ذكي يفهم لهجتك</h2>
+            <p class="card-p">اسأله بعفوية عمّا تبحث عنه، وسيرشدك للنتيجة المناسبة خلال ثوانٍ.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.26s;">
+            <div class="card-icon">🎲</div>
+            <h2 class="card-h">مشوار</h2>
+            <p class="card-p">لا تعرف أين تذهب اليوم؟ اضغط زر مشوار واترك التطبيق يقترح عليك مكاناً يناسب مزاجك.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.34s;">
+            <div class="card-icon">💼</div>
+            <h2 class="card-h">فرص عمل محلية</h2>
+            <p class="card-p">تصفح الوظائف المتاحة في المدينة، أو أعلن عن فرصة عمل لديك بسهولة.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.42s;">
+            <div class="card-icon">🏪</div>
+            <h2 class="card-h">لأصحاب الأماكن</h2>
+            <p class="card-p">أضف نشاطك التجاري، أدره بالكامل، وفعّل ظهوره المميز أو الموصى به مباشرة من التطبيق.</p>
+        </div>
+
+        <div class="card" style="animation-delay: 0.5s;">
+            <div class="card-icon">🤝</div>
+            <h2 class="card-h">مجتمع اللاذقية</h2>
+            <p class="card-p">ساهم بمعلوماتك عن المدينة، ولتصبح خريطتها أكثر دقة يوماً بعد يوم لكل مستخدم.</p>
+        </div>
+
+    </main>
+
+    <!-- Firebase (لعدّاد التحميل فقط — لا يؤثر على رابط التحميل نفسه) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-functions-compat.js"></script>
+
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            const overlay = document.getElementById('overlay');
+            if (drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // عدّاد تحميل — لا يمنع ولا يؤخر التحميل الفعلي بأي حال، حتى لو فشل بصمت
+        // (مثلاً بسبب حد المعدل لكل IP — 3 كل ساعة — وهو أمر متوقَّع وسليم)
+        try {
+            firebase.initializeApp({
+                apiKey:            "AIzaSyAT8auOR8cfT7C-kRzm27iQRIPriCy9jQE",
+                authDomain:        "device-streaming-a7432e75.firebaseapp.com",
+                projectId:         "device-streaming-a7432e75",
+                storageBucket:     "device-streaming-a7432e75.firebasestorage.app",
+                messagingSenderId: "6321458513",
+                appId:             "1:6321458513:web:583c16a20cc6101977d770"
+            });
+            const functions = firebase.app().functions('europe-west1');
+            document.getElementById('downloadBtn').addEventListener('click', function () {
+                try {
+                    functions.httpsCallable('record_owner_apk_download')().catch(function () {});
+                } catch (e) {}
+            });
+        } catch (e) {}
+    </script>
+</body>
+</html>

@@ -221,6 +221,27 @@
           to   { opacity: 1; transform: translateY(0); }
         }
 
+        /* ── Hero CTA button ─────────────────────── */
+        .btn-download {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 0.9rem 1.8rem;
+          margin-top: 1.2rem;
+          border-radius: 16px;
+          background: linear-gradient(135deg, var(--blue), var(--blue-d));
+          color: var(--white);
+          font-family: 'Cairo', sans-serif;
+          font-size: 1rem;
+          font-weight: 800;
+          text-decoration: none;
+          box-shadow: 0 8px 20px rgba(26,63,124,0.35);
+          transition: transform 0.15s ease;
+        }
+
+        .btn-download:active { transform: scale(0.97); }
+
         /* ── Icons (Simple Unicode/Emoji replacements) ── */
         .icon-menu::before { content: '☰'; }
         .icon-close::before { content: '✕'; }
@@ -249,6 +270,7 @@
         </div>
         <nav class="drawer-content">
             <a href="#" class="drawer-item active">🏠 الرئيسية</a>
+            <a href="download.html" class="drawer-item">📲 تحميل مباشر</a>
             <a href="user_guide.html" class="drawer-item">📖 دليل الاستخدام</a>
             <a href="community-guide.html" class="drawer-item">🤝 دليل المجتمع</a>
             <a href="add_place_guide.html" class="drawer-item">📍 دليل إضافة مكان</a>
@@ -274,6 +296,10 @@
         <div class="hero-section">
             <h1 class="main-title">أهلاً بك في دليل اللاذقية</h1>
             <p class="main-subtitle">دليلك الشامل لاستكشاف أجمل الأماكن والخدمات في عروس الساحل</p>
+            <a href="download.html" class="btn-download">
+                <span>⬇️</span>
+                <span>حمّل التطبيق الآن</span>
+            </a>
         </div>
 
         <div class="card" style="animation-delay: 0.1s;">
