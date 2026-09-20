@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="assets/theme-init.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>من نحن — دليل اللاذقية</title>
+<meta name="description" content="نبذة عن دليل اللاذقية: القصة، الرسالة، والفريق القائم على المنصة.">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --clr-bg:        #F7F8FA;
+    --clr-surface:   #FFFFFF;
+    --clr-brand:     #1A5C8A;
+    --clr-brand-mid: #2478B5;
+    --clr-accent:    #E8A020;
+    --clr-accent-lt: #FEF3DC;
+    --clr-text:      #1C1E26;
+    --clr-muted:     #5A6070;
+    --clr-border:    #DDE1EA;
+    --clr-divider:   #EEF0F5;
+    --ff-display: 'Cairo', sans-serif;
+    --ff-body:    'Tajawal', sans-serif;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --shadow-card: 0 2px 16px rgba(26, 92, 138, 0.07), 0 1px 4px rgba(0,0,0,0.04);
+    --max-w: 860px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--clr-text);
+    background: var(--clr-bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  .site-header {
+    background: linear-gradient(135deg, var(--clr-brand) 0%, var(--clr-brand-mid) 60%, #30A5E8 100%);
+    color: #fff;
+    padding: 48px 24px 40px;
+    text-align: center;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 5px 18px;
+    font-family: var(--ff-display);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    margin-bottom: 18px;
+  }
+  .site-header h1 { font-family: var(--ff-display); font-size: clamp(24px,4vw,38px); font-weight: 800; }
+  .header-meta { font-size: 13px; opacity: .8; margin-top: 10px; font-weight: 300; }
+  .logo-badge {
+    width: 92px; height: 92px;
+    margin: 22px auto 0;
+    background: rgba(255,255,255,0.92);
+    border-radius: 26px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+  }
+  .logo-badge img { width: 62px; height: 62px; }
+
+  .page-body { max-width: var(--max-w); margin: 0 auto; padding: 32px 20px 60px; }
+  .policy-section {
+    background: var(--clr-surface);
+    border-radius: var(--radius-lg);
+    padding: clamp(22px,3vw,32px);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--clr-border);
+  }
+  .policy-section h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(18px,2.2vw,22px);
+    font-weight: 800;
+    color: var(--clr-brand);
+    margin-bottom: 14px;
+    padding-right: 14px;
+    border-right: 4px solid var(--clr-accent);
+  }
+  .policy-section p { color: var(--clr-text); margin-bottom: 14px; }
+  .policy-section p:last-child { margin-bottom: 0; }
+  .policy-section p.lead { color: var(--clr-muted); font-size: 15px; }
+
+  .founder-card {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--clr-accent-lt);
+    border: 1px solid rgba(232,160,32,0.3);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin-top: 16px;
+  }
+  .founder-icon {
+    flex-shrink: 0; width: 48px; height: 48px;
+    background: var(--clr-brand); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .founder-name { font-family: var(--ff-display); font-weight: 800; color: var(--clr-brand); font-size: 16px; }
+  .founder-role { color: var(--clr-muted); font-size: 13px; margin-top: 2px; }
+
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--clr-brand), var(--clr-brand-mid));
+    color: #fff; font-family: var(--ff-display); font-weight: 700; font-size: 15px;
+    text-decoration: none;
+    margin-top: 8px;
+    box-shadow: 0 3px 10px rgba(26,92,138,0.25);
+  }
+
+  .site-footer { background: var(--clr-brand); color: rgba(255,255,255,0.75); text-align: center; padding: 32px 24px; font-size: 13px; }
+  .site-footer .footer-brand { font-family: var(--ff-display); font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .site-footer a { color: var(--clr-accent); text-decoration: none; }
+</style>
+<link rel="stylesheet" href="assets/site-nav.css">
+<link rel="stylesheet" href="assets/dark-theme.css">
+</head>
+<body>
+<div data-lg-drawer-root></div>
+
+<header class="site-header">
+  <div class="header-badge" data-lg-home-link>Lattakia Guide</div>
+  <h1>من نحن</h1>
+  <p class="header-meta">آخر تحديث: 21 سبتمبر 2026</p>
+  <div class="logo-badge"><img src="assets/logo.svg" alt="شعار دليل اللاذقية"></div>
+</header>
+
+<main class="page-body">
+
+  <section class="policy-section">
+    <h2>نبذة عن المنصة</h2>
+    <p>دليل اللاذقية منصة رقمية شاملة تهدف إلى أن تكون الرفيق اليومي لكل من يبحث عن مكان، أو خدمة، أو فرصة عمل في مدينة اللاذقية؛ وصوتاً رقمياً موثوقاً يجمع تفاصيل المدينة المتناثرة في مكانٍ واحد يسهل الوصول إليه للجميع.</p>
+  </section>
+
+  <section class="policy-section">
+    <h2>القصة والدافع</h2>
+    <p>بعد سنوات من الظلام التقني الذي حلّ على بلدنا ومدينتنا الحبيبة اللاذقية، وفي ظل غياب أي منصة رقمية شاملة وموثوقة تعكس ما تزخر به المدينة من أماكن وخدمات وفرص، قرر فريق <strong>Lattakia Guide Team</strong> القيام بخطوة جادة نحو التغيير، فبدأ بتطوير تطبيق شامل يكون الرفيق والدليل المناسب لإيجاد كل ما تحتاجه مدينة اللاذقية وأهلها من معلومات دقيقة وحديثة.</p>
+    <p>لم يكن الهدف مجرد إنشاء تطبيق آخر، بل بناء جسر رقمي يعيد الاعتبار لمدينة تستحق أن تُعرَض بأفضل صورة، وأن يجد كل قاطنٍ فيها أو زائرٍ لها كل ما يحتاجه بضغطة واحدة: من أفضل الأماكن والمطاعم والخدمات، إلى فرص العمل المتاحة، مروراً بمساهمة كل فرد من المجتمع في إثراء هذه المنصة بمعلوماته وخبرته عن مدينته.</p>
+    <p>انطلق هذا المشروع من إيمان راسخ بأن التقنية يجب أن تكون أداة خيرٍ ونهوض، لا رفاهيةً بعيدة عن واقع الناس، وأن أصعب الظروف يمكن أن تكون بداية لأجمل المبادرات حين تجتمع الإرادة الصادقة مع العمل الدؤوب. ومن هذا المنطلق، يواصل فريق Lattakia Guide Team جهوده باستمرار لتطوير المنصة وتوسيع خدماتها، سعياً لخدمة اللاذقية وأهلها بكل إخلاص وتفانٍ.</p>
+  </section>
+
+  <section class="policy-section">
+    <h2>رسالتنا</h2>
+    <p>تتمثل رسالتنا في جعل استكشاف مدينة اللاذقية أسهل ما يكون، من خلال تقديم خدمات كاملة ومجانية بالكامل، لضمان وصول هذه الخدمات لأكبر عدد ممكن من أفراد المجتمع دون أي عائق. فنحن نؤمن بأن المعلومة الموثوقة وسهولة الوصول إلى الخدمات حقٌّ للجميع، لا امتيازاً لفئة دون أخرى.</p>
+  </section>
+
+  <section class="policy-section">
+    <h2>القائمون على المنصة</h2>
+    <p class="lead">يشرف على فريق Lattakia Guide Team ويتولى مسؤوليته:</p>
+    <div class="founder-card">
+      <div class="founder-icon"><img src="assets/icons/icon-person.svg" alt="" style="width:24px;height:24px;filter:brightness(0) invert(1);"></div>
+      <div>
+        <div class="founder-name">السيد نجيب شيخ يوسف</div>
+        <div class="founder-role">مؤسس ومسؤول فريق Lattakia Guide Team</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="policy-section">
+    <h2>تواصل معنا</h2>
+    <p>لأي استفسار أو اقتراح يسعدنا تواصلكم معنا عبر صفحة التواصل المخصصة.</p>
+    <a href="contact.html" class="cta-btn"><img src="assets/icons/icon-contact.svg" alt="" style="width:18px;height:18px;filter:brightness(0) invert(1);"> الانتقال إلى صفحة التواصل</a>
+  </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <p class="footer-brand">Lattakia Guide Team</p>
+  <p class="footer-copy">© 2026 جميع الحقوق محفوظة · دليل اللاذقية</p>
+</footer>
+
+<script src="assets/site-nav.js" defer></script>
+</body>
+</html>

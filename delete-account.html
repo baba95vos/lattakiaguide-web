@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<script src="assets/theme-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>حذف الحساب والبيانات – Lattakia Guide</title>
@@ -120,13 +121,16 @@
         @media print { body { background: #fff; } .site-header { background: var(--clr-brand)!important; print-color-adjust: exact; } .policy-section { box-shadow: none; border: 1px solid #ddd; } .page-body { padding: 16px; } }
         @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition: none!important; animation: none!important; } }
     </style>
+    <link rel="stylesheet" href="assets/site-nav.css">
+    <link rel="stylesheet" href="assets/dark-theme.css">
 </head>
 <body>
+<div data-lg-drawer-root></div>
 <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
 
 <!-- ═══ HERO ═══ -->
 <header class="site-header" role="banner">
-    <div class="header-badge">Lattakia Guide</div><br>
+    <div class="header-badge" data-lg-home-link>Lattakia Guide</div><br>
     <div class="header-sub">Account & Data Deletion</div>
     <h1>حذف الحساب والبيانات</h1>
     <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 15 يوليو 2026</p>
@@ -353,5 +357,6 @@
     <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة</p>
 </footer>
 
+<script src="assets/site-nav.js" defer></script>
 </body>
 </html>

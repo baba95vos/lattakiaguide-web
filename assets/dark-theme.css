@@ -1,0 +1,123 @@
+/* دليل اللاذقية — الوضع الليلي/النهاري المشترك لكل صفحات الموقع (ملف واحد، بلا تكرار).
+   الوضع الفعلي يُحدَّد بسمة data-theme على <html> (يضبطها assets/theme-init.js
+   فوراً قبل الرسم: افتراضياً حسب جهاز الزائر prefers-color-scheme، أو يتغلّب عليه
+   اختيار يدوي محفوظ من زر التبديل في القائمة الجانبية). لا نعتمد على
+   prefers-color-scheme مباشرة هنا كي يعمل التبديل اليدوي بصرف النظر عن إعداد
+   النظام.
+   الألوان مقتبَسة حرفياً من هوية التطبيق نفسه (values-night/colors.xml):
+   background_dark=#121212، surface_dark=#1E1E1E، surface_dark_elevated=#2C2C2C،
+   divider_dark=#383838، text_primary=#E1E1E1، text_secondary=#B0B0B0،
+   status_open_bg/text، status_closed_bg/text، notif_selected_bg، accent_blue.
+   يجب تحميل هذا الملف بعد وسم <style> الخاص بكل صفحة كي تتغلّب قواعده عند
+   تساوي درجة التحديد. */
+
+/* ── نظام 1: الرئيسية / التحميل / الوصولات (--blue, --ink, --bg ...) ──
+     ملاحظة: --white غير مُعاد تعريفه عمداً — يُستخدَم في هذه الصفحات أيضاً
+     كلون نص أبيض فوق الهيدر/الأزرار الزرقاء (color: var(--white))، وتغييره
+     كان يجعل ذلك النص غامقاً وغير مقروء فوق الأزرق. خلفيات البطاقات التي
+     كانت تعتمد عليه (.card/.cta-card/.receipt-card/.btn-secondary) لها
+     تجاوز مباشر أسفل بدلاً من ذلك. ── */
+:root[data-theme="dark"] {
+  --ink:    #E1E1E1;
+  --muted:  #C7CDD3;
+  --border: #383838;
+  --bg:     #121212;
+  color-scheme: dark;
+}
+
+/* خلفية الصفحة بتدرّج بدل لون مسطّح — مظهر أكثر احترافية في الوضعين */
+body { background: linear-gradient(180deg, #F7FAFC 0%, #E9F1FB 100%) !important; }
+[data-theme="dark"] body { background: linear-gradient(180deg, #121212 0%, #0A1420 100%) !important; }
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .cta-card,
+[data-theme="dark"] .receipt-card,
+[data-theme="dark"] .btn-secondary {
+  background: #1E1E1E !important;
+}
+
+/* عنوان الترحيب الكبير (index/download) يستخدم --blue-d كلون نص عمداً في
+   الوضع النهاري (كتابة داكنة على خلفية فاتحة) — لا نغيّر --blue-d نفسه لأنه
+   يُستخدم أيضاً كخلفية تدرّج في الهيدر، فنعطي العنوان لوناً فاتحاً مباشراً بدلاً
+   من ذلك مع توهّج خفيف لتحسين وضوحه. */
+[data-theme="dark"] .main-title {
+  color: #64B5F6 !important;
+  text-shadow: 0 1px 16px rgba(100, 181, 246, 0.25);
+}
+
+/* ── نظام 2: صفحات الأدلة والسياسات (--clr-*) ── */
+:root[data-theme="dark"] {
+  --clr-bg:          #121212;
+  --clr-surface:     #1E1E1E;
+  --clr-text:        #E1E1E1;
+  --clr-muted:       #C7CDD3;
+  --clr-text-muted:  #C7CDD3;
+  --clr-border:      #383838;
+  --clr-divider:     #383838;
+}
+
+/* ظلال البطاقات شبه معدومة على خلفية داكنة أصلاً؛ نخفّفها بدل حذفها بالكامل */
+[data-theme="dark"] .card,
+[data-theme="dark"] .cta-card,
+[data-theme="dark"] .toc-card,
+[data-theme="dark"] .policy-section,
+[data-theme="dark"] .receipt-card {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* ── صناديق كبيرة كانت بخلفية فاتحة صريحة: تحويلها إلى لوحة داكنة متناسقة
+     بدل أن تبقى "جزيرة بيضاء" داخل صفحة داكنة ── */
+[data-theme="dark"] .info-banner,
+[data-theme="dark"] .data-item-header,
+[data-theme="dark"] .alert-info,
+[data-theme="dark"] .cta-btn.outline {
+  background: #1D3A5F !important;
+  border-color: #1D3A5F !important;
+  color: #64B5F6 !important;
+}
+[data-theme="dark"] .data-label { background: #2C2C2C !important; }
+[data-theme="dark"] .steps-list li { background: #2C2C2C !important; }
+[data-theme="dark"] .summary-table tr:nth-child(even) td { background: rgba(255, 255, 255, 0.04) !important; }
+
+[data-theme="dark"] .warning-box,
+[data-theme="dark"] .forbidden-label {
+  background: #2D1B1B !important;
+  border-color: #5C2E29 !important;
+  color: #FF8A80 !important;
+}
+
+[data-theme="dark"] .scope-note,
+[data-theme="dark"] .alert-warn,
+[data-theme="dark"] .founder-card {
+  background: #3A2F14 !important;
+  border-color: #5C4A1F !important;
+  color: #FFCC80 !important;
+}
+[data-theme="dark"] .founder-name { color: #FFCC80 !important; }
+
+[data-theme="dark"] .alert-tip {
+  background: rgba(129, 199, 132, 0.16) !important;
+  color: #A5D6A7 !important;
+}
+
+/* شارات/وسوم صغيرة — نفس ثنائيات الحالة الحقيقية في التطبيق (نجاح/خطأ) */
+[data-theme="dark"] .badge-yes, [data-theme="dark"] .status-approved {
+  background: #1B5E20 !important; color: #A5D6A7 !important; border-color: #2E7D32 !important;
+}
+[data-theme="dark"] .badge-no, [data-theme="dark"] .status-rejected {
+  background: #B71C1C !important; color: #EF9A9A !important; border-color: #C62828 !important;
+}
+[data-theme="dark"] .badge-opt, [data-theme="dark"] .status-pending {
+  background: #4A3410 !important; color: #FFCC80 !important; border-color: #6B4A18 !important;
+}
+[data-theme="dark"] .gplay-tag {
+  background: #1D3A5F !important; color: #64B5F6 !important; border-color: #1D3A5F !important;
+}
+
+/* عناصر الدرج/التنقّل المشترك تبقى بمظهر واحد بصرف النظر عن الوضع */
+[data-theme="dark"] .lg-drawer { background: #1E1E1E; }
+[data-theme="dark"] .lg-drawer-item { color: #E1E1E1; }
+[data-theme="dark"] .lg-drawer-item:hover, [data-theme="dark"] .lg-drawer-item.active {
+  background: #1D3A5F; color: #64B5F6; border-right-color: #64B5F6;
+}
+[data-theme="dark"] .lg-drawer-footer { color: #B0B0B0; border-top-color: #383838; }

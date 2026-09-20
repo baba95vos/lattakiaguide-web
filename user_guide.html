@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<script src="assets/theme-init.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>دليل الاستخدام الشامل – Lattakia Guide</title>
@@ -290,11 +291,14 @@
       .toc-grid { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="assets/site-nav.css">
+  <link rel="stylesheet" href="assets/dark-theme.css">
 </head>
 <body>
+<div data-lg-drawer-root></div>
 
 <header class="site-header">
-  <div class="header-badge">دليل اللاذقية</div>
+  <div class="header-badge" data-lg-home-link>دليل اللاذقية</div>
   <h1>دليل الاستخدام والتحكم</h1>
   <p>رفيقك الذكي لاستكشاف المدينة، العثور على الفرص، وتنمية أعمالك التجارية.</p>
   <span class="header-divider" aria-hidden="true"></span>
@@ -581,6 +585,8 @@
   <p>دليلك الذكي لمدينة اللاذقية</p>
   <p class="footer-copy">© 2026 جميع الحقوق محفوظة لفريق دليل اللاذقية</p>
 </footer>
+
+<script src="assets/site-nav.js" defer></script>
 
 </body>
 </html>

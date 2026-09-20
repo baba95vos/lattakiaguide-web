@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<script src="assets/theme-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>إقرار أمان البيانات – Lattakia Guide</title>
@@ -209,13 +210,15 @@
 background:#FFF7E6;border:1px solid #F0C36D;border-right:5px solid #E8A020;
 color:#5C4413;font-size:15px;line-height:1.9;}
 </style>
+<link rel="stylesheet" href="assets/site-nav.css">
+<link rel="stylesheet" href="assets/dark-theme.css">
 </head>
 <body>
 <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
 
 <!-- ═══ HERO ═══ -->
 <header class="site-header" role="banner">
-    <div class="header-badge">Lattakia Guide</div><br>
+    <div class="header-badge" data-lg-home-link>Lattakia Guide</div><br>
     <div class="header-sub">Google Play Data Safety Declaration</div>
     <h1>إقرار أمان البيانات</h1>
     <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 3 سبتمبر 2026</p>
@@ -742,7 +745,11 @@ color:#5C4413;font-size:15px;line-height:1.9;}
         <p><span class="badge-yes">نعم</span></p>
         <p>يحتوي التطبيق على:</p>
         <ul>
-            <li>إعلانات عبر Google AdMob (نوع Native وInterstitial حصراً).</li>
+            <li>إعلانات عبر Google AdMob — ثلاثة أنواع: <strong>Native</strong> (ضمن القوائم)،
+                و<strong>Interstitial</strong>، و<strong>Rewarded</strong> (إعلان اختياري بالكامل
+                يشاهده المستخدم بإرادته مقابل سؤال إضافي للمساعد الذكي، أو كشف مؤقت لإحصائيات
+                مكانه — ولا يفقد شيئاً إن رفض مشاهدته).</li>
+            <li>لا يوجد شريط إعلاني ثابت (Banner) — أُزيل نهائياً من كل الشاشات.</li>
             <li>معرّف إعلاني (Advertising ID) — تُعالجه Google وفق سياستها الخاصة.</li>
         </ul>
         <p>يمكن لفريق التطبيق إيقاف عرض الإعلانات بالكامل عن بُعد في أي وقت. المحتوى الإعلاني مضبوط على مستوى عام مناسب لكل الأعمار.</p>
@@ -760,10 +767,12 @@ color:#5C4413;font-size:15px;line-height:1.9;}
 
 <!-- ═══ FOOTER ═══ -->
 <footer class="site-footer" role="contentinfo">
+    <div data-lg-mini-nav-root></div>
     <p class="footer-brand">Lattakia Guide Team</p>
     <p>البريد الإلكتروني: <a href="mailto:help@lattakiaguide.app"><span class="reverse-email">ppa.ediugaikattal@pleh</span></a> &nbsp;·&nbsp; الموقع: <a href="https://lattakiaguide.app" target="_blank" rel="noopener noreferrer">lattakiaguide.app</a></p>
     <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة · نهاية إقرار أمان البيانات</p>
 </footer>
 
+<script src="assets/site-nav.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<script src="assets/theme-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>تواصل معنا – Lattakia Guide</title>
@@ -121,13 +122,16 @@
         @media print { body { background: #fff; } .site-header { background: var(--clr-brand)!important; print-color-adjust: exact; } .policy-section { box-shadow: none; border: 1px solid #ddd; } .page-body { padding: 16px; } }
         @media(prefers-reduced-motion:reduce) { *,*::before,*::after { transition: none!important; animation: none!important; } }
     </style>
+    <link rel="stylesheet" href="assets/site-nav.css">
+    <link rel="stylesheet" href="assets/dark-theme.css">
 </head>
 <body>
+<div data-lg-drawer-root></div>
 <a href="#main-content" class="skip-link">الانتقال إلى المحتوى الرئيسي</a>
 
 <!-- ═══ HERO ═══ -->
 <header class="site-header" role="banner">
-    <div class="header-badge">Lattakia Guide</div><br>
+    <div class="header-badge" data-lg-home-link>Lattakia Guide</div><br>
     <div class="header-sub">Contact &amp; Data Requests</div>
     <h1>تواصل معنا</h1>
     <p class="header-meta">إعداد: Lattakia Guide Team &nbsp;·&nbsp; آخر تحديث: 3 سبتمبر 2026</p>
@@ -217,27 +221,55 @@
     <p class="footer-copy">© Lattakia Guide Team · جميع الحقوق محفوظة</p>
 </footer>
 
+<script src="assets/site-nav.js" defer></script>
 <script>
     // بناء روابط mailto مع Subject/Body مُعدّة مسبقاً عبر encodeURIComponent
     // لتجنّب أي أخطاء ترميز يدوية للنص العربي داخل الـ href مباشرة.
+    //
+    // مشكلة سطح المكتب: على الهاتف يفتح mailto: تطبيق البريد مباشرة وينجح دائماً.
+    // على حاسوب بلا برنامج بريد افتراضي (شائع جداً مع مستخدمي Gmail عبر المتصفح)
+    // لا يوجد من يستقبل mailto:، فتفتح بعض المتصفحات تبويباً/صفحة فارغة بلا أي فائدة.
+    // الحل: لا نغيّر سلوك mailto: إطلاقاً (يبقى يعمل بنجاح على الهاتف كما هو)، بل
+    // نراقب فقط هل فقدت النافذة التركيز خلال نصف ثانية (علامة انفتاح برنامج بريد
+    // فعلي، هاتفاً كان أو حاسوباً) — إن لم يحدث ذلك نفتح Gmail على الويب كبديل
+    // جاهز بنفس الموضوع والنص، دون لمس رابط mailto: الأصلي.
     (function () {
         var to = 'help@lattakiaguide.app';
 
-        var generalSubject = 'استفسار عام - دليل اللاذقية';
-        var generalBody = 'مرحباً فريق دليل اللاذقية،\n\nأرغب بالتواصل بخصوص:\n\n';
-        document.getElementById('btnGeneral').href =
-            'mailto:' + to + '?subject=' + encodeURIComponent(generalSubject) + '&body=' + encodeURIComponent(generalBody);
+        function attachFallback(link, subject, body) {
+            link.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) +
+                '&su=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
-        var delSubject = 'طلب حذف بيانات محددة - دليل اللاذقية';
-        var delBody =
+            link.addEventListener('click', function () {
+                var handled = false;
+                function onBlur() { handled = true; }
+                window.addEventListener('blur', onBlur);
+                setTimeout(function () {
+                    window.removeEventListener('blur', onBlur);
+                    if (!handled && !document.hidden) {
+                        window.open(gmailUrl, '_blank', 'noopener');
+                    }
+                }, 600);
+            });
+        }
+
+        attachFallback(
+            document.getElementById('btnGeneral'),
+            'استفسار عام - دليل اللاذقية',
+            'مرحباً فريق دليل اللاذقية،\n\nأرغب بالتواصل بخصوص:\n\n'
+        );
+
+        attachFallback(
+            document.getElementById('btnDeletion'),
+            'طلب حذف بيانات محددة - دليل اللاذقية',
             'مرحباً فريق دليل اللاذقية،\n\n' +
             'أرغب بحذف العنصر التالي من بياناتي دون حذف حسابي بالكامل:\n\n' +
             'البريد الإلكتروني المرتبط بحسابي: \n' +
             'نوع العنصر (مكان / وظيفة / منتج / صورة): \n' +
             'اسم العنصر أو معرّفه: \n' +
-            'سبب الطلب (اختياري): \n';
-        document.getElementById('btnDeletion').href =
-            'mailto:' + to + '?subject=' + encodeURIComponent(delSubject) + '&body=' + encodeURIComponent(delBody);
+            'سبب الطلب (اختياري): \n'
+        );
     })();
 </script>
 
