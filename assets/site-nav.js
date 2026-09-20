@@ -85,7 +85,7 @@
       '</div>' +
       themeToggle +
       '<nav class="lg-drawer-content">' + items + '</nav>' +
-      '<div class="lg-drawer-footer">الإصدار 1.0.0 &copy; 2026</div>' +
+      '<div class="lg-drawer-footer">الإصدار 0.1.24 &copy; 2026</div>' +
       '</div>'
     );
   }
