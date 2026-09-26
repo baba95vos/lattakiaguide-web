@@ -2,29 +2,39 @@
    يبحث عن حاويات محدَّدة بسمات data- ويملأها:
      [data-lg-drawer-root]   → قائمة جانبية كاملة (وزر فتحها إن لم يوجد زر جاهز)
      [data-lg-mini-nav-root] → شريط روابط مصغّر (للصفحات الرسمية بلا قائمة جانبية)
-     [data-lg-home-link]     → يحوّل العنصر (غالباً شعار) إلى رابط للرئيسية */
+     [data-lg-home-link]     → يحوّل العنصر (غالباً شعار) إلى رابط للرئيسية
+     أول <footer> في الصفحة  → يُلحَق به صف أزرار السوشيال ميديا (initSocial) */
 (function () {
   'use strict';
 
   var ICON_BASE = 'assets/icons/';
 
-  var NAV_ITEMS = [
-    { href: 'index.html', icon: 'icon-home.svg', label: 'الرئيسية' },
-    { href: 'download.html', icon: 'icon-download.svg', label: 'تحميل التطبيق' },
-    { href: 'about.html', icon: 'icon-about.svg', label: 'من نحن' },
-    { href: 'user_guide.html', icon: 'icon-guide.svg', label: 'دليل الاستخدام' },
-    { href: 'community-guide.html', icon: 'icon-community.svg', label: 'دليل المجتمع' },
-    { href: 'add_place_guide.html', icon: 'icon-add-place.svg', label: 'دليل إضافة مكان' },
-    { href: 'manage_place_guide.html', icon: 'icon-settings.svg', label: 'دليل إدارة المكان' },
-    { href: 'job_opportunity_guide.html', icon: 'icon-jobs.svg', label: 'دليل إضافة فرصة عمل' },
-    { href: 'job_seeker_guide.html', icon: 'icon-job-seeker.svg', label: 'دليل طلب عمل' },
-    { href: 'contact.html', icon: 'icon-contact.svg', label: 'تواصل معنا' },
-    { href: 'terms_of_use.html', icon: 'icon-terms.svg', label: 'شروط الاستخدام' },
-    { href: 'privacy_policy.html', icon: 'icon-privacy.svg', label: 'سياسة الخصوصية' },
-    { href: 'claiming_policy.html', icon: 'icon-claiming.svg', label: 'سياسة إثبات الملكية' },
-    { href: 'Data-Safety-Declaration.html', icon: 'icon-data-safety.svg', label: 'إقرار أمان البيانات' },
-    { href: 'deletion_policy.html', icon: 'icon-deletion.svg', label: 'سياسة حذف البيانات' },
-    { href: 'delete-account.html', icon: 'icon-person.svg', label: 'حذف الحساب' }
+  // البنود مجمَّعة حسب النوع — كل مجموعة بعنوان صغير (المجموعة الأولى بلا عنوان)
+  var NAV_GROUPS = [
+    { title: '', items: [
+      { href: 'index.html', icon: 'icon-home.svg', label: 'الرئيسية' },
+      { href: 'download.html', icon: 'icon-download.svg', label: 'تحميل التطبيق' },
+      { href: 'about.html', icon: 'icon-about.svg', label: 'من نحن' },
+      { href: 'contact.html', icon: 'icon-contact.svg', label: 'تواصل معنا' }
+    ] },
+    { title: 'الأدلة', items: [
+      { href: 'user_guide.html', icon: 'icon-guide.svg', label: 'دليل الاستخدام' },
+      { href: 'community-guide.html', icon: 'icon-community.svg', label: 'دليل المجتمع' },
+      { href: 'add_place_guide.html', icon: 'icon-add-place.svg', label: 'دليل إضافة مكان' },
+      { href: 'manage_place_guide.html', icon: 'icon-settings.svg', label: 'دليل إدارة المكان' },
+      { href: 'job_opportunity_guide.html', icon: 'icon-jobs.svg', label: 'دليل إضافة فرصة عمل' },
+      { href: 'job_seeker_guide.html', icon: 'icon-job-seeker.svg', label: 'دليل طلب عمل' }
+    ] },
+    { title: 'الشروط والسياسات', items: [
+      { href: 'terms_of_use.html', icon: 'icon-terms.svg', label: 'شروط الاستخدام' },
+      { href: 'claiming_policy.html', icon: 'icon-claiming.svg', label: 'سياسة إثبات الملكية' }
+    ] },
+    { title: 'الخصوصية والبيانات', items: [
+      { href: 'privacy_policy.html', icon: 'icon-privacy.svg', label: 'سياسة الخصوصية' },
+      { href: 'Data-Safety-Declaration.html', icon: 'icon-data-safety.svg', label: 'إقرار أمان البيانات' },
+      { href: 'deletion_policy.html', icon: 'icon-deletion.svg', label: 'سياسة حذف البيانات' },
+      { href: 'delete-account.html', icon: 'icon-person.svg', label: 'حذف الحساب' }
+    ] }
   ];
 
   var MINI_ITEMS = [
@@ -45,11 +55,16 @@
 
   function buildDrawerMarkup() {
     var page = currentPage();
-    var items = NAV_ITEMS.map(function (item) {
-      var active = item.href.toLowerCase() === page ? ' active' : '';
-      return '<a href="' + item.href + '" class="lg-drawer-item' + active + '">' +
-        '<img class="lg-drawer-icon" src="' + ICON_BASE + item.icon + '" alt="">' +
-        escapeHtml(item.label) + '</a>';
+    var items = NAV_GROUPS.map(function (group) {
+      var links = group.items.map(function (item) {
+        var active = item.href.toLowerCase() === page ? ' active' : '';
+        return '<a href="' + item.href + '" class="lg-drawer-item' + active + '">' +
+          '<img class="lg-drawer-icon" src="' + ICON_BASE + item.icon + '" alt="">' +
+          escapeHtml(item.label) + '</a>';
+      }).join('');
+      var title = group.title
+        ? '<div class="lg-drawer-group-title">' + escapeHtml(group.title) + '</div>' : '';
+      return '<div class="lg-drawer-group">' + title + links + '</div>';
     }).join('');
 
     var themeToggle =
@@ -85,6 +100,7 @@
       '</div>' +
       themeToggle +
       '<nav class="lg-drawer-content">' + items + '</nav>' +
+      '<div class="lg-social lg-social-drawer" data-lg-social hidden></div>' +
       '<div class="lg-drawer-footer">الإصدار 0.1.24 &copy; 2026</div>' +
       '</div>'
     );
@@ -172,6 +188,109 @@
     el.replaceWith(a);
   }
 
+  /* ── حسابات التطبيق على السوشيال ميديا ─────────────────────────────────
+     نفس مصدر تذييل القائمة الجانبية في التطبيق (layout_drawer_social +
+     BaseActivity.bindDrawerSocialLinks): app_config/settings.URLfacebook / URLinstagram،
+     تُقرأ عبر Firestore REST (القراءة مفتوحة في القواعد) بلا تحميل Firebase SDK.
+     رابط فارغ أو ليس https على نطاق المنصّة نفسها ← يختفي زرّه، وكلاهما ← يختفي الصف كله. */
+  var FIRESTORE_SETTINGS_URL =
+    'https://firestore.googleapis.com/v1/projects/device-streaming-a7432e75/databases/(default)' +
+    '/documents/app_config/settings?key=AIzaSyAT8auOR8cfT7C-kRzm27iQRIPriCy9jQE' +
+    '&mask.fieldPaths=URLfacebook&mask.fieldPaths=URLinstagram';
+  var SOCIAL_CACHE_KEY = 'lg-social-links';
+  var SOCIAL_CACHE_MS = 10 * 60 * 1000;
+
+  // نفس رسمَي ic_facebook_custom / ic_instagram_custom في التطبيق
+  var SOCIAL_ICON_FACEBOOK =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#1877F2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path stroke-width="1.5" d="M16,3H8C5.24,3 3,5.24 3,8v8c0,2.76 2.24,5 5,5h8c2.76,0 5,-2.24 5,-5V8C21,5.24 18.76,3 16,3z"/>' +
+    '<path stroke-width="1.2" transform="translate(14 13) scale(0.95) translate(-14 -13)" d="M15.5,21V13.5h2.5l0.5-3h-3v-1.8c0-0.7,0.3-1,1-1h2V5c-0.3,0-1.5-0.2-2.8-0.2-2.8,0-4.2,1.7-4.2,4.2v2h-2v3h2v7H15.5z"/>' +
+    '</svg>';
+  var SOCIAL_ICON_INSTAGRAM =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#E4405F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M16,3H8C5.24,3 3,5.24 3,8v8c0,2.76 2.24,5 5,5h8c2.76,0 5,-2.24 5,-5V8C21,5.24 18.76,3 16,3z"/>' +
+    '<circle cx="12" cy="12" r="3"/>' +
+    '<circle cx="17.5" cy="6.5" r="0.5" fill="#E4405F" stroke="none"/>' +
+    '</svg>';
+
+  var SOCIAL_PLATFORMS = [
+    { field: 'URLfacebook', label: 'فيسبوك', icon: SOCIAL_ICON_FACEBOOK, hosts: ['facebook.com', 'fb.com', 'fb.me'] },
+    { field: 'URLinstagram', label: 'إنستغرام', icon: SOCIAL_ICON_INSTAGRAM, hosts: ['instagram.com', 'instagr.am'] }
+  ];
+
+  function validSocialUrl(raw, hosts) {
+    if (typeof raw !== 'string' || !raw.trim()) return null;
+    var url;
+    try { url = new URL(raw.trim()); } catch (e) { return null; }
+    if (url.protocol !== 'https:') return null;
+    var host = url.hostname.toLowerCase();
+    var ok = hosts.some(function (h) {
+      return host === h || host.slice(-(h.length + 1)) === '.' + h;
+    });
+    return ok ? url.href : null;
+  }
+
+  function readSocialCache() {
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(SOCIAL_CACHE_KEY) || 'null');
+      if (cached && Date.now() - cached.at < SOCIAL_CACHE_MS) return cached.links;
+    } catch (e) {}
+    return null;
+  }
+
+  function fetchSocialLinks() {
+    var cached = readSocialCache();
+    if (cached) return Promise.resolve(cached);
+    if (!window.fetch) return Promise.resolve({});
+    return fetch(FIRESTORE_SETTINGS_URL)
+      .then(function (res) { return res.ok ? res.json() : {}; })
+      .then(function (doc) {
+        var fields = (doc && doc.fields) || {};
+        var links = {};
+        SOCIAL_PLATFORMS.forEach(function (p) {
+          links[p.field] = fields[p.field] ? fields[p.field].stringValue || '' : '';
+        });
+        try {
+          sessionStorage.setItem(SOCIAL_CACHE_KEY, JSON.stringify({ at: Date.now(), links: links }));
+        } catch (e) {}
+        return links;
+      })
+      .catch(function () { return {}; });
+  }
+
+  function buildSocialMarkup(links) {
+    var buttons = SOCIAL_PLATFORMS.map(function (p) {
+      var url = validSocialUrl(links[p.field], p.hosts);
+      if (!url) return '';
+      return '<a class="lg-social-btn" href="' + url.replace(/"/g, '%22') + '"' +
+        ' target="_blank" rel="noopener noreferrer" aria-label="' + p.label + '" title="' + p.label + '">' +
+        p.icon + '</a>';
+    }).join('');
+    return buttons ? '<span class="lg-social-label">تابعنا</span>' + buttons : '';
+  }
+
+  // صف أسفل القائمة الجانبية (إن وُجدت) + صف في آخر أول تذييل للصفحة
+  function initSocial() {
+    var targets = Array.prototype.slice.call(document.querySelectorAll('[data-lg-social]'));
+    var footer = document.querySelector('footer');
+    if (footer && !footer.querySelector('[data-lg-social]')) {
+      var row = document.createElement('div');
+      row.className = 'lg-social lg-social-footer';
+      row.setAttribute('data-lg-social', '');
+      row.hidden = true;
+      footer.appendChild(row);
+      targets.push(row);
+    }
+    if (!targets.length) return;
+    fetchSocialLinks().then(function (links) {
+      var html = buildSocialMarkup(links);
+      targets.forEach(function (el) {
+        el.innerHTML = html;
+        el.hidden = !html;
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var drawerRoot = document.querySelector('[data-lg-drawer-root]');
     if (drawerRoot) initDrawer(drawerRoot);
@@ -181,5 +300,7 @@
 
     var homeLinks = document.querySelectorAll('[data-lg-home-link]');
     for (var i = 0; i < homeLinks.length; i++) initHomeLink(homeLinks[i]);
+
+    initSocial();
   });
 })();
