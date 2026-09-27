@@ -461,17 +461,20 @@
           align-items: center;
           gap: 0.5rem;
         }
-        .uid-info-icon { font-size: 1.1rem; flex-shrink: 0; }
+        .uid-info-icon { font-size: 1.1rem; flex-shrink: 0; line-height: 0; }
+        .uid-info-icon img { width: 20px; height: 20px; }
 
         /* ── Dead / Error screen ────────────────── */
         .dead-wrap { text-align: center; padding: 2rem 0.5rem; }
-        .dead-icon  { font-size: 4rem; margin-bottom: 1rem; }
+        .dead-icon  { font-size: 4rem; margin-bottom: 1rem; line-height: 0; }
+        .dead-icon img { width: 72px; height: 72px; }
         .dead-title { font-size: 1.25rem; font-weight: 900; color: var(--err); margin-bottom: 0.5rem; }
         .dead-sub   { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
 
         /* ── Success ────────────────────────────── */
         .success-wrap { text-align: center; padding: 1rem 0; }
-        .success-icon { font-size: 4.5rem; margin-bottom: 1rem; animation: pop 0.4s ease; }
+        .success-icon { font-size: 4.5rem; margin-bottom: 1rem; animation: pop 0.4s ease; line-height: 0; }
+        .success-icon img { width: 80px; height: 80px; }
         @keyframes pop {
           0%   { transform: scale(0.5); opacity: 0; }
           70%  { transform: scale(1.15); }
@@ -527,7 +530,7 @@
 </head>
 <body>
 <div id="vpn-notice" style="display:none;background:#fff3cd;border:1px solid #ffc107;color:#856404;padding:10px 16px;font-size:13px;text-align:center;direction:rtl;">
-  ⚠️ يبدو أنك تستخدم VPN — قد يؤثر ذلك على معالجة طلبك. يُنصح بإيقافه قبل الإرسال.
+  <img src="assets/icons/icon-warning.svg" alt="" style="width:18px;height:18px;vertical-align:-3px;"> يبدو أنك تستخدم VPN — قد يؤثر ذلك على معالجة طلبك. يُنصح بإيقافه قبل الإرسال.
 </div>
 
 <!-- Loading overlay -->
@@ -537,7 +540,7 @@
 </div>
 
 <div class="header">
-    <div class="header-logo">🗺️ دليل اللاذقية</div>
+    <div class="header-logo"><img src="assets/logo.svg" alt="" style="width:38px;height:38px;background:#fff;border-radius:11px;padding:4px;vertical-align:middle;margin-left:8px;">دليل اللاذقية</div>
     <div class="header-sub">الاشتراك في الخطط المميزة</div>
 </div>
 
@@ -562,7 +565,7 @@
     <!-- ❌ Dead screen (refresh / invalid) -->
     <div class="card" id="view-dead" style="display:none">
         <div class="dead-wrap">
-            <div class="dead-icon">🔒</div>
+            <div class="dead-icon"><img src="assets/icons/icon-data-safety.svg" alt=""></div>
             <div class="dead-title">انتهت صلاحية هذه الصفحة</div>
             <div class="dead-sub">
                 هذه الصفحة تُفتح مرة واحدة فقط من داخل التطبيق.<br>
@@ -577,7 +580,7 @@
         <div class="card-sub">تُفعَّل الخطة فور مراجعة وتأكيد الدفع من قِبل الإدارة</div>
 
         <div class="uid-info" id="uid-info-box" style="display:none">
-            <span class="uid-info-icon">✅</span>
+            <span class="uid-info-icon"><img src="assets/icons/icon-success.svg" alt=""></span>
             <span id="uid-info-text"></span>
         </div>
 
@@ -696,13 +699,13 @@
         </div>
 
         <div class="warn-box">
-            ⚠️ أكمل التحويل أولاً عبر تطبيق شام كاش، ثم أدخل رقم الحوالة الظاهر لك بعد إتمام العملية. سيُراجَع طلبك خلال 24 ساعة.
+            <img src="assets/icons/icon-warning.svg" alt="" style="width:18px;height:18px;vertical-align:-3px;"> أكمل التحويل أولاً عبر تطبيق شام كاش، ثم أدخل رقم الحوالة الظاهر لك بعد إتمام العملية. سيُراجَع طلبك خلال 24 ساعة.
         </div>
 
         <div class="form-group">
           <label>البريد الإلكتروني <span style="color:var(--err)">*</span></label>
           <input type="email" id="email-input" placeholder="example@gmail.com" autocomplete="email" dir="ltr">
-          <div style="font-size:0.78rem;color:#15803d;margin-top:0.35rem;">📧 سيصلك وصل الدفع على هذا البريد بعد إرسال الطلب</div>
+          <div style="font-size:0.78rem;color:#15803d;margin-top:0.35rem;"><img src="assets/icons/icon-contact.svg" alt="" style="width:16px;height:16px;vertical-align:-3px;"> سيصلك وصل الدفع على هذا البريد بعد إرسال الطلب</div>
           <div class="err-msg" id="err-email"></div>
         </div>
 
@@ -724,7 +727,7 @@
     <!-- ✅ Success ───────────────────────── -->
     <div class="card" id="view-success" style="display:none">
         <div class="success-wrap">
-            <div class="success-icon">✅</div>
+            <div class="success-icon"><img src="assets/icons/icon-success.svg" alt=""></div>
             <div class="success-title">تم استلام طلبك!</div>
             <div class="success-sub">
                 ستتلقى إشعاراً في التطبيق فور مراجعة طلبك وتفعيل اشتراكك من قِبل الإدارة.<br>
@@ -738,7 +741,7 @@
                       background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;
                       color:#15803d;font-weight:700;font-size:0.9rem;text-decoration:none;
                       text-align:center;width:100%;box-sizing:border-box;">
-              📄 تحميل وصل الدفع PDF
+              <img src="assets/icons/icon-receipt.svg" alt="" style="width:18px;height:18px;vertical-align:-3px;"> تحميل وصل الدفع PDF
             </a>
         </div>
     </div>
@@ -1092,7 +1095,7 @@
               'margin-top:0.5rem;font-size:0.78rem;font-weight:700;' +
               'color:#15803d;background:#f0fdf4;border:1px solid #86efac;' +
               'border-radius:8px;padding:0.25rem 0.6rem;display:inline-block;';
-            badge.textContent = '🔄 مشترك حالياً — سيُمدَّد الاشتراك';
+            badge.innerHTML = '<img src="assets/icons/icon-renew.svg" alt="" style="width:14px;height:14px;vertical-align:-2px;"> مشترك حالياً — سيُمدَّد الاشتراك';
             card.appendChild(badge);
           }
         });
@@ -1461,7 +1464,7 @@
 </style>
 </head>
 <body>
-<div class="logo">🗺️ دليل اللاذقية</div>
+<div class="logo"><img src="https://lattakiaguide.app/assets/logo.svg" alt="" style="width:38px;height:38px;background:#e8eef7;border-radius:11px;padding:4px;vertical-align:middle;margin-left:8px;">دليل اللاذقية</div>
 <div class="subtitle">وصل دفع رسمي</div>
 <div class="ref">رقم الطلب: ${requestId}</div>
 <hr class="divider">
@@ -1495,7 +1498,7 @@
 </table>
 
 <div class="warn">
-  ⚠️ تنبيه هام: هذا الوصل وثيقة طلب أولية فقط. لا يُعدّ دليلاً على تفعيل الخدمة ولا ملزماً قانونياً إلا بعد مراجعته والتأكد من مطابقة المبلغ الإجمالي المدفوع مع رقم الحوالة المرسلين برقم الحوالة وقيمة المبلغ المرسل في تطبيق شام كاش والموافقة عليه من قِبَل إدارة دليل اللاذقية.
+  <img src="https://lattakiaguide.app/assets/icons/icon-warning.svg" alt="" style="width:16px;height:16px;vertical-align:-3px;"> تنبيه هام: هذا الوصل وثيقة طلب أولية فقط. لا يُعدّ دليلاً على تفعيل الخدمة ولا ملزماً قانونياً إلا بعد مراجعته والتأكد من مطابقة المبلغ الإجمالي المدفوع مع رقم الحوالة المرسلين برقم الحوالة وقيمة المبلغ المرسل في تطبيق شام كاش والموافقة عليه من قِبَل إدارة دليل اللاذقية.
 </div>
 </body>
 </html>`;

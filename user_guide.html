@@ -184,7 +184,9 @@
       justify-content: center;
       font-size: 24px;
       font-weight: 800;
+      flex-shrink: 0;
     }
+    .section-icon img { width: 30px; height: 30px; display: block; }
     .section h2 {
       font-family: var(--ff-display);
       font-size: 24px;
@@ -222,11 +224,13 @@
       font-size: 15px;
     }
     .feature-item::before {
-      content: '✓';
+      content: '';
       position: absolute;
       right: 0;
-      color: var(--clr-success);
-      font-weight: 900;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      background: url('assets/icons/icon-check.svg') center / contain no-repeat;
     }
 
     /* Cards for features */
@@ -245,9 +249,9 @@
     }
     .feature-card i {
       display: block;
-      font-size: 30px;
       margin-bottom: 10px;
     }
+    .feature-card i img { width: 38px; height: 38px; display: block; margin: 0 auto; }
     .feature-card h4 {
       font-family: var(--ff-display);
       font-size: 15px;
@@ -264,6 +268,8 @@
       display: flex;
       gap: 15px;
     }
+    .alert-ico { width: 20px; height: 20px; vertical-align: -4px; margin-left: 4px; }
+    .ui-ico { width: 18px; height: 18px; vertical-align: -3px; margin: 0 2px; }
     .alert-info { background: var(--clr-brand-light); border-right: 5px solid var(--clr-brand); color: var(--clr-brand); }
     .alert-tip { background: #F0FDF4; border-right: 5px solid var(--clr-success); color: #166534; }
     .alert-warn { background: var(--clr-accent-lt); border-right: 5px solid var(--clr-accent); color: #92400E; }
@@ -325,7 +331,7 @@
   <!-- Section 1: Regular User Explorer -->
   <section class="section" id="user-explorer">
     <div class="section-header">
-      <div class="section-icon">🔍</div>
+      <div class="section-icon"><img src="assets/icons/icon-discover.svg" alt=""></div>
       <h2>دليلك لاستكشاف اللاذقية</h2>
     </div>
     <p>صُمم التطبيق ليكون بوابتك الأسرع لكل ما تحتاجه في المدينة، من مطاعم وكافيهات إلى مراكز طبية وخدمات عامة.</p>
@@ -344,9 +350,9 @@
       <h3>صفحة المكان: كل شيء في مكان واحد</h3>
       <p>عند دخولك لصفحة أي مكان، ستجد معلومات متكاملة:</p>
       <div class="grid-features">
-        <div class="feature-card"><i>📋</i><h4>المنيو والكتالوج</h4><p>تصفح المنتجات والأسعار والصور بدقة.</p></div>
-        <div class="feature-card"><i>📍</i><h4>الموقع الدقيق</h4><p>خرائط تفاعلية مع علامات "بالقرب من" لتسهيل الوصول.</p></div>
-        <div class="feature-card"><i>📞</i><h4>التواصل السريع</h4><p>اتصال مباشر، واتساب، أو تصفح صفحات التواصل الاجتماعي.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-menu.svg" alt=""></i><h4>المنيو والكتالوج</h4><p>تصفح المنتجات والأسعار والصور بدقة.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-location.svg" alt=""></i><h4>الموقع الدقيق</h4><p>خرائط تفاعلية مع علامات "بالقرب من" لتسهيل الوصول.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-phone.svg" alt=""></i><h4>التواصل السريع</h4><p>اتصال مباشر، واتساب، أو تصفح صفحات التواصل الاجتماعي.</p></div>
       </div>
     </div>
   </section>
@@ -354,7 +360,7 @@
   <!-- Section 2: Mushwar Feature -->
   <section class="section" id="user-mushwar">
     <div class="section-header">
-      <div class="section-icon">🎡</div>
+      <div class="section-icon"><img src="assets/icons/icon-mashwar.svg" alt=""></div>
       <h2>ميزة "المشوار": اكتشف بذكاء</h2>
     </div>
     <p>هل تشعر بالحيرة؟ ميزة المشوار تقترح عليك أماكن بناءً على "مزاجك" الحالي بطريقة تفاعلية وممتعة.</p>
@@ -371,14 +377,14 @@
     </div>
 
     <div class="alert alert-tip">
-      <strong>💡 معلومة:</strong> كلما استخدمت "المشوار" أكثر، أصبح التطبيق أذكى في فهم ذوقك واقتراح الأماكن التي تحبها فعلاً.
+      <strong><img class="alert-ico" src="assets/icons/icon-tip.svg" alt=""> معلومة:</strong> كلما استخدمت "المشوار" أكثر، أصبح التطبيق أذكى في فهم ذوقك واقتراح الأماكن التي تحبها فعلاً.
     </div>
   </section>
 
   <!-- Section 2-b: AI Assistant -->
   <section class="section" id="user-ai-agent">
     <div class="section-header">
-      <div class="section-icon">✨</div>
+      <div class="section-icon"><img src="assets/icons/icon-assistant.svg" alt=""></div>
       <h2>المساعد الذكي: اسأل بلغتك</h2>
     </div>
     <p>بدل ما تدوّر بين التصنيفات، اسأل مباشرة: «وين في مطعم سمك؟» أو «بدي كافيه هادي قريب من الكورنيش»
@@ -395,20 +401,20 @@
         <li>إذا فعّلت الموقع التقريبي، بيعرف منطقتك وبيحسب بُعد كل مكان عنك بالكيلومترات، فبيدلّك على الأقرب فعلاً بلا ما تكتب اسم منطقتك.</li>
         <li>بيسألك سؤال متابعة بآخر كل رد، وبتلاقي تحته اقتراحات جاهزة بتضغطها بدل ما تكتب.</li>
         <li>اسأله عن التطبيق نفسه: «وين زرّ إضافة مكان؟» أو «كيف بغيّر صورة الغلاف؟» — بيدلّك على مكان الزر بالضبط.</li>
-        <li>بدك تبلّش من جديد؟ اضغط 🗑️ أعلى الشاشة لتبدأ محادثة جديدة — رصيدك ما بيتأثر.</li>
-        <li>كل مكان أو فرصة عمل بيرسلها لك بتلاقيها بـ🗂️ «ما أرسله المساعد»، وفيك تحذف منها أي عنصر ما بدك ياه.</li>
+        <li>بدك تبلّش من جديد؟ اضغط <img class="ui-ico" src="assets/icons/icon-deletion.svg" alt="زر الحذف"> أعلى الشاشة لتبدأ محادثة جديدة — رصيدك ما بيتأثر.</li>
+        <li>كل مكان أو فرصة عمل بيرسلها لك بتلاقيها بـ<img class="ui-ico" src="assets/icons/icon-folder.svg" alt="زر ما أرسله المساعد"> «ما أرسله المساعد»، وفيك تحذف منها أي عنصر ما بدك ياه.</li>
       </ol>
     </div>
 
     <div class="alert alert-tip">
-      <strong>📍 الموقع التقريبي:</strong> اختياري تماماً، وبتقدر تفعّله من داخل شاشة المساعد.
+      <strong><img class="alert-ico" src="assets/icons/icon-location.svg" alt=""> الموقع التقريبي:</strong> اختياري تماماً، وبتقدر تفعّله من داخل شاشة المساعد.
       تقريبي فقط — مو دقيق — وما بينحفظ موقعك: التطبيق بيحوّله لاسم منطقة ومسافة وبينساه.
       إذا ما فعّلته، المساعد بيشتغل معك كامل زي ما هو، بس ما رح يقدر يقلّك «هاد على بعد
       كم منك» وبيسألك عن منطقتك بدل ما يخمّنها.
     </div>
 
     <div class="alert alert-tip">
-      <strong>💡 معلومة:</strong> المساعد يجاوب عن محتوى التطبيق فقط (أماكن، وظائف، فعاليات، عروض،
+      <strong><img class="alert-ico" src="assets/icons/icon-tip.svg" alt=""> معلومة:</strong> المساعد يجاوب عن محتوى التطبيق فقط (أماكن، وظائف، فعاليات، عروض،
       خدمات)، وباللغة العربية أو الإنجليزية أو التركية. عدد الأسئلة اليومي محدود، والمعلومة الأدق
       تبقى دائماً في صفحة المكان نفسها.
     </div>
@@ -417,7 +423,7 @@
   <!-- Section 3: Jobs -->
   <section class="section" id="user-jobs">
     <div class="section-header">
-      <div class="section-icon">💼</div>
+      <div class="section-icon"><img src="assets/icons/icon-jobs.svg" alt=""></div>
       <h2>سوق العمل والوظائف</h2>
     </div>
 
@@ -435,7 +441,7 @@
   <!-- Section 4: Weekly Top -->
   <section class="section" id="user-weekly-top">
     <div class="section-header">
-      <div class="section-icon">🏆</div>
+      <div class="section-icon"><img src="assets/icons/icon-trophy.svg" alt=""></div>
       <h2>سباق "الأول على الأسبوع"</h2>
     </div>
     <p>تحدي أسبوعي متجدد يبرز أكثر الأماكن تفاعلاً وزيارة في اللاذقية خلال الـ 7 أيام الماضية.</p>
@@ -444,21 +450,21 @@
       <h3>كيف يتم التصنيف؟</h3>
       <p>يعتمد الترتيب بشكل أساسي على <strong>عدد الزيارات الحقيقية</strong> لصفحة المكان داخل التطبيق. يبدأ السباق كل يوم أحد وينتهي بنهاية يوم السبت.</p>
       <div class="grid-features">
-        <div class="feature-card"><i>👑</i><h4>المركز الأول</h4><p>يحصل على تاج الصدارة وبطاقة عرض مميزة في قمة القائمة.</p></div>
-        <div class="feature-card"><i>🥇</i><h4>منصة التتويج</h4><p>يتم إبراز المراكز الثلاثة الأولى بميداليات خاصة (ذهبية، فضية، برونزية).</p></div>
-        <div class="feature-card"><i>📅</i><h4>الأرشيف الأسبوعي</h4><p>يمكنك العودة ومشاهدة متصدري الأسابيع الماضية ومعرفة الأماكن الأكثر استمرارية.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-crown.svg" alt=""></i><h4>المركز الأول</h4><p>يحصل على تاج الصدارة وبطاقة عرض مميزة في قمة القائمة.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-medal.svg" alt=""></i><h4>منصة التتويج</h4><p>يتم إبراز المراكز الثلاثة الأولى بميداليات خاصة (ذهبية، فضية، برونزية).</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-calendar.svg" alt=""></i><h4>الأرشيف الأسبوعي</h4><p>يمكنك العودة ومشاهدة متصدري الأسابيع الماضية ومعرفة الأماكن الأكثر استمرارية.</p></div>
       </div>
     </div>
 
     <div class="alert alert-tip">
-      <strong>💡 نصيحة لأصحاب الأماكن:</strong> مشاركة رابط مكانك على وسائل التواصل الاجتماعي ودعوة الزبائن لتصفح عروضك يزيد من عدد زياراتك ويرفع ترتيبك في سباق الأسبوع.
+      <strong><img class="alert-ico" src="assets/icons/icon-tip.svg" alt=""> نصيحة لأصحاب الأماكن:</strong> مشاركة رابط مكانك على وسائل التواصل الاجتماعي ودعوة الزبائن لتصفح عروضك يزيد من عدد زياراتك ويرفع ترتيبك في سباق الأسبوع.
     </div>
   </section>
 
   <!-- Section 5: Place Owners -->
   <section class="section" id="owner-start">
     <div class="section-header">
-      <div class="section-icon">🏗️</div>
+      <div class="section-icon"><img src="assets/icons/icon-add-place.svg" alt=""></div>
       <h2>دليل أصحاب المكان</h2>
     </div>
     <p>حوّل مكانك التجاري إلى وجهة رقمية يقصدها آلاف المستخدمين يومياً.</p>
@@ -483,14 +489,14 @@
     </div>
 
     <div class="alert alert-warn">
-      <strong>⚠️ تنبيه:</strong> البيانات الدقيقة والصور عالية الجودة تزيد من نسبة ظهور مكانك في نتائج البحث بنسبة تصل إلى 300%.
+      <strong><img class="alert-ico" src="assets/icons/icon-warning.svg" alt=""> تنبيه:</strong> البيانات الدقيقة والصور عالية الجودة تزيد من نسبة ظهور مكانك في نتائج البحث بنسبة تصل إلى 300%.
     </div>
   </section>
 
   <!-- Section 5: Owner Additional features -->
   <section class="section" id="owner-additional">
     <div class="section-header">
-      <div class="section-icon">🚀</div>
+      <div class="section-icon"><img src="assets/icons/icon-growth.svg" alt=""></div>
       <h2>الميزات الإضافية والنمو</h2>
     </div>
 
@@ -498,9 +504,9 @@
       <h3>الإحصائيات والتحليلات</h3>
       <p>لا تخمن، بل اعرف الحقيقة! نوفر لك إحصائيات دقيقة حول:</p>
       <div class="grid-features">
-        <div class="feature-card"><i>👁️</i><h4>المشاهدات</h4><p>عدد الأشخاص الذين زاروا صفحتك.</p></div>
-        <div class="feature-card"><i>📞</i><h4>التفاعلات</h4><p>عدد مرات الضغط على زر الاتصال أو الواتساب.</p></div>
-        <div class="feature-card"><i>⌛</i><h4>وقت البقاء</h4><p>متوسط الوقت الذي يقضيه الزوار في تصفح صورك ومنتجاتك.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-views.svg" alt=""></i><h4>المشاهدات</h4><p>عدد الأشخاص الذين زاروا صفحتك.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-phone.svg" alt=""></i><h4>التفاعلات</h4><p>عدد مرات الضغط على زر الاتصال أو الواتساب.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-time.svg" alt=""></i><h4>وقت البقاء</h4><p>متوسط الوقت الذي يقضيه الزوار في تصفح صورك ومنتجاتك.</p></div>
       </div>
     </div>
 
@@ -514,7 +520,7 @@
   <!-- Section 6: Community -->
   <section class="section" id="community">
     <div class="section-header">
-      <div class="section-icon">🤝</div>
+      <div class="section-icon"><img src="assets/icons/icon-community.svg" alt=""></div>
       <h2>المجتمع والمصداقية</h2>
     </div>
 
@@ -524,19 +530,19 @@
     </div>
 
     <div class="alert alert-info">
-      <strong>📧 هل تحتاج لمساعدة؟</strong> يمكنك دائماً التواصل مع الدعم الفني عبر التطبيق للاستفسار عن أي ميزة أو لطلب المساعدة في إدارة مكانك.
+      <strong><img class="alert-ico" src="assets/icons/icon-contact.svg" alt=""> هل تحتاج لمساعدة؟</strong> يمكنك دائماً التواصل مع الدعم الفني عبر التطبيق للاستفسار عن أي ميزة أو لطلب المساعدة في إدارة مكانك.
     </div>
   </section>
 
   <!-- Section 7: خطط العرض الإضافية (مميز / موصى به) -->
   <section class="section" id="owner-plans">
     <div class="section-header">
-      <div class="section-icon">⭐</div>
+      <div class="section-icon"><img src="assets/icons/icon-star.svg" alt=""></div>
       <h2>خطط العرض الإضافية: «مميز» و«موصى به»</h2>
     </div>
 
     <div class="alert alert-warn">
-      <strong>⚠️ هاتان الخطتان غير مفعَّلتين حالياً.</strong>
+      <strong><img class="alert-ico" src="assets/icons/icon-warning.svg" alt=""> هاتان الخطتان غير مفعَّلتين حالياً.</strong>
       لا تُجرى داخل التطبيق أي عملية شراء أو دفع، ولا يطلب التطبيق أي بيانات بطاقات أو
       حسابات بنكية. ستصبح الخطتان متاحتين عند تفعيل خدمات الدفع في Google&nbsp;Play،
       وستتم عمليات الشراء حينها عبر نظام الدفع في Google&nbsp;Play حصراً.
@@ -547,11 +553,11 @@
     <div class="sub-section">
       <h3>خطة «مميز» — أهم خمس ميزات</h3>
       <div class="grid-features">
-        <div class="feature-card"><i>👑</i><h4>بطاقة ذهبية بإطار متحرّك</h4><p>تصميم ذهبي وإطار متحرّك لبطاقة مكانك في الصفحة الرئيسية وقوائم التصنيفات ونتائج البحث وصفحة المكان.</p></div>
-        <div class="feature-card"><i>📊</i><h4>فتح الإحصائيات المقفلة</h4><p>نقرات واتساب وفيسبوك وانستغرام، ومرات فتح «مشوار»، وعدد المهتمين، وعدد من حفظوا مكانك.</p></div>
-        <div class="feature-card"><i>🎨</i><h4>تحكّم كامل بتصميم البطاقة</h4><p>موضع الصورة، وترتيب أزرار التواصل ومواضعها، وحتى خمسة أوسمة تُعرَض على البطاقة — بمعاينة حيّة وزر تراجع.</p></div>
-        <div class="feature-card"><i>🖼️</i><h4>خمس صور لكل صنف</h4><p>كل عنصر في قائمة أصنافك يقبل حتى خمس صور تُرتَّب بالسحب، بدل صورة واحدة للأماكن غير المشتركة.</p></div>
-        <div class="feature-card"><i>🏅</i><h4>ثمانية أنواع أوسمة إضافية</h4><p>أوسمة واتساب وفيسبوك وانستغرام و«مشوار» والاهتمام والحفظ وأوسمة الاشتراك.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-crown.svg" alt=""></i><h4>بطاقة ذهبية بإطار متحرّك</h4><p>تصميم ذهبي وإطار متحرّك لبطاقة مكانك في الصفحة الرئيسية وقوائم التصنيفات ونتائج البحث وصفحة المكان.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-stats.svg" alt=""></i><h4>فتح الإحصائيات المقفلة</h4><p>نقرات واتساب وفيسبوك وانستغرام، ومرات فتح «مشوار»، وعدد المهتمين، وعدد من حفظوا مكانك.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-design.svg" alt=""></i><h4>تحكّم كامل بتصميم البطاقة</h4><p>موضع الصورة، وترتيب أزرار التواصل ومواضعها، وحتى خمسة أوسمة تُعرَض على البطاقة — بمعاينة حيّة وزر تراجع.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-images.svg" alt=""></i><h4>خمس صور لكل صنف</h4><p>كل عنصر في قائمة أصنافك يقبل حتى خمس صور تُرتَّب بالسحب، بدل صورة واحدة للأماكن غير المشتركة.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-badge.svg" alt=""></i><h4>ثمانية أنواع أوسمة إضافية</h4><p>أوسمة واتساب وفيسبوك وانستغرام و«مشوار» والاهتمام والحفظ وأوسمة الاشتراك.</p></div>
       </div>
       <p><strong>ومعها أيضاً:</strong> إخفاء الاسم أو الوصف أو عدد المشاهدات عن البطاقة،
          وإضافة زر اتصال مباشر وزر موقع عليها، وشارة «مميز» على صفحة المكان، وترجيح في
@@ -562,11 +568,11 @@
     <div class="sub-section">
       <h3>خطة «موصى به» — أهم خمس ميزات</h3>
       <div class="grid-features">
-        <div class="feature-card"><i>📍</i><h4>بانر في الصفحة الرئيسية</h4><p>صورة عريضة لمكانك ضمن قسم «الأماكن الموصى بها» أعلى الصفحة الرئيسية.</p></div>
-        <div class="feature-card"><i>🎚️</i><h4>تحكّم بمظهر البانر</h4><p>ضبط إزاحة الصورة عمودياً، وإخفاء الاسم أو العنوان أو طبقة التعتيم — بمعاينة حيّة قبل الحفظ.</p></div>
-        <div class="feature-card"><i>🧭</i><h4>ظهور في تبويب «اكتشف»</h4><p>يُدرَج مكانك ضمن الموصى بها في «اكتشف» أيضاً، لا في الصفحة الرئيسية وحدها.</p></div>
-        <div class="feature-card"><i>🏷️</i><h4>تصميم مختلف في القوائم</h4><p>بطاقة بتصميم «موصى به» داخل قوائم التصنيفات ونتائج البحث.</p></div>
-        <div class="feature-card"><i>🎫</i><h4>مقاعد محدودة</h4><p>عدد الأماكن الموصى بها في آنٍ واحد محدود بعدد مقاعد ثابت، فلا يُفتَح مقعد قبل أن يشغر واحد.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-location.svg" alt=""></i><h4>بانر في الصفحة الرئيسية</h4><p>صورة عريضة لمكانك ضمن قسم «الأماكن الموصى بها» أعلى الصفحة الرئيسية.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-sliders.svg" alt=""></i><h4>تحكّم بمظهر البانر</h4><p>ضبط إزاحة الصورة عمودياً، وإخفاء الاسم أو العنوان أو طبقة التعتيم — بمعاينة حيّة قبل الحفظ.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-discover.svg" alt=""></i><h4>ظهور في تبويب «اكتشف»</h4><p>يُدرَج مكانك ضمن الموصى بها في «اكتشف» أيضاً، لا في الصفحة الرئيسية وحدها.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-claiming.svg" alt=""></i><h4>تصميم مختلف في القوائم</h4><p>بطاقة بتصميم «موصى به» داخل قوائم التصنيفات ونتائج البحث.</p></div>
+        <div class="feature-card"><i><img src="assets/icons/icon-ticket.svg" alt=""></i><h4>مقاعد محدودة</h4><p>عدد الأماكن الموصى بها في آنٍ واحد محدود بعدد مقاعد ثابت، فلا يُفتَح مقعد قبل أن يشغر واحد.</p></div>
       </div>
       <p><strong>ومعها أيضاً:</strong> شارة «موصى به» على صفحة المكان، وترجيح في ترتيب قوائم
          التصنيفات مع أفضلية عند تساوي نتيجتين في البحث، وإمكانية الجمع بين «مميز» و«موصى به»

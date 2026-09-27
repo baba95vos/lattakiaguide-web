@@ -153,7 +153,8 @@
           text-align: center;
           padding: 4rem 2rem;
         }
-        .empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+        .empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; line-height: 0; }
+        .empty-icon img { width: 72px; height: 72px; }
         .empty-text { color: var(--muted); font-size: 0.95rem; }
     </style>
     <link rel="stylesheet" href="assets/dark-theme.css">
@@ -166,7 +167,7 @@
 </div>
 
 <div class="header">
-    <div class="header-logo">🗺️ دليل اللاذقية</div>
+    <div class="header-logo"><img src="assets/logo.svg" alt="" style="width:38px;height:38px;background:#fff;border-radius:11px;padding:4px;vertical-align:middle;margin-left:8px;">دليل اللاذقية</div>
     <div class="header-sub">وصولات الدفع الخاصة بك</div>
 </div>
 
@@ -175,7 +176,7 @@
 </div>
 
 <div id="empty-state" class="empty-state" style="display:none">
-    <div class="empty-icon">📄</div>
+    <div class="empty-icon"><img src="assets/icons/icon-receipt.svg" alt=""></div>
     <div class="empty-text">لا توجد وصولات دفع متاحة حالياً.</div>
 </div>
 
