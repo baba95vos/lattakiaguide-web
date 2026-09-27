@@ -261,7 +261,7 @@
         -->
         <div class="cta-card">
             <a href="https://play.google.com/store/apps/details?id=com.lattakia.guide"
-               target="_blank" rel="noopener" class="btn btn-primary">
+               target="_blank" rel="noopener" class="btn btn-primary" data-lg-track="download_play">
                 <span>▶️</span>
                 <span>تحميل من Google Play</span>
             </a>
@@ -269,7 +269,7 @@
 
             <div id="directWrap" hidden>
                 <div class="divider-or">أو</div>
-                <a id="downloadBtn" href="#" class="btn btn-secondary">
+                <a id="downloadBtn" href="#" class="btn btn-secondary" data-lg-track="download_direct">
                     <span>⬇️</span>
                     <span>تحميل مباشر</span>
                 </a>
@@ -374,5 +374,6 @@
                 .catch(function () { /* يبقى مغلقاً */ });
         } catch (e) {}
     </script>
+<script src="assets/site-stats.js" defer></script>
 </body>
 </html>

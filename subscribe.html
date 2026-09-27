@@ -1649,5 +1649,6 @@ fetch('https://ipapi.co/json/')
   .then(d => { if (d.threat && (d.threat.is_vpn || d.threat.is_proxy)) document.getElementById('vpn-notice').style.display = 'block'; })
   .catch(() => {});
 </script>
+<script src="assets/site-stats.js" defer></script>
 </body>
 </html>

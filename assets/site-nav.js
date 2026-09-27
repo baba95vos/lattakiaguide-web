@@ -214,8 +214,8 @@
     '</svg>';
 
   var SOCIAL_PLATFORMS = [
-    { field: 'URLfacebook', label: 'فيسبوك', icon: SOCIAL_ICON_FACEBOOK, hosts: ['facebook.com', 'fb.com', 'fb.me'] },
-    { field: 'URLinstagram', label: 'إنستغرام', icon: SOCIAL_ICON_INSTAGRAM, hosts: ['instagram.com', 'instagr.am'] }
+    { field: 'URLfacebook', track: 'social_facebook', label: 'فيسبوك', icon: SOCIAL_ICON_FACEBOOK, hosts: ['facebook.com', 'fb.com', 'fb.me'] },
+    { field: 'URLinstagram', track: 'social_instagram', label: 'إنستغرام', icon: SOCIAL_ICON_INSTAGRAM, hosts: ['instagram.com', 'instagr.am'] }
   ];
 
   function validSocialUrl(raw, hosts) {
@@ -263,7 +263,8 @@
       var url = validSocialUrl(links[p.field], p.hosts);
       if (!url) return '';
       return '<a class="lg-social-btn" href="' + url.replace(/"/g, '%22') + '"' +
-        ' target="_blank" rel="noopener noreferrer" aria-label="' + p.label + '" title="' + p.label + '">' +
+        ' target="_blank" rel="noopener noreferrer" data-lg-track="' + p.track + '"' +
+        ' aria-label="' + p.label + '" title="' + p.label + '">' +
         p.icon + '</a>';
     }).join('');
     return buttons ? '<span class="lg-social-label">تابعنا</span>' + buttons : '';
